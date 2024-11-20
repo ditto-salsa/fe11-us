@@ -11,7 +11,9 @@ fe11_*/
 *.sav
 *.xMAP
 
+# Objdiff
 objdiff.json
+report.json
 
 /dsd
 /dsd.exe
@@ -21,3 +23,7 @@ build.ninja
 
 __pycache__/
 tools/mwccarm/
+
+# Clang
+.cache/
+compile_commands.json
