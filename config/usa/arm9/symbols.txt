@@ -6251,9 +6251,10 @@ data_020cdb74 kind:data(any) addr:0x20cdb74
 data_020cdbec kind:data(any) addr:0x20cdbec
 data_020cdc5c kind:data(any) addr:0x20cdc5c
 data_020ce6ec kind:data(any) addr:0x20ce6ec
-data_020ce6f0 kind:data(any) addr:0x20ce6f0
-data_020ce710 kind:data(any) addr:0x20ce710
-data_020ce750 kind:data(any) addr:0x20ce750
+ProcScr_020ce6f0 kind:data(any) addr:0x20ce6f0
+ProcScr_020ce710 kind:data(any) addr:0x20ce710
+ProcScr_020ce730 kind:data(any) addr:0x20ce730
+ProcScr_020ce750 kind:data(any) addr:0x20ce750
 data_020ce770 kind:data(any) addr:0x20ce770
 data_020ce778 kind:data(any) addr:0x20ce778
 data_020ce780 kind:data(any) addr:0x20ce780

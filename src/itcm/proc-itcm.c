@@ -13,7 +13,7 @@ extern u8 data_027e125c;
 
 #pragma section force_text begin
 
-BOOL (* data_01ffbbf8[])(struct Proc *) =
+BOOL (* gProcessCmdTable[])(struct Proc *) =
 {
     [PROC_CMD_END] = ProcCmd_End,
     [PROC_CMD_01] = ProcCmd_End,
@@ -62,12 +62,12 @@ struct Proc * func_01ffbc90(u32 treeNum)
     return gProcTreeRootArray[treeNum];
 }
 
-BOOL func_01ffbca0(struct Proc * proc)
+BOOL IsRootProcess(struct Proc * proc)
 {
     return (u32)proc < 14;
 }
 
-void func_01ffbcb0(struct Proc * proc)
+void RunProcessScript(struct Proc * proc)
 {
     if (proc->proc_script == NULL)
     {
@@ -84,7 +84,7 @@ void func_01ffbcb0(struct Proc * proc)
         return;
     }
 
-    while (data_01ffbbf8[proc->proc_scrCur->opcode](proc))
+    while (gProcessCmdTable[proc->proc_scrCur->opcode](proc))
     {
         if (proc->proc_script == NULL)
         {
@@ -105,7 +105,7 @@ void func_01ffbcb0(struct Proc * proc)
     return;
 }
 
-struct Proc * func_01ffbd3c(void)
+struct Proc * AllocateProcess(void)
 {
     void * var_0 = func_020a4a38();
 
@@ -162,7 +162,7 @@ void func_01ffbda4(struct Proc * proc)
     return;
 }
 
-void func_01ffbdf4(struct Proc * proc, s32 treeNum)
+void InsertRootProcess(struct Proc * proc, s32 treeNum)
 {
     struct Proc ** root = gProcTreeRootArray + treeNum;
 
@@ -178,7 +178,7 @@ void func_01ffbdf4(struct Proc * proc, s32 treeNum)
     return;
 }
 
-void func_01ffbe1c(struct Proc * proc, struct Proc * parent)
+void InsertChildProcess(struct Proc * proc, struct Proc * parent)
 {
     if (parent->proc_child != NULL)
     {
@@ -204,7 +204,7 @@ void func_01ffbe3c(struct Proc * proc)
         proc->proc_prev->proc_next = proc->proc_next;
     }
 
-    if (!func_01ffbca0(proc->proc_parent))
+    if (!IsRootProcess(proc->proc_parent))
     {
         if (proc->proc_parent->proc_child == proc)
         {
@@ -227,11 +227,11 @@ void func_01ffbe3c(struct Proc * proc)
     return;
 }
 
-struct Proc * func_01ffbeb4(struct ProcCmd * script, struct Proc * parent, void * arg_2)
+struct Proc * Proc_StartExt(struct ProcCmd * script, struct Proc * parent, void * arg_2)
 {
     void * tmp;
 
-    struct Proc * proc = func_01ffbd3c();
+    struct Proc * proc = AllocateProcess();
 
     proc->proc_script = script;
     proc->proc_scrCur = script;
@@ -249,24 +249,24 @@ struct Proc * func_01ffbeb4(struct ProcCmd * script, struct Proc * parent, void 
     proc->proc_lockCnt = 0;
     proc->proc_flags = 0xc;
 
-    if (func_01ffbca0(parent))
+    if (IsRootProcess(parent))
     {
         if (parent == NULL)
         {
             parent = (void *)9;
         }
 
-        func_01ffbdf4(proc, (s32)parent);
+        InsertRootProcess(proc, (s32)parent);
     }
     else
     {
-        func_01ffbe1c(proc, parent);
+        InsertChildProcess(proc, parent);
     }
 
     tmp = data_027e1268;
     data_027e1268 = arg_2;
 
-    func_01ffbcb0(proc);
+    RunProcessScript(proc);
 
     data_027e1268 = tmp;
 
@@ -275,16 +275,16 @@ struct Proc * func_01ffbeb4(struct ProcCmd * script, struct Proc * parent, void 
     return proc;
 }
 
-struct Proc * func_01ffbf78(struct ProcCmd * script, struct Proc * parent)
+struct Proc * Proc_Start(struct ProcCmd * script, struct Proc * parent)
 {
-    return func_01ffbeb4(script, parent, data_027e1268);
+    return Proc_StartExt(script, parent, data_027e1268);
 }
 
 struct Proc * func_01ffbf90(struct ProcCmd * script, struct Proc * parent)
 {
     void * var_0 = func_020a4a38();
 
-    struct Proc * proc = func_01ffbf78(script, parent);
+    struct Proc * proc = Proc_Start(script, parent);
     proc->proc_flags |= 4;
 
     func_020a4a4c(var_0);
@@ -298,9 +298,9 @@ void func_01ffbfd0(struct Proc * proc)
     return;
 }
 
-struct Proc * func_01ffbfe0(struct ProcCmd * script, struct Proc * parent, void * arg_2)
+struct Proc * Proc_StartBlockingExt(struct ProcCmd * script, struct Proc * parent, void * arg_2)
 {
-    struct Proc * proc = func_01ffbeb4(script, parent, arg_2);
+    struct Proc * proc = Proc_StartExt(script, parent, arg_2);
 
     if (proc->proc_script != NULL)
     {
@@ -313,9 +313,9 @@ struct Proc * func_01ffbfe0(struct ProcCmd * script, struct Proc * parent, void 
     return NULL;
 }
 
-struct Proc * func_01ffc018(struct ProcCmd * script, struct Proc * parent)
+struct Proc * Proc_StartBlocking(struct ProcCmd * script, struct Proc * parent)
 {
-    return func_01ffbfe0(script, parent, data_027e1268);
+    return Proc_StartBlockingExt(script, parent, data_027e1268);
 }
 
 struct Proc * func_01ffc030(struct ProcCmd * script, struct Proc * parent)
@@ -325,12 +325,12 @@ struct Proc * func_01ffc030(struct ProcCmd * script, struct Proc * parent)
         parent = (void *)9;
     }
 
-    if (func_01ffbca0(parent))
+    if (IsRootProcess(parent))
     {
-        return func_01ffbf78(script, parent);
+        return Proc_Start(script, parent);
     }
 
-    return func_01ffc018(script, parent);
+    return Proc_StartBlocking(script, parent);
 }
 
 void func_01ffc068(struct Proc * proc)
@@ -412,7 +412,7 @@ void func_01ffc0e8(struct Proc * proc)
     return;
 }
 
-void func_01ffc174(struct Proc * proc)
+void Proc_End(struct Proc * proc)
 {
     u16 _bkp;
     u16 ime;
@@ -444,7 +444,7 @@ void func_01ffc174(struct Proc * proc)
     return;
 }
 
-void func_01ffc1e8(struct Proc * proc)
+void RunProcessRecursive(struct Proc * proc)
 {
     void * tmp;
 
@@ -457,7 +457,7 @@ void func_01ffc1e8(struct Proc * proc)
 
     if (proc->proc_prev != NULL)
     {
-        func_01ffc1e8(proc->proc_prev);
+        RunProcessRecursive(proc->proc_prev);
     }
 
     proc->proc_flags &= ~0x10;
@@ -483,7 +483,7 @@ void func_01ffc1e8(struct Proc * proc)
 
             if (proc->proc_idleCb == NULL)
             {
-                func_01ffbcb0(proc);
+                RunProcessScript(proc);
             }
 
             if (proc->proc_idleCb != NULL)
@@ -505,7 +505,7 @@ void func_01ffc1e8(struct Proc * proc)
 _01ffc2d4:
     if (proc->proc_child != NULL)
     {
-        func_01ffc1e8(proc->proc_child);
+        RunProcessRecursive(proc->proc_child);
     }
 
     return;
@@ -554,12 +554,12 @@ void func_01ffc2f4(struct Proc * proc)
 
 void func_01ffc390(u32 treeNum)
 {
-    func_01ffc1e8(func_01ffbc90(treeNum));
+    RunProcessRecursive(func_01ffbc90(treeNum));
     func_01ffc2f4(func_01ffbc90(treeNum));
     return;
 }
 
-void func_01ffc3b0(struct Proc * proc, s32 arg_1)
+void Proc_Break(struct Proc * proc, s32 arg_1)
 {
     if (proc->proc_idleCb != NULL)
     {
