@@ -7,11 +7,11 @@
 
 extern void func_01ffbb90(void *, void *);
 extern void * func_01ffb934(void *, s32);
-extern BOOL func_01ffbca0(struct Proc * proc);
-extern struct Proc * func_01ffbf78(struct ProcCmd * script, struct Proc * parent);
-extern struct Proc * func_01ffc018(struct ProcCmd * script, struct Proc * parent);
-extern void func_01ffc174(struct Proc * proc);
-extern void func_01ffc3b0(struct Proc * proc, s32 arg_1);
+extern BOOL IsRootProcess(struct Proc * proc);
+extern struct Proc * Proc_Start(struct ProcCmd * script, struct Proc * parent);
+extern struct Proc * Proc_StartBlocking(struct ProcCmd * script, struct Proc * parent);
+extern void Proc_End(struct Proc * proc);
+extern void Proc_Break(struct Proc * proc, s32 arg_1);
 
 extern void func_0200f20c(u32 overlayId);
 extern void func_0200f24c(u32 overlayId);

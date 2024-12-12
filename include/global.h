@@ -5,6 +5,8 @@
 
 #define STRUCT_PAD(from, to) unsigned char _pad_ ## from[(to) - (from)]
 
+#pragma define_section force_text ".text"
+
 #include "unknown_types.h"
 #include "unknown_funcs.h"
 #include "unknown_data.h"

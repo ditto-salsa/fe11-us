@@ -210,7 +210,7 @@ void Proc_Goto(struct Proc * proc, s32 label, s32 unk)
 
     for (cmd = proc->proc_script; cmd->opcode != 0; cmd++)
     {
-        if (cmd->opcode == 0x13 && cmd->dataImm == label)
+        if (cmd->opcode == PROC_CMD_LABEL && cmd->dataImm == label)
         {
             proc->proc_scrCur = cmd;
             proc->proc_idleCb = NULL;
@@ -297,25 +297,25 @@ void func_02018fa4(struct ProcCmd * script, ProcFunc func)
 
 void Proc_BreakEach(struct ProcCmd * script)
 {
-    Proc_ForEach(script, (ProcFunc)func_01ffc3b0); // Possible bug - mismatched function declaration
+    Proc_ForEach(script, (ProcFunc)Proc_Break); // Possible bug - mismatched function declaration
     return;
 }
 
 void func_0201900c(struct ProcCmd * script)
 {
-    func_02018fa4(script, (ProcFunc)func_01ffc3b0); // Possible bug - mismatched function declaration
+    func_02018fa4(script, (ProcFunc)Proc_Break); // Possible bug - mismatched function declaration
     return;
 }
 
 void Proc_EndEach(struct ProcCmd * script)
 {
-    Proc_ForEach(script, func_01ffc174);
+    Proc_ForEach(script, Proc_End);
     return;
 }
 
 void func_02019034(struct ProcCmd * script)
 {
-    func_02018fa4(script, func_01ffc174);
+    func_02018fa4(script, Proc_End);
     return;
 }
 
@@ -336,7 +336,7 @@ void Proc_EndEachMarked(u32 mark)
             continue;
         }
 
-        func_01ffc174(it);
+        Proc_End(it);
     }
 
     return;
@@ -366,7 +366,7 @@ struct ProcCmd * func_020190c4(struct Proc * proc)
 
 struct Proc * func_020190cc(struct Proc * proc)
 {
-    if (func_01ffbca0(proc->proc_parent))
+    if (IsRootProcess(proc->proc_parent))
     {
         return NULL;
     }
@@ -376,7 +376,7 @@ struct Proc * func_020190cc(struct Proc * proc)
 
 void func_020190ec(struct Proc * proc)
 {
-    if (func_01ffbca0(proc->proc_parent))
+    if (IsRootProcess(proc->proc_parent))
     {
         return;
     }
@@ -389,7 +389,7 @@ void func_020190ec(struct Proc * proc)
 
 void func_02019124(struct Proc * proc)
 {
-    if (func_01ffbca0(proc->proc_parent))
+    if (IsRootProcess(proc->proc_parent))
     {
         return;
     }
@@ -407,12 +407,12 @@ void func_02019124(struct Proc * proc)
 
 void func_02019164(struct Proc * proc)
 {
-    if (func_01ffbca0(proc->proc_parent))
+    if (IsRootProcess(proc->proc_parent))
     {
         return;
     }
 
-    func_01ffc174(proc->proc_parent);
+    Proc_End(proc->proc_parent);
 
     return;
 }
@@ -450,7 +450,7 @@ BOOL func_02019190(struct Proc * proc, u32 flags)
 
         if (!(flags & 2) || (other->proc_funcTable != NULL) && (other->proc_funcTable == proc->proc_funcTable))
         {
-            func_01ffc174(proc);
+            Proc_End(proc);
             return FALSE;
         }
     }
@@ -486,7 +486,7 @@ BOOL func_02019230(struct Proc * proc, u32 flags)
 
         if (!(flags & 2) || (other->proc_funcTable != NULL) && (other->proc_funcTable == proc->proc_funcTable))
         {
-            func_01ffc174(other);
+            Proc_End(other);
             break;
         }
     }
@@ -503,7 +503,7 @@ void func_020192d0(struct Proc * proc)
         return;
     }
 
-    func_01ffc174(proc);
+    Proc_End(proc);
 
     return;
 }
@@ -511,13 +511,13 @@ void func_020192d0(struct Proc * proc)
 void func_020192f4(struct Proc * proc)
 {
     proc->unk_38(proc);
-    func_01ffc174(proc);
+    Proc_End(proc);
     return;
 }
 
 void func_02019310(void * func, struct Proc * parent)
 {
-    struct Proc * proc = func_01ffbf78(data_020ce6f0, parent);
+    struct Proc * proc = Proc_Start(ProcScr_020ce6f0, parent);
     proc->unk_38 = func;
     return;
 }
@@ -530,14 +530,14 @@ void func_0201932c(struct Proc * proc)
 
 void func_0201933c(void * func, struct Proc * parent)
 {
-    struct Proc * proc = func_01ffbf78(data_020ce710, parent);
+    struct Proc * proc = Proc_Start(ProcScr_020ce710, parent);
     proc->unk_38 = func;
     return;
 }
 
 BOOL ProcCmd_End(struct Proc * proc)
 {
-    func_01ffc174(proc);
+    Proc_End(proc);
     return FALSE;
 }
 
@@ -712,21 +712,21 @@ BOOL ProcCmd_WhileExists(struct Proc * proc)
 
 BOOL ProcCmd_SpawnChild(struct Proc * proc)
 {
-    func_01ffbf78(proc->proc_scrCur->dataPtr, proc);
+    Proc_Start(proc->proc_scrCur->dataPtr, proc);
     proc->proc_scrCur++;
     return TRUE;
 }
 
 BOOL ProcCmd_SpawnLockChild(struct Proc * proc)
 {
-    func_01ffc018(proc->proc_scrCur->dataPtr, proc);
+    Proc_StartBlocking(proc->proc_scrCur->dataPtr, proc);
     proc->proc_scrCur++;
     return FALSE;
 }
 
 BOOL ProcCmd_SpawnChildInTree(struct Proc * proc)
 {
-    func_01ffbf78(proc->proc_scrCur->dataPtr, (void *)(u32)proc->proc_scrCur->dataImm);
+    Proc_Start(proc->proc_scrCur->dataPtr, (void *)(u32)proc->proc_scrCur->dataImm);
     proc->proc_scrCur++;
     return TRUE;
 }
@@ -813,7 +813,7 @@ void SleepRepeatFunc(struct Proc * proc)
         return;
     }
 
-    func_01ffc3b0(proc, 0);
+    Proc_Break(proc, 0);
 
     return;
 }
