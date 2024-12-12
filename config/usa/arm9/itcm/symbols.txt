@@ -96,3 +96,4 @@ func_01ffcb44 kind:function(arm,size=0x70) addr:0x1ffcb44
 func_01ffcbb4 kind:function(arm,size=0x24) addr:0x1ffcbb4
 func_01ffcbd8 kind:function(arm,size=0x64) addr:0x1ffcbd8
 func_01ffcc3c kind:function(arm,size=0x94) addr:0x1ffcc3c
+data_01ffbbf8 kind:data(any) addr:0x1ffbbf8

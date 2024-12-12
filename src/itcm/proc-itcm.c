@@ -11,7 +11,9 @@ extern void func_020a4a4c(void *);
 extern u8 data_027e1258;
 extern u8 data_027e125c;
 
-BOOL (* const data_01ffbbf8[])(struct Proc *) =
+#pragma section force_text begin
+
+BOOL (* data_01ffbbf8[])(struct Proc *) =
 {
     [PROC_CMD_END] = ProcCmd_End,
     [PROC_CMD_01] = ProcCmd_End,
@@ -52,6 +54,8 @@ BOOL (* const data_01ffbbf8[])(struct Proc *) =
     [PROC_CMD_OVERLAY] = ProcCmd_Overlay,
     [PROC_CMD_25] = func_02019b84,
 };
+
+#pragma section force_text end
 
 struct Proc * func_01ffbc90(u32 treeNum)
 {
