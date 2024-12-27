@@ -1340,7 +1340,6 @@ BOOL func_0203d1f4(struct Unit * unit)
 s32 func_0203d22c(struct Unit * unit, struct ItemData * item, BOOL arg_2)
 {
     s32 might;
-    s32 iVar2;
 
     if (item == NULL)
     {
@@ -1349,8 +1348,17 @@ s32 func_0203d22c(struct Unit * unit, struct ItemData * item, BOOL arg_2)
 
     might = item->might;
 
-    iVar2 = !func_02038348(item) ? func_0203c480(unit, item, TRUE) : func_0203c4d0(unit, item, TRUE);
-    might += iVar2;
+    if (!func_02038348(item))
+    {
+        s32 str = func_0203c480(unit, item, TRUE);
+        might += str;
+    }
+    else
+    {
+        s32 mag = func_0203c4d0(unit, item, TRUE);
+        might += mag;
+    }
+
 
     if (arg_2)
     {
