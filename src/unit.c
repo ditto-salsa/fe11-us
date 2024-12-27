@@ -9,6 +9,7 @@ void func_0203e040(struct Item *, struct Item *);
 BOOL func_0203cb6c(struct Unit *, s32, s32);
 struct ItemData * func_0203df8c(struct Item *);
 void func_0203df18(struct Unit * unit);
+u32 func_0203c810(struct Unit * unit, u32 arg_1);
 
 inline struct Unit * func_0203c378(struct Unit * unit);
 
@@ -371,14 +372,66 @@ void func_0203bf68(struct Unit * srcUnit, u32 arg_1, u32 arg_2, u32 arg_3)
 
     func_0203aa4c(srcUnit, dstUnit);
 
-    srcUnit->state2 &= ~0x40000;
+    srcUnit->state2 &= ~0x8000;
 
     func_0203bd34(dstUnit, 4, 1);
 
     return;
 }
 
-// #func_0203c068
+void func_0203c068(struct Unit * arg_0, struct Unit * arg_1)
+{
+    s32 i;
+
+    struct Unit ** ppUVar3 = (struct Unit **)func_02040c98(4);
+    struct Unit * pUVar7 = *ppUVar3;
+
+    func_0203bd34(pUVar7, 5, 1);
+
+    func_0203aa4c(pUVar7, arg_0);
+    func_0203aa4c(arg_0, arg_1);
+
+    arg_0->xPos = pUVar7->xPos;
+    arg_0->yPos = pUVar7->yPos;
+
+    arg_0->hp = func_0203c454(arg_0);
+    arg_0->exp = pUVar7->exp;
+
+    arg_0->state2 = pUVar7->state2;
+    arg_0->unk_90 = pUVar7->unk_90;
+    arg_0->unk_91 = pUVar7->unk_91;
+    arg_0->unk_92 = pUVar7->unk_92;
+    arg_0->unk_94 = pUVar7->unk_94;
+    arg_0->unk_a4 = pUVar7->unk_a4;
+
+    for (i = 0; i < 5; i++)
+    {
+        struct Item * pUVar9 = arg_0->items + i;
+        struct Item * pUVar8 = pUVar7->items + i;
+
+        func_0203e040(pUVar9, pUVar8);
+
+        if (!(pUVar9->unk_03 & 0x10))
+        {
+            continue;
+        }
+
+        if (func_0203cb6c(arg_0, i, 0))
+        {
+            continue;
+        }
+
+        pUVar9->unk_03 &= ~0x10;
+    }
+
+    arg_0->state1 &= 0xFFFFEFFD;
+    arg_0->state1 |= func_0203c810(pUVar7, 0x00001002);
+
+    arg_0->unk_a0 = pUVar7;
+    arg_0->state2 |= 0x40000;
+
+    return;
+}
 
 void func_0203c19c(struct Unit * srcUnit)
 {
@@ -444,7 +497,7 @@ void func_0203c284(struct Unit * unit)
     func_02037eb8(unit->pPersonData);
     return;
 }
- 
+
 // #func_0203c378
 
 s32 func_0203c454(struct Unit * unit)
