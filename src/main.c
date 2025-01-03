@@ -7,7 +7,7 @@ void main(void)
     func_02022f10();
     func_020ad244(0x14);
 
-    while (1)
+    while (TRUE)
         func_0200f04c();
 }
 
@@ -32,14 +32,14 @@ void func_02000c7c(struct UnkStruct_Func_2000C7C * buf)
     buf->unk_0860 = data_ov000_021e3328->unk_28;
 }
 
-void func_02000d14(struct UnkStruct_Func_2000C7C * buf, int a)
+void func_02000d14(struct UnkStruct_Func_2000C7C * buf, s32 a)
 {
     func_020a5824(buf->unk_0854, a & 0xFF, 0x400);
 }
 
-void func_02000d2c(struct UnkStruct_Func_2000D2C * buf, int a, int b)
+void func_02000d2c(struct UnkStruct_Func_2000D2C * buf, s32 a, s32 b)
 {
-    int tmp1, tmp2, tmp3, tmp4;
+    s32 tmp1, tmp2;
     struct UnkStruct_021E3328 * unk0 = data_ov000_021e3328;
     struct UnkStruct_021E3328_00_04_00 * unk1 = unk0->unk_04->unk_00;
     
@@ -54,22 +54,14 @@ void func_02000d2c(struct UnkStruct_Func_2000D2C * buf, int a, int b)
         return;
     }
 
-    tmp3 = b - buf->unk_43;
-    if (tmp3 < 0)
-        tmp3 = -tmp3;
-
-    tmp4 = a - buf->unk_42;
-    if (tmp4 < 0)
-        tmp4 = -tmp4;
-
-    if ((tmp4 + tmp3) == 1)
+    if ((ABS(a - buf->unk_42) + ABS(b - buf->unk_43)) == 1)
     {
-        int tmp_r0 = func_020016e8(buf, unk1, a, b);
+        s32 tmp_r0 = func_020016e8(buf, unk1, a, b);
 
         if ((buf->unk_47 + tmp_r0) <= tmp1)
         {
-            int tmp_r2 = buf->unk_42;
-            int tmp_r3 = buf->unk_43;
+            s32 tmp_r2 = buf->unk_42;
+            s32 tmp_r3 = buf->unk_43;
 
             if (buf->unk_42 < (s8)a)
                 tmp_r2 = 2;
@@ -116,41 +108,32 @@ void func_02000d2c(struct UnkStruct_Func_2000D2C * buf, int a, int b)
     }
 }
 
-int func_02000f18(struct UnkStruct_Func_2000D2C * buf, int a, int b, int c)
+BOOL func_02000f18(struct UnkStruct_Func_2000D2C * buf, s32 a, s32 b, s32 c)
 {
-    int tmp4;
+    s32 tmp4;
     void * tmp1 = data_ov000_021e3328->unk_04->unk_00;
 
     if (data_ov000_021e3328->unk_28[buf->unk_42 | (buf->unk_43 << 5)] != 0)
-        return 0;
+        return FALSE;
 
-    b = b - buf->unk_43;
-    if (b < 0)
-        b = -b;
-
-    a = a - buf->unk_42;
-    if (a < 0)
-        a = -a;
-
-    tmp4 = a + b;
+    tmp4 = ABS(a - buf->unk_42) + ABS(b - buf->unk_43);
 
     if (c == 2)
     {
         if (tmp4 != 1)
-            return 0;
+            return FALSE;
 
         buf->unk_48 = -1;
     }
     else
     {
-        int tmp_0 = c == 0 ? 1 : 0;
-        int tmp_1 = c == 1 ? 1 : 0;
-        int ret = func_02039088(tmp1, buf->unk_42, buf->unk_43, tmp4, tmp_0, tmp_1, -1);
+        s32 ret = func_02039088(tmp1, buf->unk_42, buf->unk_43, tmp4, c == 0, c == 1, -1);
 
         if (ret < 0)
-            return 0;
+            return FALSE;
 
         buf->unk_48 = ret;
     }
-    return 1;
+
+    return TRUE;
 }

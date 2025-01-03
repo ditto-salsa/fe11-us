@@ -5,6 +5,8 @@
 
 #define STRUCT_PAD(from, to) unsigned char _pad_ ## from[(to) - (from)]
 
+#define ABS(val) ((val) >= 0 ? (val) : -(val))
+
 #pragma define_section force_text ".text"
 
 #include "unknown_types.h"
