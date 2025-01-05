@@ -5,14 +5,14 @@
 extern struct Unit * data_021974d8;
 
 // FE11U = 0x02044974
-bool UnitSetEventDead(void * unused, s32 unitId)
+BOOL UnitSetEventDead(void * unused, s32 unitId)
 {
 
     struct Unit * unit;
     
     if (!unitId)
     {
-        unit = 0;
+        unit = NULL;
     }
     else
     {
