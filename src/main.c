@@ -2,6 +2,8 @@
 
 #include "unit.h"
 
+#define GetPos(x, y) ((x) | ((y) << 5))
+
 void main(void)
 {
     func_0200ef04();
@@ -43,7 +45,7 @@ void func_02000d2c(struct UnkStruct_Func_2000D2C * buf, s32 a, s32 b)
 {
     s32 tmp1, tmp2;
     struct Unit * unit = data_ov000_021e3328->unk_04->unk_00;
-    
+
     tmp1 = func_0203c77c(unit);
     if (func_0203c810(unit, 0x8000000))
         tmp1 = 0;
@@ -95,7 +97,7 @@ void func_02000d2c(struct UnkStruct_Func_2000D2C * buf, s32 a, s32 b)
         0xA
     );
 
-    if (data_ov000_021e3328->unk_08->unk_0854[a | (b << 5)] >= 0)
+    if (data_ov000_021e3328->unk_08->unk_0854[GetPos(a, b)] >= 0)
     {
         func_02001820(buf, a, b, 1);
         data_ov000_021e3328->unk_08->unk_0854 = data_ov000_021e3328->unk_08->unk_0878;
@@ -114,7 +116,7 @@ BOOL func_02000f18(struct UnkStruct_Func_2000D2C * buf, s32 a, s32 b, s32 c)
     s32 tmp4;
     struct Unit * unit = data_ov000_021e3328->unk_04->unk_00;
 
-    if (data_ov000_021e3328->unk_28[buf->unk_42 | (buf->unk_43 << 5)] != 0)
+    if (data_ov000_021e3328->unk_28[GetPos(buf->unk_42, buf->unk_43)] != 0)
         return FALSE;
 
     tmp4 = ABS(a - buf->unk_42) + ABS(b - buf->unk_43);
@@ -137,4 +139,45 @@ BOOL func_02000f18(struct UnkStruct_Func_2000D2C * buf, s32 a, s32 b, s32 c)
     }
 
     return TRUE;
+}
+
+s32 func_02000fec(struct UnkStruct_Func_2000D2C * buf, s32 a, s32 b)
+{
+    s32 tmp_r4 = 0;
+    s32 ret = func_02001770(buf, a, b);
+    struct TerrainData * pTerrain;
+    s32 terrainId;
+
+    if (ret >= 0)
+    {
+        tmp_r4 += 0x40000000;
+        tmp_r4 += ret << 16;
+    }
+    else
+    {
+        struct UnkStruct_Func_2000C7C * r2 = data_ov000_021e3328->unk_08;
+        s8 * unk_0C78 = r2->unk_0C78;
+
+        // The temp variable seems to be required
+        s8 * tmp_r0 = &unk_0C78[GetPos(a, b)];
+
+        if (unk_0C78[GetPos(a, b)] >= 0)
+        {
+            tmp_r4 += 0x20000000;
+            tmp_r4 += (0x80 - *tmp_r0) << 16;
+        }
+        else
+        {
+            tmp_r4 += (0x80 - r2->unk_0854[GetPos(a, b)]) << 16;
+        }
+    }
+
+    // The temp variable seems to be required
+    terrainId = data_ov000_021e3328->unk_0828[GetPos(a, b)];
+
+    tmp_r4 += (data_02197254->pTerrain[terrainId].unk_08[0] << 8);
+    tmp_r4 += (data_02197254->pTerrain[data_ov000_021e3328->unk_0828[GetPos(a, b)]].unk_08[1] << 4);
+    tmp_r4 += (data_02197254->pTerrain[data_ov000_021e3328->unk_0828[GetPos(a, b)]].unk_08[2]);
+
+    return tmp_r4;
 }

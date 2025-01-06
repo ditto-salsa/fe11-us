@@ -6,7 +6,7 @@
     .bss        start:0x020e3ca0 end:0x021a23e0 kind:bss align:32
 
 src/main.c:
-    .text       start:0x02000c50 end:0x02000fec
+    .text       start:0x02000c50 end:0x020010a0
 
 src/proc.c:
     complete
