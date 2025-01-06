@@ -91,14 +91,14 @@ void func_0200f04c(void)
     func_02015fb4();
     func_0201079c();
 
-    func_01ffc390(5);
-    func_01ffc390(6);
-    func_01ffc390(7);
-    func_01ffc390(8);
-    func_01ffc390(9);
-    func_01ffc390(10);
-    func_01ffc390(11);
-    func_01ffc390(12);
+    Proc_Run(5);
+    Proc_Run(6);
+    Proc_Run(7);
+    Proc_Run(8);
+    Proc_Run(9);
+    Proc_Run(10);
+    Proc_Run(11);
+    Proc_Run(12);
 
     func_02019c30();
     data_027e1258 = FALSE;
