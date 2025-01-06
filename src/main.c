@@ -1,5 +1,7 @@
 #include "global.h"
 
+#include "unit.h"
+
 void main(void)
 {
     func_0200ef04();
@@ -40,11 +42,10 @@ void func_02000d14(struct UnkStruct_Func_2000C7C * buf, s32 a)
 void func_02000d2c(struct UnkStruct_Func_2000D2C * buf, s32 a, s32 b)
 {
     s32 tmp1, tmp2;
-    struct UnkStruct_021E3328 * unk0 = data_ov000_021e3328;
-    struct UnkStruct_021E3328_00_04_00 * unk1 = unk0->unk_04->unk_00;
+    struct Unit * unit = data_ov000_021e3328->unk_04->unk_00;
     
-    tmp1 = func_0203c77c(unk1);
-    if (func_0203c810(unk1, 0x8000000))
+    tmp1 = func_0203c77c(unit);
+    if (func_0203c810(unit, 0x8000000))
         tmp1 = 0;
 
     tmp2 = func_02001770(buf, a, b);
@@ -56,7 +57,7 @@ void func_02000d2c(struct UnkStruct_Func_2000D2C * buf, s32 a, s32 b)
 
     if ((ABS(a - buf->unk_42) + ABS(b - buf->unk_43)) == 1)
     {
-        s32 tmp_r0 = func_020016e8(buf, unk1, a, b);
+        s32 tmp_r0 = func_020016e8(buf, unit, a, b);
 
         if ((buf->unk_47 + tmp_r0) <= tmp1)
         {
@@ -89,7 +90,7 @@ void func_02000d2c(struct UnkStruct_Func_2000D2C * buf, s32 a, s32 b)
         data_ov000_021e3328->unk_08,
         buf->unk_42,
         buf->unk_43,
-        unk1->unk_44->unk_28,
+        unit->pJobData->unk_28,
         tmp1 - buf->unk_47,
         0xA
     );
@@ -111,7 +112,7 @@ void func_02000d2c(struct UnkStruct_Func_2000D2C * buf, s32 a, s32 b)
 BOOL func_02000f18(struct UnkStruct_Func_2000D2C * buf, s32 a, s32 b, s32 c)
 {
     s32 tmp4;
-    void * tmp1 = data_ov000_021e3328->unk_04->unk_00;
+    struct Unit * unit = data_ov000_021e3328->unk_04->unk_00;
 
     if (data_ov000_021e3328->unk_28[buf->unk_42 | (buf->unk_43 << 5)] != 0)
         return FALSE;
@@ -127,7 +128,7 @@ BOOL func_02000f18(struct UnkStruct_Func_2000D2C * buf, s32 a, s32 b, s32 c)
     }
     else
     {
-        s32 ret = func_02039088(tmp1, buf->unk_42, buf->unk_43, tmp4, c == 0, c == 1, -1);
+        s32 ret = func_02039088(unit, buf->unk_42, buf->unk_43, tmp4, c == 0, c == 1, -1);
 
         if (ret < 0)
             return FALSE;

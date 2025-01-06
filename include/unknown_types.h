@@ -46,24 +46,8 @@ struct UnkStruct_02197254 {
 	/* 00 */ struct UnkStruct_02197254_20 * unk_20;
 };
 
-struct UnkStruct_021E3328_00_04_00_44 {
-    STRUCT_PAD(0x00, 0x28);
-
-    /* 28 */ u8 unk_28;
-};
-
-struct UnkStruct_021E3328_00_04_00 {
-    STRUCT_PAD(0x00, 0x44);
-
-    /* 44 */ struct UnkStruct_021E3328_00_04_00_44 * unk_44;
-
-    STRUCT_PAD(0x48, 0x6D);
-
-    /* 6D */ s8 unk_6D;
-};
-
 struct UnkStruct_021E3328_00_04 {
-    /* 00 */ struct UnkStruct_021E3328_00_04_00 * unk_00;
+    /* 00 */ struct Unit * unk_00;
 };
 
 struct UnkStruct_021E3328 {

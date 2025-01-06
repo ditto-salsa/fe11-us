@@ -30,5 +30,5 @@ BOOL func_02078808(struct UnkStruct_Func_02078808 * r0)
 
 BOOL func_0207884c(struct UnkStruct_Func_02078808 * r0)
 {
-    return func_02078F5C(data_0219796c.unk_08, 0x400, r0) != 0 ? TRUE : FALSE;
+    return func_02078f5c(data_0219796c.unk_08, 0x400, r0) != 0 ? TRUE : FALSE;
 }
