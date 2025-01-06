@@ -552,7 +552,7 @@ void func_01ffc2f4(struct Proc * proc)
     return;
 }
 
-void func_01ffc390(u32 treeNum)
+void Proc_Run(u32 treeNum)
 {
     RunProcessRecursive(func_01ffbc90(treeNum));
     func_01ffc2f4(func_01ffbc90(treeNum));
