@@ -35,6 +35,7 @@ CC_FLAGS = " ".join([
     "-sym on",              # Debug info, including line numbers
     "-nolink",              # Do not link
     "-msgstyle gcc",        # Use GCC-like messages (some IDEs will make file names clickable)
+    "-str pool",
 ])
 LD_FLAGS = " ".join([
     "-proc arm946e",        # Target processor

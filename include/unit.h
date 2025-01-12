@@ -35,7 +35,7 @@ struct JobData
 
 struct ItemData
 {
-    /* 00 */ s32 id;
+    /* 00 */ const char * id;
     /* 04 */ const char * pName;
     /* 08 */ const char * pDescription;
     /* 0C */ u16 weaponIcon;
@@ -51,7 +51,8 @@ struct ItemData
     /* 18 */ u8 weight;
     /* 19 */ u8 minRange;
     /* 1A */ u8 maxRange;
-    STRUCT_PAD(0x1E, 0x24);
+    u8 unk_1b;
+    s8 unk_1c[8];
     u64 unk_24;
     STRUCT_PAD(0x2c, 0x3A);
     u8 unk_3a; // item difficulty adjustment

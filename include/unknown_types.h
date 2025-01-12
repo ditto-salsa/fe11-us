@@ -70,8 +70,11 @@ struct UnkStruct_021E3328 {
 	/* 0828 */ u8 * unk_0828; // idk
 };
 
-struct UnkStruct_021E3324 {
+struct UnkStruct_021E3324
+{
     /* 00 */ u8 unk_00;
+    /* 01 */ u8 unk_01;
+    /* 02 */ u8 unk_02;
 };
 
 struct UnkStruct_Func_2000D2C {
