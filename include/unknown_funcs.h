@@ -52,16 +52,16 @@ extern struct JobData * func_02037c5c(const char *);
 extern s32 func_02039088(struct Unit * unit, int b, int c, int d, int e, int f, int g);
 extern const char * func_02039e10(const char *);
 
-extern s32 func_0203c454(struct Unit * unit);
-extern s32 func_0203c4d0(struct Unit * unit, struct ItemData * item, BOOL unused);
+extern s32 GetUnitMaxHp(struct Unit * unit);
+extern s32 GetUnitMag(struct Unit * unit, struct ItemData * item, BOOL unused);
 extern s32 func_0203c6c0(struct Unit * unit, u32 arg_1, struct ItemData * item, s32 arg_3);
 extern s32 func_0203c77c(struct Unit * unit);
 extern s32 func_0203c7ac(struct Unit * unit, u32 arg_1);
 extern s32 func_0203c7e4(struct Unit * unit, u32 arg_1);
-extern s32 func_0203c810(struct Unit * unit, int attribute);
+extern s32 CheckUnitAttribute(struct Unit * unit, int attribute);
 extern BOOL func_0203c834(struct Unit * unit, struct ItemData * item, s32 arg_2);
-extern s32 func_0203cb98(struct Unit * unit);
-extern struct ItemData * func_0203df8c(struct Item *);
+extern s32 GetUnitEquippedWeaponSlot(struct Unit * unit);
+extern struct ItemData * GetItemData(struct Item *);
 
 struct Unit ** func_02040c98(s32);
 

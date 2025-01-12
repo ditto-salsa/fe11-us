@@ -2,7 +2,7 @@
 
 #include "unit.h"
 
-extern struct Unit * data_021974d8;
+extern struct Unit * gUnitList;
 
 // FE11U = 0x02044974
 BOOL UnitSetEventDead(void * unused, s32 unitId)
@@ -16,7 +16,7 @@ BOOL UnitSetEventDead(void * unused, s32 unitId)
     }
     else
     {
-        unit = data_021974d8 + unitId - 1;
+        unit = gUnitList + unitId - 1;
     }
     
     if (!unit)

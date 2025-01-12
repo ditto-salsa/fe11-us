@@ -53,7 +53,7 @@ struct ItemData
     /* 1A */ u8 maxRange;
     u8 unk_1b;
     s8 unk_1c[8];
-    u64 unk_24;
+    u64 attributes;
     STRUCT_PAD(0x2c, 0x3A);
     u8 unk_3a; // item difficulty adjustment
     u8 unk_3b;
