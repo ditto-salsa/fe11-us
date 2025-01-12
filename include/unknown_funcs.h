@@ -47,10 +47,23 @@ extern void func_0201da98(struct Proc * proc, u16 data, u32 flag);
 
 extern void func_02022f10(void);
 
-extern s32 func_02039088(struct Unit * unit, int b, int c, int d, int e, int f, int g);
+extern struct JobData * func_02037c5c(const char *);
 
+extern s32 func_02039088(struct Unit * unit, int b, int c, int d, int e, int f, int g);
+extern const char * func_02039e10(const char *);
+
+extern s32 GetUnitMaxHp(struct Unit * unit);
+extern s32 GetUnitMag(struct Unit * unit, struct ItemData * item, BOOL unused);
+extern s32 func_0203c6c0(struct Unit * unit, u32 arg_1, struct ItemData * item, s32 arg_3);
 extern s32 func_0203c77c(struct Unit * unit);
-extern s32 func_0203c810(struct Unit * unit, int attribute);
+extern s32 func_0203c7ac(struct Unit * unit, u32 arg_1);
+extern s32 func_0203c7e4(struct Unit * unit, u32 arg_1);
+extern s32 CheckUnitAttribute(struct Unit * unit, int attribute);
+extern BOOL func_0203c834(struct Unit * unit, struct ItemData * item, s32 arg_2);
+extern s32 GetUnitEquippedWeaponSlot(struct Unit * unit);
+extern struct ItemData * GetItemData(struct Item *);
+
+struct Unit ** func_02040c98(s32);
 
 extern void func_020a3080(void *, void *, void *, void *, s32, s32);
 extern BOOL func_020a3350(void *);
@@ -61,5 +74,7 @@ extern void func_020a374c(void *, void (*)(void *));
 extern void func_020a5824(void * buf, int a, int b);
 
 extern void func_020ad244(int a);
+
+extern BOOL func_ov000_021a47e4(void);
 
 #endif // UNKNOWN_FUNCS_H
