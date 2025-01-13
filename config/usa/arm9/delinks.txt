@@ -13,6 +13,10 @@ src/proc.c:
     .text       start:0x02018c58 end:0x02019bd4
     .bss        start:0x02190ce0 end:0x02194b28
 
+src/gamectrl.c:
+    .text       start:0x020217b4 end:0x02022f4c
+    .data       start:0x020cec44 end:0x020cf650
+
 src/item.c:
     .text       start:0x02038328 end:0x02039088
     .data       start:0x020d4900 end:0x020d4958

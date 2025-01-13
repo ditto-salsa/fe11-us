@@ -28,7 +28,7 @@ void func_02000c7c(struct UnkStruct_Func_2000C7C * buf)
     buf->unk_0871 = data_ov000_021e3328->unk_25;
     buf->unk_0872 = data_ov000_021e3328->unk_26;
     buf->unk_0873 = data_ov000_021e3328->unk_27;
-    buf->unk_0874 = data_ov000_021e3324->unk_00;
+    buf->unk_0874 = data_ov000_021e3324.unk_00->unk_00;
 
     buf->unk_0854 = buf->unk_0878;
     buf->unk_0858 = buf->unk_1078;

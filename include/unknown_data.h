@@ -16,7 +16,7 @@ extern struct ProcCmd ProcScr_020ce750[];
 
 extern struct Unknown_02197254 * data_02197254; // FE11 database
 
-extern struct UnkStruct_021E3324 * data_ov000_021e3324;
+extern struct UnkStruct_021E3324 data_ov000_021e3324;
 extern struct UnkStruct_021E3328 * data_ov000_021e3328;
 extern int data_027e00e0;
 
