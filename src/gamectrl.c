@@ -463,7 +463,7 @@ extern void func_02022f28(u32 label);
 
 void func_020217b4(void)
 {
-    int iVar1;
+    int random;
     u32 uVar2;
 
     func_0200f20c(0);
@@ -473,8 +473,8 @@ void func_020217b4(void)
     func_02028c68();
     func_020355e4();
 
-    iVar1 = func_0202000c(1, 4) * 4;
-    func_01ffb934(data_027e1b9c, iVar1);
+    random = func_0202000c(1, 4) * 4;
+    func_01ffb934(data_027e1b9c, random);
 
     if (data_02197254 == NULL)
     {
@@ -719,33 +719,33 @@ void func_02021e6c(void)
     return;
 }
 
-void func_02021f08(ProcPtr param_1)
+void func_02021f08(ProcPtr proc)
 {
     if (func_0201f690())
     {
         return;
     }
 
-    Proc_Break(param_1, 1);
+    Proc_Break(proc, 1);
 
     return;
 }
 
-void func_02021f2c(ProcPtr param_1)
+void func_02021f2c(ProcPtr proc)
 {
     if (func_020020e0(data_020e3ca0))
     {
         return;
     }
 
-    Proc_Break(param_1, 1);
+    Proc_Break(proc, 1);
 
     return;
 }
 
 void func_02021f5c(void)
 {
-    int iVar8;
+    int i;
 
     if (data_ov000_021e3324.unk_00 == NULL)
     {
@@ -753,7 +753,7 @@ void func_02021f5c(void)
 
         if (puVar2 != NULL)
         {
-            int iVar6;
+            int j;
 
             puVar2->unk_00 = 0;
             puVar2->unk_01 = 0;
@@ -767,9 +767,9 @@ void func_02021f5c(void)
             puVar2->unk_15 = 0x1f;
             puVar2->unk_16 = 0x1f;
 
-            for (iVar6 = 0; iVar6 < 4; iVar6++)
+            for (j = 0; j < 4; j++)
             {
-                puVar2->unk_18[iVar6] = 0;
+                puVar2->unk_18[j] = 0;
             }
 
             puVar2->unk_1c = 0;
@@ -778,9 +778,9 @@ void func_02021f5c(void)
         data_ov000_021e3324.unk_00 = puVar2;
     }
 
-    for (iVar8 = 0; iVar8 < 0x2e; iVar8++)
+    for (i = 0; i < 0x2e; i++)
     {
-        data_ov000_021e3528.unk_00[iVar8] = -1;
+        data_ov000_021e3528.unk_00[i] = -1;
     }
 
     data_ov000_021e3528.unk_2e = 0;
@@ -796,23 +796,23 @@ void func_02021f5c(void)
 
             for (; n < data_02196f0c->unk_00->unk_0a; n++)
             {
-                struct Unit ** ppUVar5 = func_02040c98(4);
-                struct Unit * pUVar9 = *ppUVar5;
+                struct Unit ** pUnitStack = func_02040c98(4);
+                struct Unit * pUnit = *pUnitStack;
 
-                if (pUVar9 == NULL)
+                if (pUnit == NULL)
                 {
                     break;
                 }
 
-                func_0203bd34(pUVar9, 2, 1);
-                func_020421c4(pUVar9, uVar4);
+                func_0203bd34(pUnit, 2, 1);
+                func_020421c4(pUnit, uVar4);
 
                 data_02196f0c->unk_0c |= 0x20000;
             }
         }
     }
 
-    if ((data_02196f0c->unk_0c & 0x10000) != 0)
+    if (data_02196f0c->unk_0c & 0x10000)
     {
         data_ov000_021e3324.unk_00->unk_02 = data_02196f10->unk_09;
         data_ov000_021e3324.unk_00->unk_0c = data_02196f10->unk_0c * 0x3c;
@@ -822,12 +822,12 @@ void func_02021f5c(void)
     return;
 }
 
-void func_0202214c(ProcPtr param_1)
+void func_0202214c(ProcPtr proc)
 {
     struct Unit ** pUnitStack;
     struct Unit * unit;
 
-    func_02047708("MapBegin\0\0\0", param_1);
+    func_02047708("MapBegin\0\0\0", proc);
 
     if (!(data_02196f0c->unk_0c & 0x10000))
     {
@@ -924,7 +924,7 @@ void func_02022324(void)
     return;
 }
 
-void func_02022364(ProcPtr param_1)
+void func_02022364(ProcPtr proc)
 {
     if (data_02196f0c->unk_0c & 0x40)
     {
@@ -937,7 +937,7 @@ void func_02022364(ProcPtr param_1)
     }
 
     func_02039eac("suppliance\0");
-    func_02047708("SallyTalk\0\0", param_1);
+    func_02047708("SallyTalk\0\0", proc);
 
     return;
 }
@@ -948,7 +948,7 @@ void func_020223b4(void)
     return;
 }
 
-void func_020223cc(ProcPtr param_1)
+void func_020223cc(ProcPtr proc)
 {
     data_021974fc->unk_00 = 0;
     data_021974fc->unk_08 = 0;
@@ -958,7 +958,7 @@ void func_020223cc(ProcPtr param_1)
         return;
     }
 
-    func_02047708("Opening", param_1);
+    func_02047708("Opening", proc);
 
     return;
 }
@@ -992,14 +992,14 @@ void func_02022480(void)
     return;
 }
 
-void func_020224a8(ProcPtr param_1)
+void func_020224a8(ProcPtr proc)
 {
     if (!func_020377e8("Ending\0"))
     {
         return;
     }
 
-    func_02047708("Ending\0", param_1);
+    func_02047708("Ending\0", proc);
 
     return;
 }
@@ -1023,9 +1023,9 @@ void func_020224fc(void)
     return;
 }
 
-void func_0202254c(ProcPtr param_1)
+void func_0202254c(ProcPtr proc)
 {
-    func_02047708("MapEnd\0", param_1);
+    func_02047708("MapEnd\0", proc);
     return;
 }
 
@@ -1130,7 +1130,7 @@ void func_02022588(void)
         func_0203bd34(pUnit, 2, 1);
     }
 
-    if ((data_02196f0c->unk_0c & 0x800) != 0)
+    if (data_02196f0c->unk_0c & 0x800)
     {
         return;
     }
@@ -1140,13 +1140,13 @@ void func_02022588(void)
     return;
 }
 
-void func_0202272c(ProcPtr param_1)
+void func_0202272c(ProcPtr proc)
 {
-    func_02047708("ChapterNext", param_1);
+    func_02047708("ChapterNext", proc);
 
-    if ((data_02196f0c->unk_0c & 1) == 0)
+    if (!(data_02196f0c->unk_0c & 1))
     {
-        if ((data_02196f0c->unk_0c & 0x800) == 0)
+        if (!(data_02196f0c->unk_0c & 0x800))
         {
             data_02196f0c->unk_0c |= 1;
         }
@@ -1296,7 +1296,7 @@ inline BOOL _func_02022b50(void)
 
 void func_020229f0(void)
 {
-    int uVar3;
+    int random;
 
     if (_func_02022b10())
     {
@@ -1310,22 +1310,22 @@ void func_020229f0(void)
 
     if (_func_02022b50())
     {
-        uVar3 = func_0202000c(1, data_02197254->pDBFE11Footer->unk_14 - 1);
-        data_02196f10->unk_11 = uVar3;
-        func_0204939c(data_02196f18->unk_00, uVar3);
+        random = func_0202000c(1, data_02197254->pDBFE11Footer->unk_14 - 1);
+        data_02196f10->unk_11 = random;
+        func_0204939c(data_02196f18->unk_00, random);
 
         if (data_02196f10->unk_0b != 0 && func_02021410(data_02196f10->unk_06)->unk_756 == 0x14)
         {
-            uVar3 = func_0202000c(1, data_02197254->pDBFE11Footer->unk_14 - 2);
+            random = func_0202000c(1, data_02197254->pDBFE11Footer->unk_14 - 2);
 
-            if (uVar3 >= data_02196f10->unk_11)
+            if (random >= data_02196f10->unk_11)
             {
-                uVar3 += 1;
+                random += 1;
             }
 
-            data_02196f10->unk_12 = uVar3;
+            data_02196f10->unk_12 = random;
 
-            func_0204939c(data_02196f18->unk_00, uVar3);
+            func_0204939c(data_02196f18->unk_00, random);
         }
     }
 
@@ -1366,9 +1366,9 @@ void func_02022b70(ProcPtr proc)
     return;
 }
 
-void func_02022bb0(ProcPtr param_1)
+void func_02022bb0(ProcPtr proc)
 {
-    u32 uVar1;
+    u32 var;
 
     if (!_func_02022b30())
     {
@@ -1379,13 +1379,13 @@ void func_02022bb0(ProcPtr param_1)
 
         func_020146a0();
         func_02012bbc();
-        func_02012680(param_1);
+        func_02012680(proc);
 
-        uVar1 = data_02196f10->unk_04;
+        var = data_02196f10->unk_04;
         func_02021b14();
-        data_02196f10->unk_04 = uVar1;
+        data_02196f10->unk_04 = var;
 
-        func_020228ec(param_1);
+        func_020228ec(proc);
         func_02022f28(30);
 
         data_020efcc8->unk_a4->unk_00->unk_3c(data_020efcc8->unk_a4, 0x10, 0x48, 0);
@@ -1396,39 +1396,39 @@ void func_02022bb0(ProcPtr param_1)
     return;
 }
 
-void func_02022c54(ProcPtr param_1)
+void func_02022c54(ProcPtr proc)
 {
-    func_020240a0(data_02196f0c->unk_10 + 0x0d, param_1);
+    func_020240a0(data_02196f0c->unk_10 + 0x0d, proc);
     return;
 }
 
-void func_02022c78(ProcPtr param_1)
+void func_02022c78(ProcPtr proc)
 {
-    func_020240a0(data_02196f0c->unk_10 + 0x10, param_1);
+    func_020240a0(data_02196f0c->unk_10 + 0x10, proc);
     data_02196f0c->unk_0c |= 4;
     return;
 }
 
-void func_02022cb0(ProcPtr param_1)
+void func_02022cb0(ProcPtr proc)
 {
-    func_020240a0(11, param_1);
+    func_020240a0(11, proc);
     data_02196f0c->unk_0c |= 4;
     return;
 }
 
-void func_02022cdc(ProcPtr param_1)
+void func_02022cdc(ProcPtr proc)
 {
     if (!func_0201f760(11))
     {
         return;
     }
 
-    func_0202437c(param_1);
+    func_0202437c(proc);
 
     return;
 }
 
-void func_02022d00(ProcPtr param_1)
+void func_02022d00(ProcPtr proc)
 {
     struct Unit * pUnit;
     int i;
@@ -1471,7 +1471,7 @@ void func_02022d00(ProcPtr param_1)
 
     if (!(data_02196f0c->unk_0c & 0x80))
     {
-        func_ov006_0221bdbc(param_1);
+        func_ov006_0221bdbc(proc);
         return;
     }
 
@@ -1551,8 +1551,6 @@ BOOL func_02022ef4(void)
 {
     return data_020efcb4 == 1 ? TRUE : FALSE;
 }
-
-extern struct ProcCmd data_020cec44[];
 
 void func_02022f10(void)
 {
