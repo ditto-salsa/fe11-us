@@ -423,10 +423,10 @@ func_0200f028 kind:function(arm,size=0x24) addr:0x200f028
 func_0200f04c kind:function(arm,size=0xa4) addr:0x200f04c
 func_0200f0f0 kind:function(arm,size=0xf8) addr:0x200f0f0
 func_0200f1e8 kind:function(arm,size=0x24) addr:0x200f1e8
-func_0200f20c kind:function(arm,size=0x40) addr:0x200f20c
-func_0200f24c kind:function(arm,size=0x40) addr:0x200f24c
+LoadOverlay kind:function(arm,size=0x40) addr:0x200f20c
+UnloadOverlay kind:function(arm,size=0x40) addr:0x200f24c
 func_0200f28c kind:function(arm,size=0x6c) addr:0x200f28c
-func_0200f2f8 kind:function(arm,size=0x10) addr:0x200f2f8
+IsOverlayLoaded kind:function(arm,size=0x10) addr:0x200f2f8
 func_0200f308 kind:function(arm,size=0x10) addr:0x200f308
 func_0200f318 kind:function(arm,size=0x20) addr:0x200f318
 func_0200f338 kind:function(arm,size=0x18) addr:0x200f338
@@ -1133,7 +1133,7 @@ func_0201ff20 kind:function(arm,size=0x90) addr:0x201ff20
 func_0201ffb0 kind:function(arm,size=0x10) addr:0x201ffb0
 func_0201ffc0 kind:function(arm,size=0x10) addr:0x201ffc0
 func_0201ffd0 kind:function(arm,size=0x3c) addr:0x201ffd0
-func_0202000c kind:function(arm,size=0x28) addr:0x202000c
+RollRN kind:function(arm,size=0x28) addr:0x202000c
 func_02020034 kind:function(arm,size=0x84) addr:0x2020034
 func_020200b8 kind:function(arm,size=0x50) addr:0x20200b8
 func_02020108 kind:function(arm,size=0x50) addr:0x2020108
@@ -1182,7 +1182,7 @@ func_02021134 kind:function(arm,size=0x1c) addr:0x2021134
 func_02021150 kind:function(arm,size=0x28) addr:0x2021150
 func_02021178 kind:function(arm,size=0x14) addr:0x2021178
 func_0202118c kind:function(arm,size=0x2c) addr:0x202118c
-func_020211b8 kind:function(arm,size=0x24) addr:0x20211b8
+GetBattleMapNameMaybe kind:function(arm,size=0x24) addr:0x20211b8
 func_020211dc kind:function(arm,size=0xf8) addr:0x20211dc
 func_020212d4 kind:function(arm,size=0x13c) addr:0x20212d4
 func_02021410 kind:function(arm,size=0x20) addr:0x2021410
@@ -1192,8 +1192,8 @@ func_020217b4 kind:function(arm,size=0x1f0) addr:0x20217b4
 func_020219a4 kind:function(arm,size=0x15c) addr:0x20219a4
 func_02021b00 kind:function(arm,size=0x14) addr:0x2021b00
 func_02021b14 kind:function(arm,size=0x14) addr:0x2021b14
-func_02021b28 kind:function(arm,size=0x15c) addr:0x2021b28
-func_02021c84 kind:function(arm,size=0xec) addr:0x2021c84
+InitOnlineShopItemFlags kind:function(arm,size=0x15c) addr:0x2021b28
+InitOnlineShopItemAmounts kind:function(arm,size=0xec) addr:0x2021c84
 func_02021d70 kind:function(arm,size=0x64) addr:0x2021d70
 func_02021dd4 kind:function(arm,size=0x98) addr:0x2021dd4
 func_02021e6c kind:function(arm,size=0x9c) addr:0x2021e6c
@@ -1245,7 +1245,7 @@ func_02022e54 kind:function(arm,size=0x64) addr:0x2022e54
 func_02022eb8 kind:function(arm,size=0x1c) addr:0x2022eb8
 func_02022ed4 kind:function(arm,size=0x20) addr:0x2022ed4
 func_02022ef4 kind:function(arm,size=0x1c) addr:0x2022ef4
-func_02022f10 kind:function(arm,size=0x18) addr:0x2022f10
+StartGame kind:function(arm,size=0x18) addr:0x2022f10
 func_02022f28 kind:function(arm,size=0x24) addr:0x2022f28
 func_02022f4c kind:function(arm,size=0x8) addr:0x2022f4c
 func_02022f54 kind:function(arm,size=0x8) addr:0x2022f54
@@ -6318,7 +6318,7 @@ data_020ceba4 kind:data(any) addr:0x20ceba4
 data_020cebc4 kind:data(any) addr:0x20cebc4
 data_020cebec kind:data(any) addr:0x20cebec
 data_020cec14 kind:data(any) addr:0x20cec14
-data_020cec44 kind:data(any) addr:0x20cec44
+ProcScr_GameCtrl kind:data(any) addr:0x20cec44
 data_020cf48c kind:data(any) addr:0x20cf48c
 data_020cf494 kind:data(any) addr:0x20cf494
 data_020cf498 kind:data(any) addr:0x20cf498

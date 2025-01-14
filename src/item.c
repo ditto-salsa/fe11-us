@@ -15,12 +15,6 @@ enum
     ITYPE_ITEM        = 8,
 };
 
-struct UnkStruct_02196f0c
-{
-    STRUCT_PAD(0x00, 0x0c);
-    u32 unk_0c;
-};
-
 extern struct UnkStruct_02196f0c * data_02196f0c;
 
 extern struct Unit * gUnitList;
@@ -222,7 +216,7 @@ BOOL func_02038384(struct ItemData * item, struct Unit * unit)
                 return FALSE;
             }
 
-            if (data_ov000_021e3324->unk_02 == 0)
+            if (data_ov000_021e3324.unk_00->unk_02 == 0)
             {
                 return FALSE;
             }
@@ -458,7 +452,7 @@ BOOL func_02038914(struct ItemData * item, u32 x, u32 y)
                     return FALSE;
                 }
 
-                ppUVar2 = func_02040c98(data_ov000_021e3324->unk_00);
+                ppUVar2 = func_02040c98(data_ov000_021e3324.unk_00->unk_00);
 
                 for (pUnit = *ppUVar2; pUnit != 0; pUnit = pUnit->unk_3c)
                 {
@@ -499,7 +493,7 @@ BOOL func_02038914(struct ItemData * item, u32 x, u32 y)
                 return FALSE;
             }
 
-            if (!((pUnit->unk_4c->unk_08 == data_ov000_021e3324->unk_00 ? TRUE : FALSE) & 0xff))
+            if (!((pUnit->unk_4c->unk_08 == data_ov000_021e3324.unk_00->unk_00 ? TRUE : FALSE) & 0xff))
             {
                 return FALSE;
             }
@@ -541,7 +535,7 @@ BOOL func_02038914(struct ItemData * item, u32 x, u32 y)
                 return FALSE;
             }
 
-            if (!((pUnit->unk_4c->unk_08 == data_ov000_021e3324->unk_00 ? TRUE : FALSE) & 0xff))
+            if (!((pUnit->unk_4c->unk_08 == data_ov000_021e3324.unk_00->unk_00 ? TRUE : FALSE) & 0xff))
             {
                 return FALSE;
             }
@@ -598,7 +592,7 @@ BOOL func_02038914(struct ItemData * item, u32 x, u32 y)
                 return FALSE;
             }
 
-            if (!((pUnit->unk_4c->unk_08 == data_ov000_021e3324->unk_00 ? TRUE : FALSE) & 0xff))
+            if (!((pUnit->unk_4c->unk_08 == data_ov000_021e3324.unk_00->unk_00 ? TRUE : FALSE) & 0xff))
             {
                 return FALSE;
             }
@@ -627,7 +621,7 @@ BOOL func_02038914(struct ItemData * item, u32 x, u32 y)
                 return FALSE;
             }
 
-            if (!((pUnit->unk_4c->unk_08 == data_ov000_021e3324->unk_00 ? TRUE : FALSE) & 0xff))
+            if (!((pUnit->unk_4c->unk_08 == data_ov000_021e3324.unk_00->unk_00 ? TRUE : FALSE) & 0xff))
             {
                 return FALSE;
             }
@@ -688,7 +682,7 @@ void func_02038ce4(struct ItemData * item, struct Unit * unitA, struct Unit * un
         case 0:
             if (item->attributes & 0x10)
             {
-                ppUVar3 = func_02040c98(data_ov000_021e3324->unk_00);
+                ppUVar3 = func_02040c98(data_ov000_021e3324.unk_00->unk_00);
                 pUnit = *ppUVar3;
 
                 for (; pUnit != NULL; pUnit = pUnit->unk_3c)
