@@ -15,35 +15,6 @@ void func_0201fd44(void *);
 
 void func_0204b1e0(void *);
 
-void func_ov000_021a9714(void *);
-void func_ov003_021e3610(void *);
-void func_ov003_021e4204(void *);
-void func_ov003_021e4244(void *);
-void func_ov003_021e4284(void *);
-void func_ov003_021e439c(void *);
-void func_ov003_021eb9b0(void *);
-void func_ov003_021ebb8c(void *);
-void func_ov003_021ed664(void *);
-void func_ov003_021edf2c(void *);
-void func_ov003_021f049c(void *);
-void func_ov003_021f24e4(void *);
-void func_ov003_021f31f0(void *);
-void func_ov003_021f4a84(void *);
-void func_ov003_021f6ce8(void *);
-void func_ov003_021f9470(void *);
-void func_ov003_021fb690(void *);
-void func_ov003_021fb704(void *);
-void func_ov003_021fc0d4(void *);
-void func_ov005_022052d0(void *);
-void func_ov006_0221776c(void *);
-void func_ov006_02221aec(void *);
-void func_ov006_022226cc(void *);
-void func_ov007_02218284(void *);
-void func_ov007_0221ad60(void *);
-void func_ov009_02204e10(void *);
-void func_ov009_02206020(void *);
-void func_ov009_022065a0(void *);
-
 void func_02021b00(void);
 void func_02021b14(void);
 void func_02021d70(void);
@@ -367,56 +338,11 @@ struct ProcCmd data_020cec44[] =
 
 extern char * data_02196f14;
 
-struct UnkStruct_021e3528
-{
-    s8 unk_00[0x2e];
-    s8 unk_2e;
-    u8 unk_2f;
-};
-
 extern struct UnkStruct_021e3528 data_ov000_021e3528;
-
-struct UnkStruct_021974fc
-{
-    u32 unk_00;
-    u32 unk_04;
-    u32 unk_08;
-    u32 unk_0c;
-    u8 unk_10;
-};
 
 extern struct UnkStruct_021974fc * data_021974fc;
 
-struct Unknown_020efcc8_unk_a8_unk_00
-{
-    STRUCT_PAD(0x00, 0x28);
-    void (*unk_28)(void *, u32, u32, u32);
-    STRUCT_PAD(0x2C, 0x38);
-    void (*unk_38)(void *, u32);
-    void (*unk_3c)(void *, u32, u32, u32);
-    STRUCT_PAD(0x40, 0x6c);
-    void (*unk_6c)(void *, u32);
-};
-
-struct Unknown_020efcc8_unk_a8
-{
-    struct Unknown_020efcc8_unk_a8_unk_00 * unk_00;
-};
-
-struct Unknown_020efcc8
-{
-    STRUCT_PAD(0x00, 0xA4);
-    struct Unknown_020efcc8_unk_a8 * unk_a4;
-    struct Unknown_020efcc8_unk_a8 * unk_a8;
-};
-
 extern struct Unknown_020efcc8 * data_020efcc8;
-
-struct UnkStruct_Func_02021410_Ret
-{
-    STRUCT_PAD(0x000, 0x756);
-    u8 unk_756;
-};
 
 struct UnkStruct_Func_02021410_Ret * func_02021410(u32);
 
@@ -433,100 +359,17 @@ struct UnkStruct_02196f18
 
 extern struct UnkStruct_02196f18 * data_02196f18;
 
-struct UnkStruct_020e3ca0
-{
-    STRUCT_PAD(0x00, 0x24);
-};
-
 extern struct UnkStruct_020e3ca0 * data_020e3ca0;
 
-struct UnkStruct_02196f1c
-{
-    STRUCT_PAD(0x00, 0x09);
-    u8 unk_09;
-};
 
 extern struct UnkStruct_02196f1c * data_02196f1c;
 
-struct UnkStruct_02196f10
-{
-    u32 unk_00;
-    s8 unk_04;
-    u8 unk_05;
-    u8 unk_06;
-    s8 unk_07;
-    u8 unk_08;
-    u8 unk_09;
-    u8 unk_0a;
-    u8 unk_0b;
-    u32 unk_0c;
-    u8 unk_10;
-    u8 unk_11;
-    u8 unk_12;
-    STRUCT_PAD(0x13, 0x17);
-    u8 unk_17;
-};
-
 extern struct UnkStruct_02196f10 * data_02196f10;
 
-struct UnkStruct_02196f0c_00
-{
-    STRUCT_PAD(0x00, 0x0A);
-    s8 unk_0a;
-};
-
-struct UnkStruct_02196f0c_04_00
-{
-    u32 unk_00;
-    void (*unk_04)(void *, char *);
-};
-
-struct UnkStruct_02196f0c_04
-{
-    struct UnkStruct_02196f0c_04_00 * unk_00;
-};
-
-struct UnkStruct_02196f0c_10
-{
-    STRUCT_PAD(0x00, 0x0d);
-    u8 unk_0d;
-    STRUCT_PAD(0x0e, 0x10);
-    u8 unk_10;
-};
-
-struct UnkStruct_02196f0c
-{
-    struct UnkStruct_02196f0c_00 * unk_00;
-    struct UnkStruct_02196f0c_04 * unk_04;
-    u32 unk_08;
-    u32 unk_0c;
-    struct UnkStruct_02196f0c_10 * unk_10;
-    u32 unk_14;
-};
 
 extern struct UnkStruct_02196f0c * data_02196f0c;
 
-struct UnkStruct_02196f20
-{
-    STRUCT_PAD(0x000, 0x184);
-    s32 unk_184;
-    u32 unk_188;
-    u32 unk_18c;
-    u32 unk_190;
-    u32 unk_194;
-    u8 unk_198;
-    u8 unk_199;
-    u8 unk_19a;
-    u8 unk_19b;
-    s8 unk_19c;
-};
-
 extern struct UnkStruct_02196f20 * data_02196f20;
-
-struct UnkStruct_02196f24
-{
-    STRUCT_PAD(0x00, 0x10);
-};
 
 extern struct UnkStruct_02196f24 * data_02196f24;
 
@@ -745,7 +588,7 @@ void func_02021d70(void)
 
 void func_02021dd4(void)
 {
-    data_02196f14 = (char *)func_020211b8();
+    data_02196f14 = func_020211b8();
 
     if (data_02196f14[0] == 'b' && data_02196f14[1] == 'm' && data_02196f14[2] == 'a' && data_02196f14[3] == 'p')
     {
@@ -765,8 +608,7 @@ void func_02021dd4(void)
         data_02196f14 = NULL;
     }
 
-    func_020211b8();
-    func_02042460();
+    func_02042460(func_020211b8());
     func_020424b8("RegistLocalFlags\0\0\0");
     func_020484b0();
 
@@ -774,7 +616,6 @@ void func_02021dd4(void)
 }
 
 void func_02021e6c(void)
-
 {
     func_020485d0();
     func_020424ac();
@@ -953,23 +794,24 @@ void func_020221e4(void)
 
 void func_0202225c(void)
 {
-    struct Unit * iVar1;
-    int uVar2;
+    struct Unit * pUnit;
+    int unitId;
 
     func_0204b790();
 
-    uVar2 = data_ov000_021e3328->unk_28[data_ov000_021e3328->unk_10->unk_08 | data_ov000_021e3328->unk_10->unk_09 << 5];
+    unitId =
+        data_ov000_021e3328->unk_28[data_ov000_021e3328->unk_10->unk_08 | data_ov000_021e3328->unk_10->unk_09 << 5];
 
-    if (uVar2 == 0)
+    if (unitId == 0)
     {
-        iVar1 = NULL;
+        pUnit = NULL;
     }
     else
     {
-        iVar1 = gUnitList + uVar2 - 1;
+        pUnit = gUnitList + unitId - 1;
     }
 
-    func_0204e1a4(iVar1, 0, 1);
+    func_0204e1a4(pUnit, 0, 1);
     func_0204eab8(data_ov000_021e3328->unk_10->unk_08, data_ov000_021e3328->unk_10->unk_09, 0);
     func_0204f6d0();
 
@@ -1089,6 +931,7 @@ void func_020224fc(void)
 {
     data_02196f20->unk_19b = data_021974fc->unk_10;
     data_02196f20->unk_19c = 0xff;
+
     func_0204ac00();
 
     func_020115a4(data_021974fc);
@@ -1112,8 +955,8 @@ void func_02022564(void)
 
 void func_02022588(void)
 {
-    struct Unit * pUVar8;
-    int iVar9;
+    struct Unit * pUnit;
+    int i;
 
     if ((data_02196f0c->unk_0c & 0x00010020) != 0)
     {
@@ -1122,55 +965,55 @@ void func_02022588(void)
 
     func_02041458();
 
-    for (iVar9 = 0, pUVar8 = gUnitList; iVar9 < 0x8c; iVar9++, pUVar8++)
+    for (i = 0, pUnit = gUnitList; i < 0x8c; i++, pUnit++)
     {
-        if (pUVar8->unk_4c->unk_08 == 4)
+        if (pUnit->unk_4c->unk_08 == 4)
         {
             continue;
         }
 
-        if (pUVar8->unk_4c->unk_08 == 5)
+        if (pUnit->unk_4c->unk_08 == 5)
         {
             continue;
         }
 
-        if (pUVar8->unk_4c->unk_08 != 3)
+        if (pUnit->unk_4c->unk_08 != 3)
         {
             continue;
         }
 
-        if ((pUVar8->state2 & 0x40000) != 0)
+        if ((pUnit->state2 & 0x40000) != 0)
         {
-            func_0203c19c(pUVar8);
+            func_0203c19c(pUnit);
         }
 
-        pUVar8->state2 &= 0xfffffeff;
+        pUnit->state2 &= 0xfffffeff;
 
-        if ((pUVar8->state2 & 0x80) != 0)
+        if ((pUnit->state2 & 0x80) != 0)
         {
-            int iVar3;
-            struct Item * pUVar10;
+            int j;
+            struct Item * pUnitItem;
 
-            pUVar8->state2 &= 0xffffff7f;
-            pUVar8->unk_34 = func_02038108(data_02196f0c->unk_00);
+            pUnit->state2 &= 0xffffff7f;
+            pUnit->unk_34 = func_02038108(data_02196f0c->unk_00);
 
-            for (iVar3 = 0, pUVar10 = pUVar8->items; iVar3 < 5; iVar3++, pUVar10++)
+            for (j = 0, pUnitItem = pUnit->items; j < 5; j++, pUnitItem++)
             {
-                if (((pUVar10->id == 0) ? TRUE : FALSE) & 0xFF)
+                if (((pUnitItem->id == 0) ? TRUE : FALSE) & 0xFF)
                 {
                     continue;
                 }
 
-                pUVar10->unk_03 &= ~0x30;
+                pUnitItem->unk_03 &= ~0x30;
 
-                func_02040f5c(pUVar10);
-                func_0203e02c(pUVar10);
+                func_02040f5c(pUnitItem);
+                func_0203e02c(pUnitItem);
             }
         }
 
-        if ((pUVar8->state2 & 0x80000) != 0)
+        if ((pUnit->state2 & 0x80000) != 0)
         {
-            func_0203bd34(pUVar8, 4, 1);
+            func_0203bd34(pUnit, 4, 1);
         }
     }
 
@@ -1178,29 +1021,30 @@ void func_02022588(void)
 
     while (TRUE)
     {
-        struct Unit ** ppUVar5;
-        struct Unit * pUVar7;
-        struct Unit * pUVar6;
-        ppUVar5 = func_02040c98(0);
-        pUVar6 = *ppUVar5;
+        struct Unit ** pUnitStack;
+        struct Unit * it;
+        struct Unit * pUnit;
 
-        if (pUVar6 == NULL)
+        pUnitStack = func_02040c98(0);
+        pUnit = *pUnitStack;
+
+        if (pUnit == NULL)
         {
             break;
         }
 
-        for (pUVar7 = pUVar6->unk_3c; pUVar7 != NULL; pUVar7 = pUVar7->unk_3c)
+        for (it = pUnit->unk_3c; it != NULL; it = it->unk_3c)
         {
-            s32 a = pUVar7->unk_95;
-            s32 b = pUVar6->unk_95;
+            s32 a = it->unk_95;
+            s32 b = pUnit->unk_95;
 
             if (a < b)
             {
-                pUVar6 = pUVar7;
+                pUnit = it;
             }
         }
 
-        func_0203bd34(pUVar6, 2, 1);
+        func_0203bd34(pUnit, 2, 1);
     }
 
     if ((data_02196f0c->unk_0c & 0x800) != 0)
@@ -1471,13 +1315,13 @@ void func_02022bb0(void * param_1)
 
 void func_02022c54(void * param_1)
 {
-    func_020240a0(&data_02196f0c->unk_10->unk_0d, param_1);
+    func_020240a0(data_02196f0c->unk_10 + 0x0d, param_1);
     return;
 }
 
 void func_02022c78(void * param_1)
 {
-    func_020240a0(&data_02196f0c->unk_10->unk_10, param_1);
+    func_020240a0(data_02196f0c->unk_10 + 0x10, param_1);
     data_02196f0c->unk_0c |= 4;
     return;
 }
@@ -1501,7 +1345,7 @@ void func_02022cdc(void * param_1)
     return;
 }
 
-void func_02022d00(u32 param_1)
+void func_02022d00(void * param_1)
 {
     struct Unit * pUnit;
     int i;
@@ -1629,7 +1473,7 @@ extern struct ProcCmd data_020cec44[];
 
 void func_02022f10(void)
 {
-    Proc_Start(data_020cec44, 9);
+    Proc_Start(data_020cec44, (void *)9);
     return;
 }
 
