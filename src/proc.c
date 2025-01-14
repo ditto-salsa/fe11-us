@@ -199,25 +199,26 @@ void Proc_SetMark(struct Proc * proc, u32 mark)
     return;
 }
 
-void Proc_Goto(struct Proc * proc, s32 label, s32 unk)
+void Proc_Goto(ProcPtr proc, s32 label, s32 unk)
 {
-    struct ProcCmd * cmd = proc->proc_script;
+    struct Proc * p = proc;
+    struct ProcCmd * cmd = p->proc_script;
 
     if (cmd->opcode == 0)
     {
         return;
     }
 
-    for (cmd = proc->proc_script; cmd->opcode != 0; cmd++)
+    for (cmd = p->proc_script; cmd->opcode != 0; cmd++)
     {
         if (cmd->opcode == PROC_CMD_LABEL && cmd->dataImm == label)
         {
-            proc->proc_scrCur = cmd;
-            proc->proc_idleCb = NULL;
+            p->proc_scrCur = cmd;
+            p->proc_idleCb = NULL;
 
             if (unk != 0)
             {
-                proc->proc_flags |= 0x20;
+                p->proc_flags |= 0x20;
             }
 
             return;
@@ -382,7 +383,7 @@ void func_020190ec(struct Proc * proc)
     }
 
     proc->proc_flags |= 2;
-    proc->proc_parent->proc_lockCnt++;
+    ((struct Proc *)(proc->proc_parent))->proc_lockCnt++;
 
     return;
 }
@@ -400,7 +401,7 @@ void func_02019124(struct Proc * proc)
     }
 
     proc->proc_flags &= ~2;
-    proc->proc_parent->proc_lockCnt--;
+    ((struct Proc *)(proc->proc_parent))->proc_lockCnt--;
 
     return;
 }
@@ -535,87 +536,94 @@ void func_0201933c(void * func, struct Proc * parent)
     return;
 }
 
-BOOL ProcCmd_End(struct Proc * proc)
+BOOL ProcCmd_End(ProcPtr proc)
 {
     Proc_End(proc);
     return FALSE;
 }
 
-BOOL func_02019368(struct Proc * proc)
+BOOL func_02019368(ProcPtr proc)
 {
     return FALSE;
 }
 
-BOOL func_02019370(struct Proc * proc)
+BOOL func_02019370(ProcPtr proc)
 {
     return TRUE;
 }
 
-BOOL func_02019378(struct Proc * proc)
+BOOL func_02019378(ProcPtr proc)
 {
-    proc->proc_scrCur++;
+    struct Proc * p = proc;
+    p->proc_scrCur++;
     return TRUE;
 }
 
-BOOL ProcCmd_SetEndFunc(struct Proc * proc)
+BOOL ProcCmd_SetEndFunc(ProcPtr proc)
 {
-    Proc_SetEndFunc(proc, proc->proc_scrCur->dataPtr);
-    proc->proc_scrCur++;
+    struct Proc * p = proc;
+    Proc_SetEndFunc(proc, p->proc_scrCur->dataPtr);
+    p->proc_scrCur++;
     return TRUE;
 }
 
-BOOL func_020193b4(struct Proc * proc)
+BOOL func_020193b4(ProcPtr proc)
 {
-    func_02018f54(proc, proc->proc_scrCur->dataPtr);
-    proc->proc_scrCur++;
+    struct Proc * p = proc;
+    func_02018f54(proc, p->proc_scrCur->dataPtr);
+    p->proc_scrCur++;
     return TRUE;
 }
 
-BOOL ProcCmd_Call(struct Proc * proc)
+BOOL ProcCmd_Call(ProcPtr proc)
 {
-    ProcFunc func = proc->proc_scrCur->dataPtr;
-    proc->proc_scrCur++;
+    struct Proc * p = proc;
+    ProcFunc func = p->proc_scrCur->dataPtr;
+    p->proc_scrCur++;
 
     func(proc);
 
     return TRUE;
 }
 
-BOOL ProcCmd_CallArg(struct Proc * proc)
+BOOL ProcCmd_CallArg(ProcPtr proc)
 {
-    s16 arg = proc->proc_scrCur->dataImm;
-    BOOL (*func)(struct Proc *, s16) = proc->proc_scrCur->dataPtr;
+    struct Proc * p = proc;
+    s16 arg = p->proc_scrCur->dataImm;
+    BOOL (*func)(ProcPtr, s16) = p->proc_scrCur->dataPtr;
 
-    proc->proc_scrCur++;
+    p->proc_scrCur++;
     func(proc, arg);
 
     return TRUE;
 }
 
-BOOL ProcCmd_While(struct Proc * proc)
+BOOL ProcCmd_While(ProcPtr proc)
 {
-    BOOL (*func)(struct Proc *) = proc->proc_scrCur->dataPtr;
-    proc->proc_scrCur++;
+    struct Proc * p = proc;
+    BOOL (*func)(ProcPtr) = p->proc_scrCur->dataPtr;
+    p->proc_scrCur++;
 
     if (func(proc))
     {
-        proc->proc_scrCur--;
+        p->proc_scrCur--;
         return FALSE;
     }
 
     return TRUE;
 }
 
-BOOL ProcCmd_WhileArg(struct Proc * proc)
+BOOL ProcCmd_WhileArg(ProcPtr proc)
 {
-    s16 arg = proc->proc_scrCur->dataImm;
-    BOOL (*func)(struct Proc *, s16) = proc->proc_scrCur->dataPtr;
+    struct Proc * p = proc;
+    s16 arg = p->proc_scrCur->dataImm;
+    BOOL (*func)(ProcPtr, s16) = p->proc_scrCur->dataPtr;
 
-    proc->proc_scrCur++;
+    p->proc_scrCur++;
 
     if (func(proc, arg))
     {
-        proc->proc_scrCur--;
+        p->proc_scrCur--;
         return FALSE;
     }
 
@@ -652,163 +660,176 @@ void func_020194fc(void * unused)
     func_020a36ac(NULL);
 }
 
-BOOL func_0201951c(struct Proc * proc)
+BOOL func_0201951c(ProcPtr proc)
 {
+    struct Proc * p = proc;
     void * (*func)(void *);
     struct Unknown_func_01ffb934_ret * unk;
 
-    if (proc->proc_flags & 0x40)
+    if (p->proc_flags & 0x40)
     {
-        if (!func_020a3350(proc->unk_2c))
+        if (!func_020a3350(p->unk_2c))
         {
             return FALSE;
         }
 
-        func_01ffbb90(&data_027e1b9c, proc->unk_2c);
+        func_01ffbb90(&data_027e1b9c, p->unk_2c);
 
-        proc->unk_2c = 0;
-        proc->proc_flags &= ~0x40;
+        p->unk_2c = 0;
+        p->proc_flags &= ~0x40;
 
-        proc->proc_scrCur++;
+        p->proc_scrCur++;
 
         return TRUE;
     }
 
-    func = proc->proc_scrCur->dataPtr;
+    func = p->proc_scrCur->dataPtr;
     unk = func_01ffb934(&data_027e1b9c, 0x10c0);
     func_020a3080(unk, func, proc, ((u8 *)unk) + 0x10c0, 0x1000, 0x13);
 
     func_020a374c(unk, func_020194fc);
 
-    data_02190ce0.unk_08 = proc->unk_28;
+    data_02190ce0.unk_08 = p->unk_28;
     data_020ce6ec = unk->unk_6c;
 
     func_020a36ac(func_0201949c);
     func_020a341c(unk);
 
-    proc->unk_2c = unk;
-    proc->proc_flags |= 0x40;
+    p->unk_2c = unk;
+    p->proc_flags |= 0x40;
 
     return TRUE;
 }
 
-BOOL ProcCmd_Repeat(struct Proc * proc)
+BOOL ProcCmd_Repeat(ProcPtr proc)
 {
-    proc->proc_idleCb = proc->proc_scrCur->dataPtr;
-    proc->proc_scrCur++;
+    struct Proc * p = proc;
+    p->proc_idleCb = p->proc_scrCur->dataPtr;
+    p->proc_scrCur++;
     return FALSE;
 }
 
-BOOL ProcCmd_WhileExists(struct Proc * proc)
+BOOL ProcCmd_WhileExists(ProcPtr proc)
 {
-    if (Proc_Find(proc->proc_scrCur->dataPtr) == NULL)
+    struct Proc * p = proc;
+    if (Proc_Find(p->proc_scrCur->dataPtr) == NULL)
     {
-        proc->proc_scrCur++;
+        p->proc_scrCur++;
         return TRUE;
     }
 
     return FALSE;
 }
 
-BOOL ProcCmd_SpawnChild(struct Proc * proc)
+BOOL ProcCmd_SpawnChild(ProcPtr proc)
 {
-    Proc_Start(proc->proc_scrCur->dataPtr, proc);
-    proc->proc_scrCur++;
+    struct Proc * p = proc;
+    Proc_Start(p->proc_scrCur->dataPtr, proc);
+    p->proc_scrCur++;
     return TRUE;
 }
 
-BOOL ProcCmd_SpawnLockChild(struct Proc * proc)
+BOOL ProcCmd_SpawnLockChild(ProcPtr proc)
 {
-    Proc_StartBlocking(proc->proc_scrCur->dataPtr, proc);
-    proc->proc_scrCur++;
+    struct Proc * p = proc;
+    Proc_StartBlocking(p->proc_scrCur->dataPtr, proc);
+    p->proc_scrCur++;
     return FALSE;
 }
 
-BOOL ProcCmd_SpawnChildInTree(struct Proc * proc)
+BOOL ProcCmd_SpawnChildInTree(ProcPtr proc)
 {
-    Proc_Start(proc->proc_scrCur->dataPtr, (void *)(u32)proc->proc_scrCur->dataImm);
-    proc->proc_scrCur++;
+    struct Proc * p = proc;
+    Proc_Start(p->proc_scrCur->dataPtr, (void *)(u32)p->proc_scrCur->dataImm);
+    p->proc_scrCur++;
     return TRUE;
 }
 
-BOOL func_020196f8(struct Proc * proc)
+BOOL func_020196f8(ProcPtr proc)
 {
-    if (proc->proc_scrCur->dataImm != 0)
+    struct Proc * p = proc;
+    if (p->proc_scrCur->dataImm != 0)
     {
-        func_02019034(proc->proc_scrCur->dataPtr);
+        func_02019034(p->proc_scrCur->dataPtr);
     }
     else
     {
-        Proc_EndEach(proc->proc_scrCur->dataPtr);
+        Proc_EndEach(p->proc_scrCur->dataPtr);
     }
 
-    proc->proc_scrCur++;
+    p->proc_scrCur++;
 
     return TRUE;
 }
 
-BOOL func_02019734(struct Proc * proc)
+BOOL func_02019734(ProcPtr proc)
 {
-    if (proc->proc_scrCur->dataImm != 0)
+    struct Proc * p = proc;
+    if (p->proc_scrCur->dataImm != 0)
     {
-        func_0201900c(proc->proc_scrCur->dataPtr);
+        func_0201900c(p->proc_scrCur->dataPtr);
     }
     else
     {
-        Proc_BreakEach(proc->proc_scrCur->dataPtr);
+        Proc_BreakEach(p->proc_scrCur->dataPtr);
     }
 
-    proc->proc_scrCur++;
+    p->proc_scrCur++;
 
     return TRUE;
 }
 
-BOOL ProcCmd_Goto(struct Proc * proc)
+BOOL ProcCmd_Goto(ProcPtr proc)
 {
-    Proc_Goto(proc, proc->proc_scrCur->dataImm, 0);
-    proc->proc_scrCur++;
+    struct Proc * p = proc;
+    Proc_Goto(proc, p->proc_scrCur->dataImm, 0);
+    p->proc_scrCur++;
     return TRUE;
 }
 
-BOOL ProcCmd_GotoIfYes(struct Proc * proc)
+BOOL ProcCmd_GotoIfYes(ProcPtr proc)
 {
-    BOOL (*func)(struct Proc *) = proc->proc_scrCur->dataPtr;
+    struct Proc * p = proc;
+    BOOL (*func)(ProcPtr) = p->proc_scrCur->dataPtr;
 
     if (func == NULL || func(proc))
     {
-        Proc_Goto(proc, proc->proc_scrCur->dataImm, 0);
+        Proc_Goto(proc, p->proc_scrCur->dataImm, 0);
     }
 
-    proc->proc_scrCur++;
+    p->proc_scrCur++;
 
     return TRUE;
 }
 
-BOOL ProcCmd_GotoIfNo(struct Proc * proc)
+BOOL ProcCmd_GotoIfNo(ProcPtr proc)
 {
-    BOOL (*func)(struct Proc *) = proc->proc_scrCur->dataPtr;
+    struct Proc * p = proc;
+    BOOL (*func)(ProcPtr) = p->proc_scrCur->dataPtr;
 
     if (func == NULL || !func(proc))
     {
-        Proc_Goto(proc, proc->proc_scrCur->dataImm, 0);
+        Proc_Goto(proc, p->proc_scrCur->dataImm, 0);
     }
 
-    proc->proc_scrCur++;
+    p->proc_scrCur++;
 
     return TRUE;
 }
 
-BOOL ProcCmd_Jump(struct Proc * proc)
+BOOL ProcCmd_Jump(ProcPtr proc)
 {
-    Proc_GotoScript(proc, proc->proc_scrCur->dataPtr);
+    struct Proc * p = proc;
+    Proc_GotoScript(proc, p->proc_scrCur->dataPtr);
     return TRUE;
 }
 
-void SleepRepeatFunc(struct Proc * proc)
+void SleepRepeatFunc(ProcPtr proc)
 {
-    proc->proc_sleepTime--;
+    struct Proc * p = proc;
+    p->proc_sleepTime--;
 
-    if (proc->proc_sleepTime != 0)
+    if (p->proc_sleepTime != 0)
     {
         return;
     }
@@ -818,203 +839,219 @@ void SleepRepeatFunc(struct Proc * proc)
     return;
 }
 
-BOOL ProcCmd_Sleep(struct Proc * proc)
+BOOL ProcCmd_Sleep(ProcPtr proc)
 {
-    if (proc->proc_scrCur->dataImm != 0)
+    struct Proc * p = proc;
+    if (p->proc_scrCur->dataImm != 0)
     {
-        proc->proc_sleepTime = proc->proc_scrCur->dataImm;
-        proc->proc_idleCb = SleepRepeatFunc;
+        p->proc_sleepTime = p->proc_scrCur->dataImm;
+        p->proc_idleCb = (void *)SleepRepeatFunc;
     }
 
-    proc->proc_scrCur++;
+    p->proc_scrCur++;
 
     return FALSE;
 }
 
-BOOL ProcCmd_Mark(struct Proc * proc)
+BOOL ProcCmd_Mark(ProcPtr proc)
 {
-    proc->proc_mark = proc->proc_scrCur->dataImm;
-    proc->proc_scrCur++;
+    struct Proc * p = proc;
+    p->proc_mark = p->proc_scrCur->dataImm;
+    p->proc_scrCur++;
     return TRUE;
 }
 
-BOOL func_020198c4(struct Proc * proc)
+BOOL func_020198c4(ProcPtr proc)
 {
-    if (!func_02019190(proc, proc->proc_scrCur->dataImm))
+    struct Proc * p = proc;
+    if (!func_02019190(proc, p->proc_scrCur->dataImm))
     {
         return FALSE;
     }
 
-    proc->proc_scrCur++;
+    p->proc_scrCur++;
 
     return TRUE;
 }
 
-BOOL func_020198f8(struct Proc * proc)
+BOOL func_020198f8(ProcPtr proc)
 {
-    if (!func_02019190(proc, proc->proc_scrCur->dataImm))
+    struct Proc * p = proc;
+    if (!func_02019190(proc, p->proc_scrCur->dataImm))
     {
         return FALSE;
     }
 
-    proc->proc_scrCur++;
+    p->proc_scrCur++;
 
     return TRUE;
 }
 
-BOOL func_0201992c(struct Proc * proc)
+BOOL func_0201992c(ProcPtr proc)
 {
-    func_02019230(proc, proc->proc_scrCur->dataImm);
-    proc->proc_scrCur++;
+    struct Proc * p = proc;
+    func_02019230(proc, p->proc_scrCur->dataImm);
+    p->proc_scrCur++;
     return TRUE;
 }
 
-BOOL func_02019954(struct Proc * proc)
+BOOL func_02019954(ProcPtr proc)
 {
-    proc->proc_scrCur++;
+    struct Proc * p = proc;
+    p->proc_scrCur++;
     return TRUE;
 }
 
-BOOL func_02019968(struct Proc * proc)
+BOOL func_02019968(ProcPtr proc)
 {
-    u8 flag = ((u32)proc->proc_scrCur->dataPtr) & 2 ? 1 : 0;
+    struct Proc * p = proc;
+    u8 flag = ((u32)p->proc_scrCur->dataPtr) & 2 ? 1 : 0;
 
-    if (!(((u32)proc->proc_scrCur->dataPtr) & 1))
+    if (!(((u32)p->proc_scrCur->dataPtr) & 1))
     {
-        func_0201d9a0(proc, proc->proc_scrCur->dataImm, flag);
+        func_0201d9a0(proc, p->proc_scrCur->dataImm, flag);
     }
     else
     {
-        func_0201da48(proc, proc->proc_scrCur->dataImm, flag);
+        func_0201da48(proc, p->proc_scrCur->dataImm, flag);
     }
 
-    proc->proc_scrCur++;
+    p->proc_scrCur++;
 
     return TRUE;
 }
 
-BOOL func_020199b8(struct Proc * proc)
+BOOL func_020199b8(ProcPtr proc)
 {
-    u8 flag = ((u32)proc->proc_scrCur->dataPtr) & 2 ? 1 : 0;
+    struct Proc * p = proc;
+    u8 flag = ((u32)p->proc_scrCur->dataPtr) & 2 ? 1 : 0;
 
-    if (!(((u32)proc->proc_scrCur->dataPtr) & 1))
+    if (!(((u32)p->proc_scrCur->dataPtr) & 1))
     {
-        func_0201d9f4(proc, proc->proc_scrCur->dataImm, flag);
+        func_0201d9f4(proc, p->proc_scrCur->dataImm, flag);
     }
     else
     {
-        func_0201da98(proc, proc->proc_scrCur->dataImm, flag);
+        func_0201da98(proc, p->proc_scrCur->dataImm, flag);
     }
 
-    proc->proc_scrCur++;
+    p->proc_scrCur++;
 
     return TRUE;
 }
 
-BOOL func_02019a08(struct Proc * proc)
+BOOL func_02019a08(ProcPtr proc)
 {
-    u8 flag = ((u32)proc->proc_scrCur->dataPtr) & 2 ? 1 : 0;
+    struct Proc * p = proc;
+    u8 flag = ((u32)p->proc_scrCur->dataPtr) & 2 ? 1 : 0;
 
-    if (!(((u32)proc->proc_scrCur->dataPtr) & 1))
+    if (!(((u32)p->proc_scrCur->dataPtr) & 1))
     {
-        func_0201d728(proc, proc->proc_scrCur->dataImm, flag);
+        func_0201d728(proc, p->proc_scrCur->dataImm, flag);
     }
     else
     {
-        func_0201d7c8(proc, proc->proc_scrCur->dataImm, flag);
+        func_0201d7c8(proc, p->proc_scrCur->dataImm, flag);
     }
 
-    proc->proc_scrCur++;
+    p->proc_scrCur++;
 
     return TRUE;
 }
 
-BOOL func_02019a58(struct Proc * proc)
+BOOL func_02019a58(ProcPtr proc)
 {
-    u8 flag = ((u32)proc->proc_scrCur->dataPtr) & 2 ? 1 : 0;
+    struct Proc * p = proc;
+    u8 flag = ((u32)p->proc_scrCur->dataPtr) & 2 ? 1 : 0;
 
-    if (!(((u32)proc->proc_scrCur->dataPtr) & 1))
+    if (!(((u32)p->proc_scrCur->dataPtr) & 1))
     {
-        func_0201d778(proc, proc->proc_scrCur->dataImm, flag);
+        func_0201d778(proc, p->proc_scrCur->dataImm, flag);
     }
     else
     {
-        func_0201d814(proc, proc->proc_scrCur->dataImm, flag);
+        func_0201d814(proc, p->proc_scrCur->dataImm, flag);
     }
 
-    proc->proc_scrCur++;
+    p->proc_scrCur++;
 
     return TRUE;
 }
 
-BOOL func_02019aa8(struct Proc * proc)
+BOOL func_02019aa8(ProcPtr proc)
 {
-    u8 flag = ((u32)proc->proc_scrCur->dataPtr) & 2 ? 1 : 0;
+    struct Proc * p = proc;
+    u8 flag = ((u32)p->proc_scrCur->dataPtr) & 2 ? 1 : 0;
 
-    if (!(((u32)proc->proc_scrCur->dataPtr) & 1))
+    if (!(((u32)p->proc_scrCur->dataPtr) & 1))
     {
-        func_0201d860(proc, proc->proc_scrCur->dataImm, flag);
+        func_0201d860(proc, p->proc_scrCur->dataImm, flag);
     }
     else
     {
-        func_0201d900(proc, proc->proc_scrCur->dataImm, flag);
+        func_0201d900(proc, p->proc_scrCur->dataImm, flag);
     }
 
-    proc->proc_scrCur++;
+    p->proc_scrCur++;
 
     return TRUE;
 }
 
-BOOL func_02019af8(struct Proc * proc)
+BOOL func_02019af8(ProcPtr proc)
 {
-    u8 flag = ((u32)proc->proc_scrCur->dataPtr) & 2 ? 1 : 0;
+    struct Proc * p = proc;
+    u8 flag = ((u32)p->proc_scrCur->dataPtr) & 2 ? 1 : 0;
 
-    if (!(((u32)proc->proc_scrCur->dataPtr) & 1))
+    if (!(((u32)p->proc_scrCur->dataPtr) & 1))
     {
-        func_0201d8b0(proc, proc->proc_scrCur->dataImm, flag);
+        func_0201d8b0(proc, p->proc_scrCur->dataImm, flag);
     }
     else
     {
-        func_0201d950(proc, proc->proc_scrCur->dataImm, flag);
+        func_0201d950(proc, p->proc_scrCur->dataImm, flag);
     }
 
-    proc->proc_scrCur++;
+    p->proc_scrCur++;
 
     return TRUE;
 }
 
-BOOL ProcCmd_Overlay(struct Proc * proc)
+BOOL ProcCmd_Overlay(ProcPtr proc)
 {
-    if (proc->proc_scrCur->dataPtr != 0)
+    struct Proc * p = proc;
+    if (p->proc_scrCur->dataPtr != 0)
     {
-        func_0200f20c(proc->proc_scrCur->dataImm);
+        func_0200f20c(p->proc_scrCur->dataImm);
     }
     else
     {
-        func_0200f24c(proc->proc_scrCur->dataImm);
+        func_0200f24c(p->proc_scrCur->dataImm);
     }
 
-    proc->proc_scrCur++;
+    p->proc_scrCur++;
 
     return TRUE;
 }
 
-BOOL func_02019b84(struct Proc * proc)
+BOOL func_02019b84(ProcPtr proc)
 {
-    func_0200f28c(proc->proc_scrCur->dataImm);
-    proc->proc_scrCur++;
+    struct Proc * p = proc;
+    func_0200f28c(p->proc_scrCur->dataImm);
+    p->proc_scrCur++;
     return TRUE;
 }
 
-void func_02019bac(struct Proc * proc)
+void func_02019bac(ProcPtr proc)
 {
-    proc->proc_funcTable->unk_08(proc);
+    struct Proc * p = proc;
+    p->proc_funcTable->unk_08(proc);
     return;
 }
 
-void func_02019bc0(struct Proc * proc)
+void func_02019bc0(ProcPtr proc)
 {
-    proc->proc_funcTable->unk_0C(proc);
+    struct Proc * p = proc;
+    p->proc_funcTable->unk_0C(proc);
     return;
 }
 

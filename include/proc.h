@@ -8,7 +8,7 @@ enum
     PROC_CMD_END = 0x00,
     PROC_CMD_01 = 0x01,
     PROC_CMD_02 = 0x02,
-    PROC_CMD_03 = 0x03,
+    PROC_CMD_BLOCK = 0x03,
     PROC_CMD_04 = 0x04,
     PROC_CMD_ONEND = 0x05,
     PROC_CMD_06 = 0x06,
@@ -52,9 +52,34 @@ struct ProcCmd
     /* 04 */ void * dataPtr;
 };
 
+#define PROC_END                          { PROC_CMD_END, 0, 0 }
+#define PROC_BLOCK                        { PROC_CMD_BLOCK, 0, 0 }
+#define PROC_06(arg, func)                { PROC_CMD_06, (arg), (func) }
+#define PROC_CALL(func)                   { PROC_CMD_CALL, 0, (func) }
+#define PROC_CALL_ARG(func, arg)          { PROC_CMD_CALL_ARG, (arg), (func) }
+#define PROC_WHILE(func)                  { PROC_CMD_WHILE, 0, (func) }
+#define PROC_WHILE_ARG(func, arg)         { PROC_CMD_WHILE_ARG, {arg}, (func) }
+#define PROC_REPEAT(func)                 { PROC_CMD_REPEAT, 0, (func) }
+#define PROC_WHILE_EXISTS(script)         { PROC_CMD_WHILE_EXISTS, 0, (script) }
+#define PROC_START_CHILD(script)          { PROC_CMD_START_CHILD, 0, (script) }
+#define PROC_START_CHILD_LOCKING(script)  { PROC_CMD_START_CHILD_BLOCKING, 1, (script) }
+#define PROC_LABEL(label)                 { PROC_CMD_LABEL, (label), 0 }
+#define PROC_GOTO(label)                  { PROC_CMD_GOTO, (label), 0 }
+#define PROC_GOTO_IF_YES(func, label)     { PROC_CMD_GOTO_IF_YES, (label), (func) }
+#define PROC_GOTO_IF_NO(func, label)      { PROC_CMD_GOTO_IF_NO, (label), (func) }
+#define PROC_SLEEP(duration)              { PROC_CMD_SLEEP, (duration), 0 }
+#define PROC_NAME                         { PROC_CMD_NOP_1D, 0, 0 }
+#define PROC_20(flag, arg)                { PROC_CMD_20, (arg), ((void *)(flag)) }
+#define PROC_21(flag, arg)                { PROC_CMD_21, (arg), ((void *)(flag)) }
+#define PROC_OVERLAY(overlayId, op)       { PROC_CMD_OVERLAY, (overlayId), (op) }
+#define PROC_25(sarg, larg)               { PROC_CMD_25, (sarg), (larg) }
+
+#define PROC_OVERLAY_UNLOAD(overlayId)    PROC_OVERLAY(overlayId, (void *)0)
+#define PROC_OVERLAY_LOAD(overlayId)      PROC_OVERLAY(overlayId, (void *)1)
+
 struct Proc;
 
-typedef void (*ProcFunc)(struct Proc *);
+typedef void (*ProcFunc)(ProcPtr);
 
 struct ProcFuncTable
 {
@@ -64,30 +89,35 @@ struct ProcFuncTable
     /* 0C */ ProcFunc unk_0C; // Main Loop?
 };
 
+#define PROC_HEADER                                  \
+    /* 00 */ struct ProcFuncTable * proc_funcTable;  \
+    /* 04 */ struct ProcCmd * proc_script;           \
+    /* 08 */ struct ProcCmd * proc_scrCur;           \
+    /* 0C */ ProcFunc proc_endCb;                    \
+    /* 10 */ ProcFunc proc_idleCb;                   \
+    /* 14 */ ProcFunc unk_14;                        \
+    /* 18 */ ProcPtr proc_parent;                    \
+    /* 1C */ ProcPtr proc_child;                     \
+    /* 20 */ ProcPtr proc_next;                      \
+    /* 24 */ ProcPtr proc_prev;                      \
+    /* 28 */ void * unk_28;                          \
+    /* 2C */ void * unk_2c;                          \
+    /* 30 */ s16 proc_sleepTime;                     \
+    /* 32 */ u16 proc_flags;                         \
+    /* 34 */ u8 proc_mark;                           \
+    /* 35 */ u8 proc_lockCnt;                        \
+
 struct Proc
 {
-    /* 00 */ struct ProcFuncTable * proc_funcTable;
-    /* 04 */ struct ProcCmd * proc_script;
-    /* 08 */ struct ProcCmd * proc_scrCur;
-    /* 0C */ ProcFunc proc_endCb;
-    /* 10 */ ProcFunc proc_idleCb;
-    /* 14 */ ProcFunc unk_14;
-    /* 18 */ struct Proc * proc_parent;
-    /* 1C */ struct Proc * proc_child;
-    /* 20 */ struct Proc * proc_next;
-    /* 24 */ struct Proc * proc_prev;
-    /* 28 */ void * unk_28; // maybe child?
-    /* 2C */ void * unk_2c;
-    /* 30 */ s16 proc_sleepTime;
-    /* 32 */ u16 proc_flags;
-    /* 34 */ u8 proc_mark;
-    /* 35 */ u8 proc_lockCnt;
+    PROC_HEADER
     STRUCT_PAD(0x36, 0x38);
     /* 38 */ void (*unk_38)(void *);
     STRUCT_PAD(0x3C, 0x58);
     /* 58 */ s16 unk_58;
     STRUCT_PAD(0x5A, 0x78);
 };
+
+#define PROC_TREE_9     ((ProcPtr) 9)
 
 struct Unknown02190ce0
 {
@@ -104,22 +134,22 @@ void func_01ffbda4(struct Proc * proc);
 void InsertRootProcess(struct Proc * proc, s32 treeNum);
 void InsertChildProcess(struct Proc * proc, struct Proc * parent);
 void func_01ffbe3c(struct Proc * proc);
-struct Proc * Proc_StartExt(struct ProcCmd * script, struct Proc * parent, void * arg_2);
-struct Proc * Proc_Start(struct ProcCmd * script, struct Proc * parent);
-struct Proc * func_01ffbf90(struct ProcCmd * script, struct Proc * parent);
-void func_01ffbfd0(struct Proc * proc);
-struct Proc * Proc_StartBlockingExt(struct ProcCmd * script, struct Proc * parent, void * arg_2);
-struct Proc * Proc_StartBlocking(struct ProcCmd * script, struct Proc * parent);
-struct Proc * func_01ffc030(struct ProcCmd * script, struct Proc * parent);
+ProcPtr Proc_StartExt(struct ProcCmd * script, ProcPtr parent, void * arg_2);
+ProcPtr Proc_Start(struct ProcCmd * script, ProcPtr parent);
+ProcPtr func_01ffbf90(struct ProcCmd * script, ProcPtr parent);
+void func_01ffbfd0(ProcPtr proc);
+ProcPtr Proc_StartBlockingExt(struct ProcCmd * script, ProcPtr parent, void * arg_2);
+ProcPtr Proc_StartBlocking(struct ProcCmd * script, ProcPtr parent);
+ProcPtr func_01ffc030(struct ProcCmd * script, ProcPtr parent);
 void func_01ffc068(struct Proc * proc);
 void func_01ffc0a0(struct Proc * proc);
 void func_01ffc0e8(struct Proc * proc);
-void Proc_End(struct Proc * proc);
+void Proc_End(ProcPtr proc);
 void RunProcessRecursive(struct Proc * proc);
 void func_01ffc2f4(struct Proc * proc);
 void Proc_Run(u32 treeNum);
-void Proc_Break(struct Proc * proc, s32 arg_1);
-void func_01ffc3f4(struct Proc * proc);
+void Proc_Break(ProcPtr proc, s32 arg_1);
+void func_01ffc3f4(ProcPtr proc);
 
 void Proc_Init(void);
 struct Proc * Proc_Find(struct ProcCmd * script);
@@ -129,7 +159,7 @@ struct Proc * func_02018df4(struct ProcCmd * script, struct Proc * proc);
 struct Proc * func_02018e4c(u32 mark);
 struct Proc * func_02018e90(struct ProcCmd * script, u32 mark);
 void Proc_SetMark(struct Proc * proc, u32 mark);
-void Proc_Goto(struct Proc * proc, s32 label, s32 unk);
+void Proc_Goto(ProcPtr proc, s32 label, s32 unk);
 void Proc_GotoScript(struct Proc * proc, struct ProcCmd * script);
 void Proc_SetEndFunc(struct Proc * proc, ProcFunc func);
 void func_02018f54(struct Proc * proc, void * unk_14);
@@ -157,47 +187,47 @@ void func_020192f4(struct Proc * proc);
 void func_02019310(void * func, struct Proc * parent);
 void func_0201932c(struct Proc * proc);
 void func_0201933c(void * func, struct Proc * parent);
-BOOL ProcCmd_End(struct Proc * proc);
-BOOL func_02019368(struct Proc * proc);
-BOOL func_02019370(struct Proc * proc);
-BOOL func_02019378(struct Proc * proc);
-BOOL ProcCmd_SetEndFunc(struct Proc * proc);
-BOOL func_020193b4(struct Proc * proc);
-BOOL ProcCmd_Call(struct Proc * proc);
-BOOL ProcCmd_CallArg(struct Proc * proc);
-BOOL ProcCmd_While(struct Proc * proc);
-BOOL ProcCmd_WhileArg(struct Proc * proc);
+BOOL ProcCmd_End(ProcPtr proc);
+BOOL func_02019368(ProcPtr proc);
+BOOL func_02019370(ProcPtr proc);
+BOOL func_02019378(ProcPtr proc);
+BOOL ProcCmd_SetEndFunc(ProcPtr proc);
+BOOL func_020193b4(ProcPtr proc);
+BOOL ProcCmd_Call(ProcPtr proc);
+BOOL ProcCmd_CallArg(ProcPtr proc);
+BOOL ProcCmd_While(ProcPtr proc);
+BOOL ProcCmd_WhileArg(ProcPtr proc);
 void func_0201949c(void * arg_0, void * arg_1);
 void func_020194fc(void * unused);
-BOOL func_0201951c(struct Proc * proc);
-BOOL ProcCmd_Repeat(struct Proc * proc);
-BOOL ProcCmd_WhileExists(struct Proc * proc);
-BOOL ProcCmd_SpawnChild(struct Proc * proc);
-BOOL ProcCmd_SpawnLockChild(struct Proc * proc);
-BOOL ProcCmd_SpawnChildInTree(struct Proc * proc);
-BOOL func_020196f8(struct Proc * proc);
-BOOL func_02019734(struct Proc * proc);
-BOOL ProcCmd_Goto(struct Proc * proc);
-BOOL ProcCmd_GotoIfYes(struct Proc * proc);
-BOOL ProcCmd_GotoIfNo(struct Proc * proc);
-BOOL ProcCmd_Jump(struct Proc * proc);
-void SleepRepeatFunc(struct Proc * proc);
-BOOL ProcCmd_Sleep(struct Proc * proc);
-BOOL ProcCmd_Mark(struct Proc * proc);
-BOOL func_020198c4(struct Proc * proc);
-BOOL func_020198f8(struct Proc * proc);
-BOOL func_0201992c(struct Proc * proc);
-BOOL func_02019954(struct Proc * proc);
-BOOL func_02019968(struct Proc * proc);
-BOOL func_020199b8(struct Proc * proc);
-BOOL func_02019a08(struct Proc * proc);
-BOOL func_02019a58(struct Proc * proc);
-BOOL func_02019aa8(struct Proc * proc);
-BOOL func_02019af8(struct Proc * proc);
-BOOL ProcCmd_Overlay(struct Proc * proc);
-BOOL func_02019b84(struct Proc * proc);
-void func_02019bac(struct Proc * proc);
-void func_02019bc0(struct Proc * proc);
+BOOL func_0201951c(ProcPtr proc);
+BOOL ProcCmd_Repeat(ProcPtr proc);
+BOOL ProcCmd_WhileExists(ProcPtr proc);
+BOOL ProcCmd_SpawnChild(ProcPtr proc);
+BOOL ProcCmd_SpawnLockChild(ProcPtr proc);
+BOOL ProcCmd_SpawnChildInTree(ProcPtr proc);
+BOOL func_020196f8(ProcPtr proc);
+BOOL func_02019734(ProcPtr proc);
+BOOL ProcCmd_Goto(ProcPtr proc);
+BOOL ProcCmd_GotoIfYes(ProcPtr proc);
+BOOL ProcCmd_GotoIfNo(ProcPtr proc);
+BOOL ProcCmd_Jump(ProcPtr proc);
+void SleepRepeatFunc(ProcPtr proc);
+BOOL ProcCmd_Sleep(ProcPtr proc);
+BOOL ProcCmd_Mark(ProcPtr proc);
+BOOL func_020198c4(ProcPtr proc);
+BOOL func_020198f8(ProcPtr proc);
+BOOL func_0201992c(ProcPtr proc);
+BOOL func_02019954(ProcPtr proc);
+BOOL func_02019968(ProcPtr proc);
+BOOL func_020199b8(ProcPtr proc);
+BOOL func_02019a08(ProcPtr proc);
+BOOL func_02019a58(ProcPtr proc);
+BOOL func_02019aa8(ProcPtr proc);
+BOOL func_02019af8(ProcPtr proc);
+BOOL ProcCmd_Overlay(ProcPtr proc);
+BOOL func_02019b84(ProcPtr proc);
+void func_02019bac(ProcPtr proc);
+void func_02019bc0(ProcPtr proc);
 
 extern struct Proc gProcArray[0x80];
 extern struct Proc * gProcAllocList[0x80 + 1];

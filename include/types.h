@@ -32,4 +32,8 @@ typedef s32 BOOL;
 
 #define NULL ((void *)0)
 
+struct ProcCmd;
+
+typedef void * ProcPtr;
+
 #endif // TYPES_H

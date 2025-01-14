@@ -13,12 +13,12 @@ extern u8 data_027e125c;
 
 #pragma section force_text begin
 
-BOOL (* gProcessCmdTable[])(struct Proc *) =
+BOOL (* gProcessCmdTable[])(ProcPtr) =
 {
     [PROC_CMD_END] = ProcCmd_End,
     [PROC_CMD_01] = ProcCmd_End,
     [PROC_CMD_02] = func_02019368,
-    [PROC_CMD_03] = func_02019370,
+    [PROC_CMD_BLOCK] = func_02019370,
     [PROC_CMD_04] = func_02019378,
     [PROC_CMD_ONEND] = ProcCmd_SetEndFunc,
     [PROC_CMD_06] = func_020193b4,
@@ -172,7 +172,7 @@ void InsertRootProcess(struct Proc * proc, s32 treeNum)
         proc->proc_prev = (*root);
     }
 
-    proc->proc_parent = (struct Proc *)treeNum;
+    proc->proc_parent = (ProcPtr)treeNum;
     (*root) = proc;
 
     return;
@@ -182,7 +182,7 @@ void InsertChildProcess(struct Proc * proc, struct Proc * parent)
 {
     if (parent->proc_child != NULL)
     {
-        parent->proc_child->proc_next = proc;
+        ((struct Proc *)(parent->proc_child))->proc_next = proc;
         proc->proc_prev = parent->proc_child;
     }
 
@@ -196,19 +196,19 @@ void func_01ffbe3c(struct Proc * proc)
 {
     if (proc->proc_next != NULL)
     {
-        proc->proc_next->proc_prev = proc->proc_prev;
+        ((struct Proc *)(proc->proc_next))->proc_prev = proc->proc_prev;
     }
 
     if (proc->proc_prev != NULL)
     {
-        proc->proc_prev->proc_next = proc->proc_next;
+        ((struct Proc *)(proc->proc_prev))->proc_next = proc->proc_next;
     }
 
     if (!IsRootProcess(proc->proc_parent))
     {
-        if (proc->proc_parent->proc_child == proc)
+        if (((struct Proc *)(proc->proc_parent))->proc_child == proc)
         {
-            proc->proc_parent->proc_child = proc->proc_prev;
+            ((struct Proc *)(proc->proc_parent))->proc_child = proc->proc_prev;
         }
     }
     else
@@ -227,7 +227,7 @@ void func_01ffbe3c(struct Proc * proc)
     return;
 }
 
-struct Proc * Proc_StartExt(struct ProcCmd * script, struct Proc * parent, void * arg_2)
+ProcPtr Proc_StartExt(struct ProcCmd * script, ProcPtr parent, void * arg_2)
 {
     void * tmp;
 
@@ -253,7 +253,7 @@ struct Proc * Proc_StartExt(struct ProcCmd * script, struct Proc * parent, void 
     {
         if (parent == NULL)
         {
-            parent = (void *)9;
+            parent = PROC_TREE_9;
         }
 
         InsertRootProcess(proc, (s32)parent);
@@ -275,12 +275,12 @@ struct Proc * Proc_StartExt(struct ProcCmd * script, struct Proc * parent, void 
     return proc;
 }
 
-struct Proc * Proc_Start(struct ProcCmd * script, struct Proc * parent)
+ProcPtr Proc_Start(struct ProcCmd * script, ProcPtr parent)
 {
     return Proc_StartExt(script, parent, data_027e1268);
 }
 
-struct Proc * func_01ffbf90(struct ProcCmd * script, struct Proc * parent)
+ProcPtr func_01ffbf90(struct ProcCmd * script, ProcPtr parent)
 {
     void * var_0 = func_020a4a38();
 
@@ -292,33 +292,35 @@ struct Proc * func_01ffbf90(struct ProcCmd * script, struct Proc * parent)
     return proc;
 }
 
-void func_01ffbfd0(struct Proc * proc)
+void func_01ffbfd0(ProcPtr proc)
 {
-    proc->proc_flags &= ~4;
+    struct Proc * p = proc;
+    p->proc_flags &= ~4;
     return;
 }
 
-struct Proc * Proc_StartBlockingExt(struct ProcCmd * script, struct Proc * parent, void * arg_2)
+ProcPtr Proc_StartBlockingExt(struct ProcCmd * script, ProcPtr parent, void * arg_2)
 {
-    struct Proc * proc = Proc_StartExt(script, parent, arg_2);
+    ProcPtr proc = Proc_StartExt(script, parent, arg_2);
+    struct Proc * p = proc;
 
-    if (proc->proc_script != NULL)
+    if (p->proc_script != NULL)
     {
-        proc->proc_flags |= 2;
-        proc->proc_parent->proc_lockCnt++;
+        p->proc_flags |= 2;
+        ((struct Proc *)(p->proc_parent))->proc_lockCnt++;
 
-        return proc;
+        return p;
     }
 
     return NULL;
 }
 
-struct Proc * Proc_StartBlocking(struct ProcCmd * script, struct Proc * parent)
+ProcPtr Proc_StartBlocking(struct ProcCmd * script, ProcPtr parent)
 {
     return Proc_StartBlockingExt(script, parent, data_027e1268);
 }
 
-struct Proc * func_01ffc030(struct ProcCmd * script, struct Proc * parent)
+ProcPtr func_01ffc030(struct ProcCmd * script, ProcPtr parent)
 {
     if (parent == 0)
     {
@@ -407,13 +409,14 @@ void func_01ffc0e8(struct Proc * proc)
         return;
     }
 
-    proc->proc_parent->proc_lockCnt--;
+    ((struct Proc *)(proc->proc_parent))->proc_lockCnt--;
 
     return;
 }
 
-void Proc_End(struct Proc * proc)
+void Proc_End(ProcPtr proc)
 {
+    struct Proc * p = proc;
     u16 _bkp;
     u16 ime;
 
@@ -425,21 +428,21 @@ void Proc_End(struct Proc * proc)
     ime = REG_IME;
     REG_IME = 0;
 
-    if ((proc->proc_script == NULL) || (proc->proc_flags & 1))
+    if ((p->proc_script == NULL) || (p->proc_flags & 1))
     {
         _bkp = REG_IME;
         REG_IME = ime;
         return;
     }
 
-    func_01ffbe3c(proc);
-    func_01ffc068(proc);
+    func_01ffbe3c(p);
+    func_01ffc068(p);
 
     _bkp = REG_IME;
     REG_IME = ime;
 
-    func_01ffc0e8(proc);
-    func_01ffc0a0(proc);
+    func_01ffc0e8(p);
+    func_01ffc0a0(p);
 
     return;
 }
@@ -559,30 +562,33 @@ void Proc_Run(u32 treeNum)
     return;
 }
 
-void Proc_Break(struct Proc * proc, s32 arg_1)
+void Proc_Break(ProcPtr proc, s32 arg_1)
 {
-    if (proc->proc_idleCb != NULL)
+    struct Proc * p = proc;
+
+    if (p->proc_idleCb != NULL)
     {
-        proc->proc_idleCb = NULL;
+        p->proc_idleCb = NULL;
     }
     else
     {
-        if ((proc->proc_scrCur != NULL) && (proc->proc_scrCur->opcode == PROC_CMD_02))
+        if ((p->proc_scrCur != NULL) && (p->proc_scrCur->opcode == PROC_CMD_02))
         {
-            proc->proc_scrCur++;
+            p->proc_scrCur++;
         }
     }
 
     if (arg_1 != 0)
     {
-        proc->proc_flags |= 0x20;
+        p->proc_flags |= 0x20;
     }
 
     return;
 }
 
-void func_01ffc3f4(struct Proc * proc)
+void func_01ffc3f4(ProcPtr proc)
 {
-    proc->proc_scrCur--;
+    struct Proc * p = proc;
+    p->proc_scrCur--;
     return;
 }

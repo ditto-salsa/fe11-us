@@ -2,61 +2,56 @@
 
 #include "proc.h"
 
-extern struct ProcCmd data_020cec14[];
-extern struct ProcCmd data_020ceba4[];
-extern struct ProcCmd data_020ceb84[];
-extern struct ProcCmd data_020cec14[];
-extern struct ProcCmd data_020cebc4[];
-extern struct ProcCmd data_020cebec[];
-extern struct ProcCmd data_ov010_02209e54[];
+// TODO: Not actually data?
+extern void data_ov010_02209e54(ProcPtr);
 
-void func_020136bc(void *);
-void func_0201fd44(void *);
+void func_020136bc(ProcPtr);
+void func_0201fd44(ProcPtr);
 
-void func_0204b1e0(void *);
+void func_0204b1e0(ProcPtr);
 
 void func_02021b00(void);
 void func_02021b14(void);
 void func_02021d70(void);
 void func_02021dd4(void);
 void func_02021e6c(void);
-void func_02021f08(struct Proc *);
-void func_02021f2c(struct Proc *);
+void func_02021f08(ProcPtr);
+void func_02021f2c(ProcPtr);
 void func_02021f5c(void);
-void func_0202214c(void *);
+void func_0202214c(ProcPtr);
 void func_020221bc(void);
 void func_020221e4(void);
 void func_0202225c(void);
 void func_02022324(void);
-void func_02022364(void *);
+void func_02022364(ProcPtr);
 void func_020223b4(void);
-void func_020223cc(void *);
+void func_020223cc(ProcPtr);
 void func_02022414(void);
 void func_02022458(void);
 void func_02022480(void);
-void func_020224a8(void *);
+void func_020224a8(ProcPtr);
 void func_020224d4(void);
 void func_020224fc(void);
-void func_0202254c(void *);
+void func_0202254c(ProcPtr);
 void func_02022564(void);
 void func_02022588(void);
-void func_0202272c(void *);
+void func_0202272c(ProcPtr);
 void func_02022814(void);
-void func_0202284c(void *);
-void func_020228ac(void *);
-void func_020228ec(void *);
+void func_0202284c(ProcPtr);
+void func_020228ac(ProcPtr);
+void func_020228ec(ProcPtr);
 BOOL func_02022988(void);
 void func_020229a8(void);
 void func_020229f0(void);
 BOOL func_02022b10(void);
 BOOL func_02022b30(void);
 BOOL func_02022b50(void);
-void func_02022b70(struct Proc *);
-void func_02022bb0(void *);
-void func_02022c54(void *);
-void func_02022c78(void *);
-void func_02022cb0(void *);
-void func_02022cdc(void *);
+void func_02022b70(ProcPtr);
+void func_02022bb0(ProcPtr);
+void func_02022c54(ProcPtr);
+void func_02022c78(ProcPtr);
+void func_02022cb0(ProcPtr);
+void func_02022cdc(ProcPtr);
 void func_02022db8(void);
 void func_02022dc8(void);
 void func_02022dfc(void);
@@ -67,274 +62,369 @@ BOOL func_02022eb8(void);
 BOOL func_02022ed4(void);
 BOOL func_02022ef4(void);
 
+// clang-format off
+
 struct ProcCmd data_020cec44[] =
 {
-    { PROC_CMD_NOP_1D, 0x0000, 0x00000000 },
-    { PROC_CMD_SLEEP, 0x0000, 0x00000000 },
-    { PROC_CMD_06, 0x0000, func_02021d70 },
-    { PROC_CMD_CALL, 0x0000, func_020136bc },
-    { PROC_CMD_START_CHILD, 0x0000, data_020cec14 },
-    { PROC_CMD_GOTO, 0x0001, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0001, 0x00000000 },
-    { PROC_CMD_START_CHILD_BLOCKING, 0x0001, data_020ceba4 },
-    { PROC_CMD_GOTO, 0x0003, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0002, 0x00000000 },
-    { PROC_CMD_START_CHILD_BLOCKING, 0x0001, data_020ceb84 },
-    { PROC_CMD_GOTO, 0x0003, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0003, 0x00000000 },
-    { PROC_CMD_WHILE_EXISTS, 0x0000, data_020cec14 },
-    { PROC_CMD_CALL, 0x0000, func_02021b00 },
-    { PROC_CMD_GOTO, 0x0004, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0004, 0x00000000 },
-    { PROC_CMD_REPEAT, 0x0000, func_02021f08 },
-    { PROC_CMD_REPEAT, 0x0000, func_02021f2c },
-    { PROC_CMD_CALL, 0x0000, func_02021b14 },
-    { PROC_CMD_CALL, 0x0000, func_0201fd44 },
-    { PROC_CMD_START_CHILD_BLOCKING, 0x0001, data_020cebc4 },
-    { PROC_CMD_GOTO, 0x0002, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0005, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_02022cdc },
-    { PROC_CMD_GOTO, 0x0006, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0006, 0x00000000 },
-    { PROC_CMD_OVERLAY, 0x0004, (void *)0x00000001 },
-    { PROC_CMD_CALL, 0x0000, data_ov010_02209e54 },
-    { PROC_CMD_OVERLAY, 0x0004, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0007, 0x00000000 },
-    { PROC_CMD_REPEAT, 0x0000, func_02021f2c },
-    { PROC_CMD_CALL, 0x0000, func_02021dd4 },
-    { PROC_CMD_CALL, 0x0000, func_02021f5c },
-    { PROC_CMD_CALL, 0x0000, func_0202214c },
-    { PROC_CMD_CALL, 0x0000, func_020221bc },
-    { PROC_CMD_CALL, 0x0000, func_020221e4 },
-    { PROC_CMD_CALL, 0x0000, func_02022364 },
-    { PROC_CMD_CALL, 0x0000, func_020223b4 },
-    { PROC_CMD_OVERLAY, 0x0005, (void *)0x00000001 },
-    { PROC_CMD_CALL, 0x0000, func_ov005_022052d0 },
-    { PROC_CMD_OVERLAY, 0x0005, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0008, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_020223cc },
-    { PROC_CMD_CALL, 0x0000, func_02022414 },
-    { PROC_CMD_CALL, 0x0000, func_02022458 },
-{ PROC_CMD_LABEL, 0x0009, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_ov000_021a9714 },
-{ PROC_CMD_LABEL, 0x000A, 0x00000000 },
-    { PROC_CMD_WHILE, 0x0000, func_0204b1e0 },
-    { PROC_CMD_CALL, 0x0000, func_02022480 },
-    { PROC_CMD_CALL, 0x0000, func_020224a8 },
-    { PROC_CMD_CALL, 0x0000, func_02022414 },
-    { PROC_CMD_CALL, 0x0000, func_020224d4 },
-    { PROC_CMD_21, 0x0010, (void *)0x00000003 },
-    { PROC_CMD_CALL, 0x0000, func_020224fc },
-{ PROC_CMD_LABEL, 0x000B, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_0202254c },
-    { PROC_CMD_CALL, 0x0000, func_02022564 },
-    { PROC_CMD_CALL, 0x0000, func_02022588 },
-    { PROC_CMD_CALL, 0x0000, func_0202272c },
-    { PROC_CMD_CALL, 0x0000, func_02021e6c },
-    { PROC_CMD_START_CHILD_BLOCKING, 0x0001, data_020cebec },
-    { PROC_CMD_GOTO, 0x0006, 0x00000000 },
-{ PROC_CMD_LABEL, 0x000C, 0x00000000 },
-    { PROC_CMD_21, 0x0040, (void *)0x00000003 },
-    { PROC_CMD_CALL, 0x0000, func_020224fc },
-    { PROC_CMD_CALL, 0x0000, func_0202254c },
-    { PROC_CMD_CALL, 0x0000, func_02022564 },
-    { PROC_CMD_CALL, 0x0000, func_02021e6c },
-    { PROC_CMD_OVERLAY, 0x0006, (void *)0x00000001 },
-    { PROC_CMD_CALL, 0x0000, func_ov006_0221776c },
-    { PROC_CMD_OVERLAY, 0x0006, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_02021b00 },
-    { PROC_CMD_GOTO, 0x0002, 0x00000000 },
-{ PROC_CMD_LABEL, 0x000D, 0x00000000 },
-    { PROC_CMD_OVERLAY, 0x0009, (void *)0x00000001 },
-    { PROC_CMD_CALL, 0x0000, func_02022db8 },
-    { PROC_CMD_CALL, 0x0000, func_ov009_02206020 },
-    { PROC_CMD_CALL, 0x0000, func_ov009_022065a0 },
-    { PROC_CMD_CALL, 0x0000, func_ov009_02204e10 },
-    { PROC_CMD_CALL, 0x0000, func_02022dc8 },
-    { PROC_CMD_OVERLAY, 0x0009, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_02021b00 },
-    { PROC_CMD_GOTO, 0x0002, 0x00000000 },
-{ PROC_CMD_LABEL, 0x000E, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_02022c54 },
-    { PROC_CMD_CALL, 0x0000, func_02022cdc },
-    { PROC_CMD_CALL, 0x0000, func_02022324 },
-    { PROC_CMD_GOTO, 0x0006, 0x00000000 },
-{ PROC_CMD_LABEL, 0x000F, 0x00000000 },
-    { PROC_CMD_REPEAT, 0x0000, func_02021f2c },
-    { PROC_CMD_CALL, 0x0000, func_02022c78 },
-    { PROC_CMD_CALL, 0x0000, func_02022cdc },
-    { PROC_CMD_CALL, 0x0000, func_020221e4 },
-    { PROC_CMD_CALL, 0x0000, func_0202225c },
-    { PROC_CMD_20, 0x0008, (void *)0x00000003 },
-    { PROC_CMD_GOTO, 0x0009, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0010, 0x00000000 },
-    { PROC_CMD_REPEAT, 0x0000, func_02021f2c },
-    { PROC_CMD_CALL, 0x0000, func_02022cb0 },
-    { PROC_CMD_CALL, 0x0000, func_02022cdc },
-    { PROC_CMD_CALL, 0x0000, func_020221e4 },
-    { PROC_CMD_CALL, 0x0000, func_0202225c },
-    { PROC_CMD_20, 0x0008, (void *)0x00000003 },
-    { PROC_CMD_GOTO, 0x0009, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0027, 0x00000000 },
-    { PROC_CMD_WHILE, 0x0000, func_0204b1e0 },
-    { PROC_CMD_21, 0x0020, (void *)0x00000003 },
-    { PROC_CMD_CALL, 0x0000, func_020224fc },
-    { PROC_CMD_CALL, 0x0000, func_0202254c },
-    { PROC_CMD_CALL, 0x0000, func_02022564 },
-    { PROC_CMD_CALL, 0x0000, func_02021e6c },
-    { PROC_CMD_CALL, 0x0000, func_02021b00 },
-    { PROC_CMD_GOTO, 0x0002, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0011, 0x00000000 },
-    { PROC_CMD_OVERLAY, 0x0006, (void *)0x00000001 },
-    { PROC_CMD_CALL, 0x0000, func_ov006_02221aec },
-    { PROC_CMD_OVERLAY, 0x0006, 0x00000000 },
-    { PROC_CMD_GOTO, 0x0004, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0012, 0x00000000 },
-    { PROC_CMD_OVERLAY, 0x0006, (void *)0x00000001 },
-    { PROC_CMD_CALL, 0x0000, func_ov006_022226cc },
-    { PROC_CMD_OVERLAY, 0x0006, 0x00000000 },
-    { PROC_CMD_GOTO, 0x0004, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0015, 0x00000000 },
-    { PROC_CMD_25, 0x0003, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_ov003_021f049c },
-    { PROC_CMD_25, 0x0002, 0x00000000 },
-    { PROC_CMD_GOTO, 0x0004, 0x00000000 },
-{ PROC_CMD_LABEL, 0x001A, 0x00000000 },
-    { PROC_CMD_OVERLAY, 0x000B, (void *)0x00000001 },
-    { PROC_CMD_25, 0x0003, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_ov003_021e4204 },
-    { PROC_CMD_GOTO_IF_NO, 0x0028, func_02022ef4 },
-    { PROC_CMD_CALL, 0x0000, func_ov003_021f24e4 },
-    { PROC_CMD_GOTO, 0x0028, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0013, 0x00000000 },
-    { PROC_CMD_OVERLAY, 0x000B, (void *)0x00000001 },
-    { PROC_CMD_25, 0x0003, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_ov003_021fc0d4 },
-    { PROC_CMD_25, 0x0002, 0x00000000 },
-    { PROC_CMD_OVERLAY, 0x000B, 0x00000000 },
-    { PROC_CMD_GOTO, 0x0004, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0014, 0x00000000 },
-    { PROC_CMD_25, 0x0001, 0x00000000 },
-    { PROC_CMD_OVERLAY, 0x000B, (void *)0x00000001 },
-    { PROC_CMD_25, 0x0003, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_ov003_021e3610 },
-    { PROC_CMD_25, 0x0002, 0x00000000 },
-    { PROC_CMD_OVERLAY, 0x000B, 0x00000000 },
-    { PROC_CMD_25, 0x0000, 0x00000000 },
-    { PROC_CMD_GOTO, 0x0004, 0x00000000 },
-{ PROC_CMD_LABEL, 0x001B, 0x00000000 },
-    { PROC_CMD_25, 0x0003, 0x00000000 },
-    { PROC_CMD_OVERLAY, 0x0007, (void *)0x00000001 },
-    { PROC_CMD_CALL, 0x0000, func_ov007_02218284 },
-    { PROC_CMD_OVERLAY, 0x0007, 0x00000000 },
-    { PROC_CMD_25, 0x0002, 0x00000000 },
-    { PROC_CMD_GOTO, 0x0004, 0x00000000 },
-{ PROC_CMD_LABEL, 0x001C, 0x00000000 },
-    { PROC_CMD_OVERLAY, 0x0007, (void *)0x00000001 },
-    { PROC_CMD_CALL, 0x0000, func_ov007_0221ad60 },
-    { PROC_CMD_OVERLAY, 0x0007, 0x00000000 },
-    { PROC_CMD_GOTO, 0x0004, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0017, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_020229a8 },
-    { PROC_CMD_25, 0x0003, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_ov003_021e4204 },
-    { PROC_CMD_GOTO_IF_NO, 0x0028, func_02022ef4 },
-    { PROC_CMD_CALL, 0x0000, func_020228ac },
-    { PROC_CMD_GOTO_IF_NO, 0x0028, func_02022ef4 },
-    { PROC_CMD_CALL, 0x0000, func_ov003_021f9470 },
-    { PROC_CMD_GOTO, 0x0028, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0018, 0x00000000 },
-    { PROC_CMD_OVERLAY, 0x000B, (void *)0x00000001 },
-    { PROC_CMD_25, 0x0003, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_ov003_021e4244 },
-    { PROC_CMD_GOTO_IF_NO, 0x0028, func_02022ef4 },
-    { PROC_CMD_CALL, 0x0000, func_ov003_021f4a84 },
-    { PROC_CMD_GOTO, 0x0028, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0019, 0x00000000 },
-    { PROC_CMD_OVERLAY, 0x000B, (void *)0x00000001 },
-    { PROC_CMD_25, 0x0003, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_ov003_021e4244 },
-    { PROC_CMD_GOTO_IF_NO, 0x0028, func_02022ef4 },
-    { PROC_CMD_CALL, 0x0000, func_ov003_021f6ce8 },
-    { PROC_CMD_GOTO, 0x0028, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0016, 0x00000000 },
-    { PROC_CMD_25, 0x0003, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_ov003_021f31f0 },
-    { PROC_CMD_25, 0x0002, 0x00000000 },
-    { PROC_CMD_GOTO, 0x0004, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0028, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_ov003_021e4284 },
-    { PROC_CMD_25, 0x0002, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_02022814 },
-    { PROC_CMD_GOTO, 0x0004, 0x00000000 },
-{ PROC_CMD_LABEL, 0x001D, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_020229a8 },
-    { PROC_CMD_25, 0x0003, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_020228ec },
-    { PROC_CMD_GOTO_IF_YES, 0x001E, func_02022b30 },
-    { PROC_CMD_CALL, 0x0000, func_ov003_021e4204 },
-    { PROC_CMD_GOTO_IF_NO, 0x0028, func_02022ef4 },
-{ PROC_CMD_LABEL, 0x001E, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_ov003_021fb690 },
-    { PROC_CMD_GOTO_IF_NO, 0x0028, func_02022e34 },
-    { PROC_CMD_GOTO_IF_YES, 0x0022, func_02022b30 },
-    { PROC_CMD_GOTO, 0x0020, 0x00000000 },
-{ PROC_CMD_LABEL, 0x001F, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_ov003_021fb704 },
-    { PROC_CMD_GOTO_IF_NO, 0x0028, func_02022e34 },
-    { PROC_CMD_GOTO_IF_YES, 0x0022, func_02022b30 },
-    { PROC_CMD_GOTO, 0x0020, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0020, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_02022e54 },
-    { PROC_CMD_CALL, 0x0000, func_0202284c },
-    { PROC_CMD_GOTO_IF_YES, 0x0028, func_02022eb8 },
-    { PROC_CMD_GOTO_IF_NO, 0x001F, func_02022ef4 },
-    { PROC_CMD_GOTO_IF_YES, 0x0021, func_02022988 },
-    { PROC_CMD_CALL, 0x0000, func_ov003_021ebb8c },
-    { PROC_CMD_GOTO_IF_YES, 0x0028, func_02022ed4 },
-{ PROC_CMD_LABEL, 0x0021, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_ov003_021e439c },
-    { PROC_CMD_GOTO_IF_YES, 0x0028, func_02022eb8 },
-    { PROC_CMD_GOTO, 0x0023, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0022, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_02022e54 },
-    { PROC_CMD_CALL, 0x0000, func_ov003_021eb9b0 },
-    { PROC_CMD_GOTO_IF_NO, 0x001F, func_02022e34 },
-    { PROC_CMD_CALL, 0x0000, func_02022e14 },
-    { PROC_CMD_GOTO, 0x0023, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0023, 0x00000000 },
-    { PROC_CMD_25, 0x0002, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_02021dd4 },
-    { PROC_CMD_CALL, 0x0000, func_02021f5c },
-    { PROC_CMD_CALL, 0x0000, func_0202214c },
-    { PROC_CMD_CALL, 0x0000, func_020221bc },
-    { PROC_CMD_CALL, 0x0000, func_020221e4 },
-    { PROC_CMD_20, 0x0008, (void *)0x00000003 },
-    { PROC_CMD_CALL, 0x0000, func_ov000_021a9714 },
-    { PROC_CMD_CALL, 0x0000, func_020229f0 },
-    { PROC_CMD_CALL, 0x0000, func_020224d4 },
-    { PROC_CMD_CALL, 0x0000, func_02022b70 },
-    { PROC_CMD_CALL, 0x0000, func_020224fc },
-    { PROC_CMD_CALL, 0x0000, func_0202254c },
-    { PROC_CMD_CALL, 0x0000, func_02022564 },
-    { PROC_CMD_CALL, 0x0000, func_02021e6c },
-    { PROC_CMD_CALL, 0x0000, func_02022dfc },
-    { PROC_CMD_REPEAT, 0x0000, func_02021f08 },
-    { PROC_CMD_25, 0x0003, 0x00000000 },
-    { PROC_CMD_GOTO_IF_YES, 0x0028, func_02022b10 },
-    { PROC_CMD_GOTO_IF_NO, 0x0025, func_02022b50 },
-{ PROC_CMD_LABEL, 0x0024, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_ov003_021ed664 },
-    { PROC_CMD_GOTO, 0x0026, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0025, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_ov003_021edf2c },
-    { PROC_CMD_GOTO, 0x0026, 0x00000000 },
-{ PROC_CMD_LABEL, 0x0026, 0x00000000 },
-    { PROC_CMD_CALL, 0x0000, func_02022bb0 },
-    { PROC_CMD_GOTO, 0x0028, 0x00000000 },
-    { PROC_CMD_03, 0x0000, 0x00000000 },
-    { PROC_CMD_END, 0x0000, NULL },
+    PROC_NAME,
+    PROC_SLEEP(0),
+
+    PROC_06(0, func_02021d70),
+    PROC_CALL(func_020136bc),
+    PROC_START_CHILD(data_020cec14),
+
+    PROC_GOTO(1),
+
+PROC_LABEL(1),
+    PROC_START_CHILD_LOCKING(data_020ceba4),
+
+    PROC_GOTO(3),
+
+PROC_LABEL(2),
+    PROC_START_CHILD_LOCKING(data_020ceb84),
+
+    PROC_GOTO(3),
+
+PROC_LABEL(3),
+    PROC_WHILE_EXISTS(data_020cec14),
+    PROC_CALL(func_02021b00),
+
+    PROC_GOTO(4),
+
+PROC_LABEL(4),
+    PROC_REPEAT(func_02021f08),
+    PROC_REPEAT(func_02021f2c),
+    PROC_CALL(func_02021b14),
+    PROC_CALL(func_0201fd44),
+    PROC_START_CHILD_LOCKING(data_020cebc4),
+
+    PROC_GOTO(2),
+
+PROC_LABEL(5),
+    PROC_CALL(func_02022cdc),
+
+    PROC_GOTO(6),
+
+PROC_LABEL(6),
+    PROC_OVERLAY_LOAD(4),
+    PROC_CALL(data_ov010_02209e54),
+    PROC_OVERLAY_UNLOAD(4),
+
+    // fallthrough
+
+PROC_LABEL(7),
+    PROC_REPEAT(func_02021f2c),
+    PROC_CALL(func_02021dd4),
+    PROC_CALL(func_02021f5c),
+    PROC_CALL(func_0202214c),
+    PROC_CALL(func_020221bc),
+    PROC_CALL(func_020221e4),
+    PROC_CALL(func_02022364),
+    PROC_CALL(func_020223b4),
+    PROC_OVERLAY_LOAD(5),
+    PROC_CALL(func_ov005_022052d0),
+    PROC_OVERLAY_UNLOAD(5),
+
+    // fallthrough
+
+PROC_LABEL(8),
+    PROC_CALL(func_020223cc),
+    PROC_CALL(func_02022414),
+    PROC_CALL(func_02022458),
+
+    // fallthrough
+
+PROC_LABEL(9),
+    PROC_CALL(func_ov000_021a9714),
+
+    // fallthrough
+
+PROC_LABEL(10),
+    PROC_WHILE(func_0204b1e0),
+    PROC_CALL(func_02022480),
+    PROC_CALL(func_020224a8),
+    PROC_CALL(func_02022414),
+    PROC_CALL(func_020224d4),
+    PROC_21(3, 16),
+    PROC_CALL(func_020224fc),
+
+    // fallthrough
+
+PROC_LABEL(11),
+    PROC_CALL(func_0202254c),
+    PROC_CALL(func_02022564),
+    PROC_CALL(func_02022588),
+    PROC_CALL(func_0202272c),
+    PROC_CALL(func_02021e6c),
+    PROC_START_CHILD_LOCKING(data_020cebec),
+
+    PROC_GOTO(6),
+
+PROC_LABEL(12),
+    PROC_21(3, 64),
+    PROC_CALL(func_020224fc),
+    PROC_CALL(func_0202254c),
+    PROC_CALL(func_02022564),
+    PROC_CALL(func_02021e6c),
+    PROC_OVERLAY_LOAD(6),
+    PROC_CALL(func_ov006_0221776c),
+    PROC_OVERLAY_UNLOAD(6),
+    PROC_CALL(func_02021b00),
+
+    PROC_GOTO(2),
+
+PROC_LABEL(13),
+    PROC_OVERLAY_LOAD(9),
+    PROC_CALL(func_02022db8),
+    PROC_CALL(func_ov009_02206020),
+    PROC_CALL(func_ov009_022065a0),
+    PROC_CALL(func_ov009_02204e10),
+    PROC_CALL(func_02022dc8),
+    PROC_OVERLAY_UNLOAD(9),
+    PROC_CALL(func_02021b00),
+
+    PROC_GOTO(2),
+
+PROC_LABEL(14),
+    PROC_CALL(func_02022c54),
+    PROC_CALL(func_02022cdc),
+    PROC_CALL(func_02022324),
+
+    PROC_GOTO(6),
+
+PROC_LABEL(15),
+    PROC_REPEAT(func_02021f2c),
+    PROC_CALL(func_02022c78),
+    PROC_CALL(func_02022cdc),
+    PROC_CALL(func_020221e4),
+    PROC_CALL(func_0202225c),
+    PROC_20(3, 8),
+
+    PROC_GOTO(9),
+
+PROC_LABEL(16),
+    PROC_REPEAT(func_02021f2c),
+    PROC_CALL(func_02022cb0),
+    PROC_CALL(func_02022cdc),
+    PROC_CALL(func_020221e4),
+    PROC_CALL(func_0202225c),
+    PROC_20(3, 8),
+
+    PROC_GOTO(9),
+
+PROC_LABEL(39),
+    PROC_WHILE(func_0204b1e0),
+    PROC_21(3, 32),
+    PROC_CALL(func_020224fc),
+    PROC_CALL(func_0202254c),
+    PROC_CALL(func_02022564),
+    PROC_CALL(func_02021e6c),
+    PROC_CALL(func_02021b00),
+
+    PROC_GOTO(2),
+
+PROC_LABEL(17),
+    PROC_OVERLAY_LOAD(6),
+    PROC_CALL(func_ov006_02221aec),
+    PROC_OVERLAY_UNLOAD(6),
+
+    PROC_GOTO(4),
+
+PROC_LABEL(18),
+    PROC_OVERLAY_LOAD(6),
+    PROC_CALL(func_ov006_022226cc),
+    PROC_OVERLAY_UNLOAD(6),
+
+    PROC_GOTO(4),
+
+PROC_LABEL(21),
+    PROC_25(3, 0),
+    PROC_CALL(func_ov003_021f049c),
+    PROC_25(2, 0),
+
+    PROC_GOTO(4),
+
+PROC_LABEL(26),
+    PROC_OVERLAY_LOAD(11),
+    PROC_25(3, 0),
+    PROC_CALL(func_ov003_021e4204),
+    PROC_GOTO_IF_NO(func_02022ef4, 40),
+    PROC_CALL(func_ov003_021f24e4),
+
+    PROC_GOTO(40),
+
+PROC_LABEL(19),
+    PROC_OVERLAY_LOAD(11),
+    PROC_25(3, 0),
+    PROC_CALL(func_ov003_021fc0d4),
+    PROC_25(2, 0),
+    PROC_OVERLAY_UNLOAD(11),
+
+    PROC_GOTO(4),
+
+PROC_LABEL(20),
+    PROC_25(1, 0),
+    PROC_OVERLAY_LOAD(11),
+    PROC_25(3, 0),
+    PROC_CALL(func_ov003_021e3610),
+    PROC_25(2, 0),
+    PROC_OVERLAY_UNLOAD(11),
+    PROC_25(0, 0),
+
+    PROC_GOTO(4),
+
+PROC_LABEL(27),
+    PROC_25(3, 0),
+    PROC_OVERLAY_LOAD(7),
+    PROC_CALL(func_ov007_02218284),
+    PROC_OVERLAY_UNLOAD(7),
+    PROC_25(2, 0),
+
+    PROC_GOTO(4),
+
+PROC_LABEL(28),
+    PROC_OVERLAY_LOAD(7),
+    PROC_CALL(func_ov007_0221ad60),
+    PROC_OVERLAY_UNLOAD(7),
+
+    PROC_GOTO(4),
+
+PROC_LABEL(23),
+    PROC_CALL(func_020229a8),
+    PROC_25(3, 0),
+    PROC_CALL(func_ov003_021e4204),
+    PROC_GOTO_IF_NO(func_02022ef4, 40),
+    PROC_CALL(func_020228ac),
+    PROC_GOTO_IF_NO(func_02022ef4, 40),
+    PROC_CALL(func_ov003_021f9470),
+
+    PROC_GOTO(40),
+
+PROC_LABEL(24),
+    PROC_OVERLAY_LOAD(11),
+    PROC_25(3, 0),
+    PROC_CALL(func_ov003_021e4244),
+    PROC_GOTO_IF_NO(func_02022ef4, 40),
+    PROC_CALL(func_ov003_021f4a84),
+
+    PROC_GOTO(40),
+
+PROC_LABEL(25),
+    PROC_OVERLAY_LOAD(11),
+    PROC_25(3, 0),
+    PROC_CALL(func_ov003_021e4244),
+    PROC_GOTO_IF_NO(func_02022ef4, 40),
+    PROC_CALL(func_ov003_021f6ce8),
+
+    PROC_GOTO(40),
+
+PROC_LABEL(22),
+    PROC_25(3, 0),
+    PROC_CALL(func_ov003_021f31f0),
+    PROC_25(2, 0),
+
+    PROC_GOTO(4),
+
+PROC_LABEL(40),
+    PROC_CALL(func_ov003_021e4284),
+    PROC_25(2, 0),
+    PROC_CALL(func_02022814),
+
+    PROC_GOTO(4),
+
+PROC_LABEL(29),
+    PROC_CALL(func_020229a8),
+    PROC_25(3, 0),
+    PROC_CALL(func_020228ec),
+    PROC_GOTO_IF_YES(func_02022b30, 30),
+    PROC_CALL(func_ov003_021e4204),
+    PROC_GOTO_IF_NO(func_02022ef4, 40),
+
+    // fallthrough
+
+PROC_LABEL(30),
+    PROC_CALL(func_ov003_021fb690),
+    PROC_GOTO_IF_NO(func_02022e34, 40),
+    PROC_GOTO_IF_YES(func_02022b30, 34),
+
+    PROC_GOTO(32),
+
+PROC_LABEL(31),
+    PROC_CALL(func_ov003_021fb704),
+    PROC_GOTO_IF_NO(func_02022e34, 40),
+    PROC_GOTO_IF_YES(func_02022b30, 34),
+
+    PROC_GOTO(32),
+
+PROC_LABEL(32),
+    PROC_CALL(func_02022e54),
+    PROC_CALL(func_0202284c),
+    PROC_GOTO_IF_YES(func_02022eb8, 40),
+    PROC_GOTO_IF_NO(func_02022ef4, 31),
+    PROC_GOTO_IF_YES(func_02022988, 33),
+    PROC_CALL(func_ov003_021ebb8c),
+    PROC_GOTO_IF_YES(func_02022ed4, 40),
+
+    // fallthrough
+
+PROC_LABEL(33),
+    PROC_CALL(func_ov003_021e439c),
+    PROC_GOTO_IF_YES(func_02022eb8, 40),
+
+    PROC_GOTO(35),
+
+PROC_LABEL(34),
+    PROC_CALL(func_02022e54),
+    PROC_CALL(func_ov003_021eb9b0),
+    PROC_GOTO_IF_NO(func_02022e34, 31),
+    PROC_CALL(func_02022e14),
+
+    PROC_GOTO(35),
+
+PROC_LABEL(35),
+    PROC_25(2, 0),
+    PROC_CALL(func_02021dd4),
+    PROC_CALL(func_02021f5c),
+    PROC_CALL(func_0202214c),
+    PROC_CALL(func_020221bc),
+    PROC_CALL(func_020221e4),
+    PROC_20(3, 8),
+    PROC_CALL(func_ov000_021a9714),
+    PROC_CALL(func_020229f0),
+    PROC_CALL(func_020224d4),
+    PROC_CALL(func_02022b70),
+    PROC_CALL(func_020224fc),
+    PROC_CALL(func_0202254c),
+    PROC_CALL(func_02022564),
+    PROC_CALL(func_02021e6c),
+    PROC_CALL(func_02022dfc),
+    PROC_REPEAT(func_02021f08),
+    PROC_25(3, 0),
+    PROC_GOTO_IF_YES(func_02022b10, 40),
+    PROC_GOTO_IF_NO(func_02022b50, 37),
+
+    // fallthrough
+
+PROC_LABEL(36),
+    PROC_CALL(func_ov003_021ed664),
+
+    PROC_GOTO(38),
+
+PROC_LABEL(37),
+    PROC_CALL(func_ov003_021edf2c),
+
+    PROC_GOTO(38),
+
+PROC_LABEL(38),
+    PROC_CALL(func_02022bb0),
+
+    PROC_GOTO(40),
+
+    PROC_BLOCK,
+    PROC_END,
 };
+
+// clang-format on
 
 extern char * data_02196f14;
 
@@ -352,20 +442,13 @@ extern struct Unit * gUnitList;
 
 extern vu32 data_027e1264;
 
-struct UnkStruct_02196f18
-{
-    u32 unk_00;
-};
-
 extern struct UnkStruct_02196f18 * data_02196f18;
 
 extern struct UnkStruct_020e3ca0 * data_020e3ca0;
 
-
 extern struct UnkStruct_02196f1c * data_02196f1c;
 
 extern struct UnkStruct_02196f10 * data_02196f10;
-
 
 extern struct UnkStruct_02196f0c * data_02196f0c;
 
@@ -636,7 +719,7 @@ void func_02021e6c(void)
     return;
 }
 
-void func_02021f08(struct Proc * param_1)
+void func_02021f08(ProcPtr param_1)
 {
     if (func_0201f690())
     {
@@ -648,7 +731,7 @@ void func_02021f08(struct Proc * param_1)
     return;
 }
 
-void func_02021f2c(struct Proc * param_1)
+void func_02021f2c(ProcPtr param_1)
 {
     if (func_020020e0(data_020e3ca0))
     {
@@ -739,7 +822,7 @@ void func_02021f5c(void)
     return;
 }
 
-void func_0202214c(void * param_1)
+void func_0202214c(ProcPtr param_1)
 {
     struct Unit ** pUnitStack;
     struct Unit * unit;
@@ -841,7 +924,7 @@ void func_02022324(void)
     return;
 }
 
-void func_02022364(void * param_1)
+void func_02022364(ProcPtr param_1)
 {
     if (data_02196f0c->unk_0c & 0x40)
     {
@@ -865,7 +948,7 @@ void func_020223b4(void)
     return;
 }
 
-void func_020223cc(void * param_1)
+void func_020223cc(ProcPtr param_1)
 {
     data_021974fc->unk_00 = 0;
     data_021974fc->unk_08 = 0;
@@ -909,7 +992,7 @@ void func_02022480(void)
     return;
 }
 
-void func_020224a8(void * param_1)
+void func_020224a8(ProcPtr param_1)
 {
     if (!func_020377e8("Ending\0"))
     {
@@ -940,7 +1023,7 @@ void func_020224fc(void)
     return;
 }
 
-void func_0202254c(void * param_1)
+void func_0202254c(ProcPtr param_1)
 {
     func_02047708("MapEnd\0", param_1);
     return;
@@ -1057,7 +1140,7 @@ void func_02022588(void)
     return;
 }
 
-void func_0202272c(void * param_1)
+void func_0202272c(ProcPtr param_1)
 {
     func_02047708("ChapterNext", param_1);
 
@@ -1100,7 +1183,7 @@ void func_02022814(void)
     return;
 }
 
-void func_0202284c(void * param_1)
+void func_0202284c(ProcPtr param_1)
 {
     switch (data_02196f10->unk_04)
     {
@@ -1124,7 +1207,7 @@ void func_0202284c(void * param_1)
     return;
 }
 
-void func_020228ac(void * param_1)
+void func_020228ac(ProcPtr param_1)
 {
     switch (data_02196f10->unk_04)
     {
@@ -1146,7 +1229,7 @@ inline BOOL _func_02022988(void)
     return data_02196f10->unk_04 == 1 ? TRUE : FALSE;
 }
 
-void func_020228ec(void * unused)
+void func_020228ec(ProcPtr unused)
 {
     if (data_02196f10->unk_04 != 3)
     {
@@ -1269,7 +1352,7 @@ void func_020229f0(void)
     return _func_02022b50();
 }
 
-void func_02022b70(struct Proc * proc)
+void func_02022b70(ProcPtr proc)
 {
     if (_func_02022b50())
     {
@@ -1283,7 +1366,7 @@ void func_02022b70(struct Proc * proc)
     return;
 }
 
-void func_02022bb0(void * param_1)
+void func_02022bb0(ProcPtr param_1)
 {
     u32 uVar1;
 
@@ -1313,27 +1396,27 @@ void func_02022bb0(void * param_1)
     return;
 }
 
-void func_02022c54(void * param_1)
+void func_02022c54(ProcPtr param_1)
 {
     func_020240a0(data_02196f0c->unk_10 + 0x0d, param_1);
     return;
 }
 
-void func_02022c78(void * param_1)
+void func_02022c78(ProcPtr param_1)
 {
     func_020240a0(data_02196f0c->unk_10 + 0x10, param_1);
     data_02196f0c->unk_0c |= 4;
     return;
 }
 
-void func_02022cb0(void * param_1)
+void func_02022cb0(ProcPtr param_1)
 {
     func_020240a0(11, param_1);
     data_02196f0c->unk_0c |= 4;
     return;
 }
 
-void func_02022cdc(void * param_1)
+void func_02022cdc(ProcPtr param_1)
 {
     if (!func_0201f760(11))
     {
@@ -1345,7 +1428,7 @@ void func_02022cdc(void * param_1)
     return;
 }
 
-void func_02022d00(void * param_1)
+void func_02022d00(ProcPtr param_1)
 {
     struct Unit * pUnit;
     int i;
@@ -1473,7 +1556,7 @@ extern struct ProcCmd data_020cec44[];
 
 void func_02022f10(void)
 {
-    Proc_Start(data_020cec44, (void *)9);
+    Proc_Start(data_020cec44, PROC_TREE_9);
     return;
 }
 

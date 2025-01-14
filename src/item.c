@@ -15,12 +15,6 @@ enum
     ITYPE_ITEM        = 8,
 };
 
-struct UnkStruct_02196f0c
-{
-    STRUCT_PAD(0x00, 0x0c);
-    u32 unk_0c;
-};
-
 extern struct UnkStruct_02196f0c * data_02196f0c;
 
 extern struct Unit * gUnitList;

@@ -201,6 +201,11 @@ struct UnkStruct_Func_02021410_Ret
     u8 unk_756;
 };
 
+struct UnkStruct_02196f18
+{
+    u32 unk_00;
+};
+
 struct UnkStruct_020e3ca0
 {
     STRUCT_PAD(0x00, 0x24);
