@@ -8,7 +8,7 @@ void main(void)
 {
     func_0200ef04();
     func_0200f028();
-    func_02022f10();
+    StartGame();
     func_020ad244(0x14);
 
     while (TRUE)

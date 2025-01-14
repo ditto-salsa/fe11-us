@@ -322,9 +322,9 @@ ProcPtr Proc_StartBlocking(struct ProcCmd * script, ProcPtr parent)
 
 ProcPtr func_01ffc030(struct ProcCmd * script, ProcPtr parent)
 {
-    if (parent == 0)
+    if (parent == NULL)
     {
-        parent = (void *)9;
+        parent = PROC_TREE_9;
     }
 
     if (IsRootProcess(parent))

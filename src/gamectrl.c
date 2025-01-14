@@ -64,7 +64,7 @@ BOOL func_02022ef4(void);
 
 // clang-format off
 
-struct ProcCmd data_020cec44[] =
+struct ProcCmd ProcScr_GameCtrl[] =
 {
     PROC_NAME,
     PROC_SLEEP(0),
@@ -457,8 +457,8 @@ extern struct UnkStruct_02196f20 * data_02196f20;
 extern struct UnkStruct_02196f24 * data_02196f24;
 
 // Forward declarations
-extern void func_02021b28(void);
-extern void func_02021c84(void);
+extern void InitOnlineShopItemFlags(void);
+extern void InitOnlineShopItemAmounts(void);
 extern void func_02022f28(u32 label);
 
 void func_020217b4(void)
@@ -466,14 +466,14 @@ void func_020217b4(void)
     int random;
     u32 uVar2;
 
-    func_0200f20c(0);
-    func_0200f20c(2);
+    LoadOverlay(0);
+    LoadOverlay(2);
 
     func_020377c8();
     func_02028c68();
     func_020355e4();
 
-    random = func_0202000c(1, 4) * 4;
+    random = RollRN(1, 4) * 4;
     func_01ffb934(data_027e1b9c, random);
 
     if (data_02197254 == NULL)
@@ -582,8 +582,8 @@ void func_020219a4(int param_1, int param_2)
     func_020494a0(data_02196f0c->unk_04, "gf_reserved5\0\0\0", 0);
     func_020494a0(data_02196f0c->unk_04, "gf_reserved6\0\0\0", 0);
 
-    func_02021b28();
-    func_02021c84();
+    InitOnlineShopItemFlags();
+    InitOnlineShopItemAmounts();
     func_020424b8("RegistGrobalFlags\0\0");
 
     if (param_2 != 0)
@@ -608,7 +608,7 @@ void func_02021b14(void)
     return;
 }
 
-void func_02021b28(void)
+void InitOnlineShopItemFlags(void)
 {
     func_020494a0(data_02196f0c->unk_08, "os_BraveSword\0\0", 0);
     func_020494a0(data_02196f0c->unk_08, "os_BraveLance\0\0", 0);
@@ -626,7 +626,7 @@ void func_02021b28(void)
     return;
 }
 
-void func_02021c84(void)
+void InitOnlineShopItemAmounts(void)
 {
     func_02049a2c(data_02196f0c->unk_08, "os_BraveSword\0\0", 3);
     func_02049a2c(data_02196f0c->unk_08, "os_BraveLance\0\0", 3);
@@ -671,7 +671,7 @@ void func_02021d70(void)
 
 void func_02021dd4(void)
 {
-    data_02196f14 = func_020211b8();
+    data_02196f14 = GetBattleMapNameMaybe();
 
     if (data_02196f14[0] == 'b' && data_02196f14[1] == 'm' && data_02196f14[2] == 'a' && data_02196f14[3] == 'p')
     {
@@ -691,7 +691,7 @@ void func_02021dd4(void)
         data_02196f14 = NULL;
     }
 
-    func_02042460(func_020211b8());
+    func_02042460(GetBattleMapNameMaybe());
     func_020424b8("RegistLocalFlags\0\0\0");
     func_020484b0();
 
@@ -1170,33 +1170,33 @@ void func_0202272c(ProcPtr proc)
 
 void func_02022814(void)
 {
-    if (func_0200f2f8(10))
+    if (IsOverlayLoaded(10))
     {
-        func_0200f24c(10);
+        UnloadOverlay(10);
     }
 
-    if (func_0200f2f8(11))
+    if (IsOverlayLoaded(11))
     {
-        func_0200f24c(11);
+        UnloadOverlay(11);
     }
 
     return;
 }
 
-void func_0202284c(ProcPtr param_1)
+void func_0202284c(ProcPtr proc)
 {
     switch (data_02196f10->unk_04)
     {
         case 0:
-            func_ov003_021e42c8(param_1, 0);
+            func_ov003_021e42c8(proc, 0);
             break;
 
         case 1:
-            func_ov003_021e4310(param_1, 0);
+            func_ov003_021e4310(proc, 0);
             break;
 
         case 2:
-            func_ov003_021e4354(param_1, 0);
+            func_ov003_021e4354(proc, 0);
             break;
 
         case 3:
@@ -1207,16 +1207,16 @@ void func_0202284c(ProcPtr param_1)
     return;
 }
 
-void func_020228ac(ProcPtr param_1)
+void func_020228ac(ProcPtr proc)
 {
     switch (data_02196f10->unk_04)
     {
         case 0:
-            func_ov003_021e42c8(param_1, 1);
+            func_ov003_021e42c8(proc, 1);
             break;
 
         case 2:
-            func_ov003_021e4354(param_1, 1);
+            func_ov003_021e4354(proc, 1);
             break;
     }
 
@@ -1261,12 +1261,12 @@ void func_020229a8(void)
     switch (data_02196f10->unk_04)
     {
         case 0:
-            func_0200f20c(10);
+            LoadOverlay(10);
             break;
 
         case 1:
         case 2:
-            func_0200f20c(11);
+            LoadOverlay(11);
             break;
 
         case 3:
@@ -1310,13 +1310,13 @@ void func_020229f0(void)
 
     if (_func_02022b50())
     {
-        random = func_0202000c(1, data_02197254->pDBFE11Footer->unk_14 - 1);
+        random = RollRN(1, data_02197254->pDBFE11Footer->unk_14 - 1);
         data_02196f10->unk_11 = random;
         func_0204939c(data_02196f18->unk_00, random);
 
         if (data_02196f10->unk_0b != 0 && func_02021410(data_02196f10->unk_06)->unk_756 == 0x14)
         {
-            random = func_0202000c(1, data_02197254->pDBFE11Footer->unk_14 - 2);
+            random = RollRN(1, data_02197254->pDBFE11Footer->unk_14 - 2);
 
             if (random >= data_02196f10->unk_11)
             {
@@ -1552,14 +1552,14 @@ BOOL func_02022ef4(void)
     return data_020efcb4 == 1 ? TRUE : FALSE;
 }
 
-void func_02022f10(void)
+void StartGame(void)
 {
-    Proc_Start(data_020cec44, PROC_TREE_9);
+    Proc_Start(ProcScr_GameCtrl, PROC_TREE_9);
     return;
 }
 
 void func_02022f28(u32 label)
 {
-    Proc_Goto(Proc_Find(data_020cec44), label, 0);
+    Proc_Goto(Proc_Find(ProcScr_GameCtrl), label, 0);
     return;
 }

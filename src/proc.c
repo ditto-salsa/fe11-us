@@ -1030,11 +1030,11 @@ BOOL ProcCmd_Overlay(ProcPtr proc)
     struct Proc * p = proc;
     if (p->proc_scrCur->dataPtr != 0)
     {
-        func_0200f20c(p->proc_scrCur->dataImm);
+        LoadOverlay(p->proc_scrCur->dataImm);
     }
     else
     {
-        func_0200f24c(p->proc_scrCur->dataImm);
+        UnloadOverlay(p->proc_scrCur->dataImm);
     }
 
     p->proc_scrCur++;

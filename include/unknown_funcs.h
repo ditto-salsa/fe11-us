@@ -30,10 +30,10 @@ extern void func_0200ef04(void);
 extern void func_0200f028(void);
 extern void func_0200f04c(void);
 
-extern void func_0200f20c(u32 overlayId);
-extern void func_0200f24c(u32 overlayId);
+extern void LoadOverlay(u32 overlayId);
+extern void UnloadOverlay(u32 overlayId);
 extern void func_0200f28c(u32 arg_0);
-extern BOOL func_0200f2f8(u32 overlayId);
+extern BOOL IsOverlayLoaded(u32 overlayId);
 
 extern void * func_02011574(s32);
 extern void func_020115a4(void *);
@@ -61,17 +61,17 @@ extern BOOL func_0201f760(s32);
 extern s32 func_0201ffc0(void);
 extern void func_0201ffd0(void);
 
-extern s32 func_0202000c(s32, s32);
+extern s32 RollRN(s32, s32);
 
 extern void func_020210d0(struct UnkStruct_02196f0c_00 *, s32);
 extern void func_02021014(void);
 extern void func_02021178(s32);
 extern void func_0202118c(void);
-extern char * func_020211b8(void);
+extern char * GetBattleMapNameMaybe(void);
 extern void func_02021430(struct UnkStruct_02196f10 *, s32, s32);
 extern void func_02021790(struct UnkStruct_02196f10 *);
 
-extern void func_02022f10(void);
+extern void StartGame(void);
 
 extern void func_020240a0(s32, void *);
 extern void func_0202437c(void *);
