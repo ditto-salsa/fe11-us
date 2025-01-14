@@ -1,5 +1,115 @@
 #include "global.h"
 
+extern char * data_02196f14;
+
+struct UnkStruct_021e3528
+{
+    s8 unk_00[0x2e];
+    s8 unk_2e;
+    u8 unk_2f;
+};
+
+extern struct UnkStruct_021e3528 data_ov000_021e3528;
+
+struct UnkStruct_021974fc
+{
+    u32 unk_00;
+    u32 unk_04;
+    u32 unk_08;
+    u32 unk_0c;
+    u8 unk_10;
+};
+
+extern struct UnkStruct_021974fc * data_021974fc;
+
+struct Unknown_020efcc8_unk_a8_unk_00
+{
+    STRUCT_PAD(0x00, 0x28);
+    void (*unk_28)(void *, u32, u32, u32);
+    STRUCT_PAD(0x2C, 0x38);
+    void (*unk_38)(void *, u32);
+    void (*unk_3c)(void *, u32, u32, u32);
+    STRUCT_PAD(0x40, 0x6c);
+    void (*unk_6c)(void *, u32);
+};
+
+struct Unknown_020efcc8_unk_a8
+{
+    struct Unknown_020efcc8_unk_a8_unk_00 * unk_00;
+};
+
+struct Unknown_020efcc8
+{
+    STRUCT_PAD(0x00, 0xA4);
+    struct Unknown_020efcc8_unk_a8 * unk_a4;
+    struct Unknown_020efcc8_unk_a8 * unk_a8;
+};
+
+extern struct Unknown_020efcc8 * data_020efcc8;
+
+struct UnkStruct_Func_02021410_Ret
+{
+    STRUCT_PAD(0x000, 0x756);
+    u8 unk_756;
+};
+
+struct UnkStruct_Func_02021410_Ret * func_02021410(u32);
+
+extern u32 data_020efcb4;
+
+extern struct Unit * gUnitList;
+
+extern vu32 data_027e1264;
+
+struct UnkStruct_02196f18
+{
+    u32 unk_00;
+};
+
+extern struct UnkStruct_02196f18 * data_02196f18;
+
+struct UnkStruct_020e3ca0
+{
+    STRUCT_PAD(0x00, 0x24);
+};
+
+extern struct UnkStruct_020e3ca0 * data_020e3ca0;
+
+struct UnkStruct_02196f1c
+{
+    STRUCT_PAD(0x00, 0x09);
+    u8 unk_09;
+};
+
+extern struct UnkStruct_02196f1c * data_02196f1c;
+
+struct UnkStruct_02196f10
+{
+    u32 unk_00;
+    s8 unk_04;
+    u8 unk_05;
+    u8 unk_06;
+    s8 unk_07;
+    u8 unk_08;
+    u8 unk_09;
+    u8 unk_0a;
+    u8 unk_0b;
+    u32 unk_0c;
+    u8 unk_10;
+    u8 unk_11;
+    u8 unk_12;
+    STRUCT_PAD(0x13, 0x17);
+    u8 unk_17;
+};
+
+extern struct UnkStruct_02196f10 * data_02196f10;
+
+struct UnkStruct_02196f0c_00
+{
+    STRUCT_PAD(0x00, 0x0A);
+    s8 unk_0a;
+};
+
 struct UnkStruct_02196f0c_04_00
 {
     u32 unk_00;
@@ -13,7 +123,7 @@ struct UnkStruct_02196f0c_04
 
 struct UnkStruct_02196f0c_10
 {
-    STRUCT_PAD(0x00, 0x0D);
+    STRUCT_PAD(0x00, 0x0d);
     u8 unk_0d;
     STRUCT_PAD(0x0e, 0x10);
     u8 unk_10;
@@ -21,7 +131,7 @@ struct UnkStruct_02196f0c_10
 
 struct UnkStruct_02196f0c
 {
-    u32 unk_00;
+    struct UnkStruct_02196f0c_00 * unk_00;
     struct UnkStruct_02196f0c_04 * unk_04;
     u32 unk_08;
     u32 unk_0c;
@@ -34,7 +144,7 @@ extern struct UnkStruct_02196f0c * data_02196f0c;
 struct UnkStruct_02196f20
 {
     STRUCT_PAD(0x000, 0x184);
-    u32 unk_184;
+    s32 unk_184;
     u32 unk_188;
     u32 unk_18c;
     u32 unk_190;
@@ -48,10 +158,114 @@ struct UnkStruct_02196f20
 
 extern struct UnkStruct_02196f20 * data_02196f20;
 
+struct UnkStruct_02196f24
+{
+    STRUCT_PAD(0x00, 0x10);
+};
+
+extern struct UnkStruct_02196f24 * data_02196f24;
+
 // Forward declarations
 extern void func_02021b28(void);
 extern void func_02021c84(void);
-extern void func_02022f28(u32 param_1);
+extern void func_02022f28(u32 label);
+
+void func_020217b4(void)
+{
+    int iVar1;
+    u32 uVar2;
+
+    func_0200f20c(0);
+    func_0200f20c(2);
+
+    func_020377c8();
+    func_02028c68();
+    func_020355e4();
+
+    iVar1 = func_0202000c(1, 4) * 4;
+    func_01ffb934(data_027e1b9c, iVar1);
+
+    if (data_02197254 == NULL)
+    {
+        data_02197254 = (struct Unknown_02197254 *)func_02011574(0x4c);
+    }
+
+    func_02037a04(data_02197254);
+
+    if (data_020e3ca0 == NULL)
+    {
+        data_020e3ca0 = (struct UnkStruct_020e3ca0 *)func_02011574(0x14);
+    }
+
+    func_02002058(data_020e3ca0);
+
+    if (data_02196f0c == NULL)
+    {
+        data_02196f0c = (struct UnkStruct_02196f0c *)func_02011574(0x18);
+    }
+
+    func_02021014();
+
+    if (data_02196f10 == NULL)
+    {
+        struct UnkStruct_02196f10 * puVar3 = (struct UnkStruct_02196f10 *)func_02011574(0x18);
+
+        if (puVar3 != NULL)
+        {
+            puVar3->unk_00 = 0;
+            puVar3->unk_06 = 0;
+        }
+
+        data_02196f10 = puVar3;
+    }
+
+    func_020423fc();
+    func_020476a0();
+
+    if (data_02196f24 == NULL)
+    {
+        data_02196f24 = (struct UnkStruct_02196f24 *)func_02011574(0x10);
+    }
+
+    func_02024c74();
+
+    if (data_02196f20 == NULL)
+    {
+        data_02196f20 = (struct UnkStruct_02196f20 *)func_02011574(0x1a4);
+    }
+
+    func_02024d28();
+
+    if (data_02196f1c == NULL)
+    {
+        data_02196f1c = (struct UnkStruct_02196f1c *)func_02011574(0x10);
+    }
+
+    func_02024e70();
+
+    if (data_02196f18 == NULL)
+    {
+        data_02196f18 = (struct UnkStruct_02196f18 *)func_02011574(0x600);
+    }
+
+    func_02024f34();
+    func_0206ecbc();
+    func_ov002_021e69ac();
+    func_020076a8();
+    func_02015f64();
+
+    func_02039eac("system");
+    func_02039eac("die");
+    func_02039eac("tutorial");
+
+    func_02042420("startup");
+
+    func_0203fafc();
+    func_02040eec();
+    func_020411e8();
+
+    return;
+}
 
 void func_020219a4(int param_1, int param_2)
 {
@@ -128,42 +342,41 @@ void func_02021c84(void)
     func_02049a2c(data_02196f0c->unk_08, "os_BraveAxe", 3);
     func_02049a2c(data_02196f0c->unk_08, "os_BraveBow", 3);
     func_02049a2c(data_02196f0c->unk_08, "os_Wato", 5);
-    func_02049a2c(data_02196f0c->unk_08, "os_MasterProof", 0xf);
+    func_02049a2c(data_02196f0c->unk_08, "os_MasterProof", 15);
     func_02049a2c(data_02196f0c->unk_08, "os_LongBow", 5);
     func_02049a2c(data_02196f0c->unk_08, "os_EmpyreadWhip", 3);
     return;
 }
 
-extern vu32 data_027e1264;
-
 void func_02021d70(void)
 {
-    int iVar1;
-    int iVar2;
-    int iVar3;
-    int iVar4;
+    int r3;
+    int lr;
+    int r1;
 
     if (data_02196f0c->unk_0c & 0x2000000)
     {
         return;
     }
 
-    iVar4 = data_027e1264;
-    iVar2 = iVar4 - data_02196f20->unk_18c;
+    lr = data_027e1264;
+    r3 = lr - data_02196f20->unk_18c;
 
-    iVar1 = 0x7fffffff;
-    if (data_02196f20->unk_184 <= 0x7fffffff - iVar2)
+    r1 = 0x7fffffff;
+
+    if ((u32)data_02196f20->unk_184 <= (0x7fffffff - r3))
     {
-        iVar1 = data_02196f20->unk_184 + iVar2;
+        data_02196f20->unk_184 = data_02196f20->unk_184 + r3;
+    }
+    else
+    {
+        data_02196f20->unk_184 = r1;
     }
 
-    data_02196f20->unk_184 = iVar1;
-    data_02196f20->unk_18c = iVar4;
+    data_02196f20->unk_18c = lr;
 
     return;
 }
-
-extern char * data_02196f14;
 
 void func_02021dd4(void)
 {
@@ -229,8 +442,6 @@ void func_02021f08(struct Proc * param_1)
     return;
 }
 
-extern u32 data_020e3ca0;
-
 void func_02021f2c(struct Proc * param_1)
 {
     if (func_020020e0(data_020e3ca0))
@@ -243,28 +454,84 @@ void func_02021f2c(struct Proc * param_1)
     return;
 }
 
-// #func_02021f5c
-
-struct UnkStruct_02196f10
+void func_02021f5c(void)
 {
-    STRUCT_PAD(0x00, 0x04);
-    s8 unk_04;
-    u8 unk_05;
-    u8 unk_06;
-    u8 unk_07;
-    u8 unk_08;
-    u8 unk_09;
-    u8 unk_0a;
-    u8 unk_0b;
-    u32 unk_0c;
-    u8 unk_10;
-    u8 unk_11;
-    u8 unk_12;
-    STRUCT_PAD(0x13, 0x17);
-    u8 unk_17;
-};
+    int iVar8;
 
-extern struct UnkStruct_02196f10 * data_02196f10;
+    if (data_ov000_021e3324.unk_00 == NULL)
+    {
+        struct UnkStruct_021E3324_00 * puVar2 = (struct UnkStruct_021E3324_00 *)func_02011574(0x20);
+
+        if (puVar2 != NULL)
+        {
+            int iVar6;
+
+            puVar2->unk_00 = 0;
+            puVar2->unk_01 = 0;
+            puVar2->unk_04 = 1;
+            puVar2->unk_06 = 0;
+            puVar2->unk_08 = 0;
+            puVar2->unk_0c = 0;
+            puVar2->unk_02 = 0;
+            puVar2->unk_03 = 0;
+            puVar2->unk_14 = 0x1f;
+            puVar2->unk_15 = 0x1f;
+            puVar2->unk_16 = 0x1f;
+
+            for (iVar6 = 0; iVar6 < 4; iVar6++)
+            {
+                puVar2->unk_18[iVar6] = 0;
+            }
+
+            puVar2->unk_1c = 0;
+        }
+
+        data_ov000_021e3324.unk_00 = puVar2;
+    }
+
+    for (iVar8 = 0; iVar8 < 0x2e; iVar8++)
+    {
+        data_ov000_021e3528.unk_00[iVar8] = -1;
+    }
+
+    data_ov000_021e3528.unk_2e = 0;
+    data_ov000_021e3528.unk_2f = 0;
+
+    if ((data_02196f0c->unk_00->unk_0a != 0) && ((data_02196f0c->unk_0c & 1) != 0))
+    {
+        int n = func_02040c74(func_02040c98(0)) + func_02040c74(func_02040c98(2));
+
+        if (n < data_02196f0c->unk_00->unk_0a)
+        {
+            int uVar4 = func_02041928();
+
+            for (; n < data_02196f0c->unk_00->unk_0a; n++)
+            {
+                struct Unit ** ppUVar5 = func_02040c98(4);
+                struct Unit * pUVar9 = *ppUVar5;
+
+                if (pUVar9 == NULL)
+                {
+                    break;
+                }
+
+                func_0203bd34(pUVar9, 2, 1);
+                func_020421c4(pUVar9, uVar4);
+
+                data_02196f0c->unk_0c |= 0x20000;
+            }
+        }
+    }
+
+    if ((data_02196f0c->unk_0c & 0x10000) != 0)
+    {
+        data_ov000_021e3324.unk_00->unk_02 = data_02196f10->unk_09;
+        data_ov000_021e3324.unk_00->unk_0c = data_02196f10->unk_0c * 0x3c;
+        data_ov000_021e3324.unk_00->unk_06 = data_02196f10->unk_0a;
+    }
+
+    return;
+}
 
 void func_0202214c(u32 param_1)
 {
@@ -291,31 +558,12 @@ void func_0202214c(u32 param_1)
     return;
 }
 
-struct UnkStruct_021e3528
-{
-    STRUCT_PAD(0x00, 0x2F);
-    u8 unk_2f;
-};
-
-extern struct UnkStruct_021e3528 data_ov000_021e3528;
-
 void func_020221bc(void)
 {
     data_ov000_021e3528.unk_2f = 1;
     data_02196f20->unk_188 = data_02196f20->unk_184;
     return;
 }
-
-struct UnkStruct_021974fc
-{
-    u32 unk_00;
-    u32 unk_04;
-    u32 unk_08;
-    u32 unk_0c;
-    u8 unk_10;
-};
-
-extern struct UnkStruct_021974fc * data_021974fc;
 
 void func_020221e4(void)
 {
@@ -337,8 +585,6 @@ void func_020221e4(void)
 
     return;
 }
-
-extern struct Unit * gUnitList;
 
 void func_0202225c(void)
 {
@@ -373,14 +619,6 @@ void func_0202225c(void)
 
     return;
 }
-
-struct UnkStruct_02196f1c
-{
-    STRUCT_PAD(0x00, 0x09);
-    u8 unk_09;
-};
-
-extern struct UnkStruct_02196f1c * data_02196f1c;
 
 void func_02022324(void)
 {
@@ -434,31 +672,6 @@ void func_020223cc(u32 param_1)
 
     return;
 }
-
-struct Unknown_020efcc8_unk_a8_unk_00
-{
-    STRUCT_PAD(0x00, 0x28);
-    void (*unk_28)(void *, u32, u32, u32);
-    STRUCT_PAD(0x2C, 0x38);
-    void (*unk_38)(void *, u32);
-    void (*unk_3c)(void *, u32, u32, u32);
-    STRUCT_PAD(0x40, 0x6c);
-    void (*unk_6c)(void *, u32);
-};
-
-struct Unknown_020efcc8_unk_a8
-{
-    struct Unknown_020efcc8_unk_a8_unk_00 * unk_00;
-};
-
-struct Unknown_020efcc8
-{
-    STRUCT_PAD(0x00, 0xA4);
-    struct Unknown_020efcc8_unk_a8 * unk_a4;
-    struct Unknown_020efcc8_unk_a8 * unk_a8;
-};
-
-extern struct Unknown_020efcc8 * data_020efcc8;
 
 void func_02022414(void)
 {
@@ -532,7 +745,108 @@ void func_02022564(void)
     return;
 }
 
-// #func_02022588
+void func_02022588(void)
+{
+    struct Unit * pUVar8;
+    int iVar9;
+
+    if ((data_02196f0c->unk_0c & 0x00010020) != 0)
+    {
+        return;
+    }
+
+    func_02041458();
+
+    for (iVar9 = 0, pUVar8 = gUnitList; iVar9 < 0x8c; iVar9++, pUVar8++)
+    {
+        if (pUVar8->unk_4c->unk_08 == 4)
+        {
+            continue;
+        }
+
+        if (pUVar8->unk_4c->unk_08 == 5)
+        {
+            continue;
+        }
+
+        if (pUVar8->unk_4c->unk_08 != 3)
+        {
+            continue;
+        }
+
+        if ((pUVar8->state2 & 0x40000) != 0)
+        {
+            func_0203c19c(pUVar8);
+        }
+
+        pUVar8->state2 &= 0xfffffeff;
+
+        if ((pUVar8->state2 & 0x80) != 0)
+        {
+            int iVar3;
+            struct Item * pUVar10;
+
+            pUVar8->state2 &= 0xffffff7f;
+            pUVar8->unk_34 = func_02038108(data_02196f0c->unk_00);
+
+            for (iVar3 = 0, pUVar10 = pUVar8->items; iVar3 < 5; iVar3++, pUVar10++)
+            {
+                if (((pUVar10->id == 0) ? TRUE : FALSE) & 0xFF)
+                {
+                    continue;
+                }
+
+                pUVar10->unk_03 &= ~0x30;
+
+                func_02040f5c(pUVar10);
+                func_0203e02c(pUVar10);
+            }
+        }
+
+        if ((pUVar8->state2 & 0x80000) != 0)
+        {
+            func_0203bd34(pUVar8, 4, 1);
+        }
+    }
+
+    func_02040cb0(func_02040c98(2), 0, 1);
+
+    while (TRUE)
+    {
+        struct Unit ** ppUVar5;
+        struct Unit * pUVar7;
+        struct Unit * pUVar6;
+        ppUVar5 = func_02040c98(0);
+        pUVar6 = *ppUVar5;
+
+        if (pUVar6 == NULL)
+        {
+            break;
+        }
+
+        for (pUVar7 = pUVar6->unk_3c; pUVar7 != NULL; pUVar7 = pUVar7->unk_3c)
+        {
+            s32 a = pUVar7->unk_95;
+            s32 b = pUVar6->unk_95;
+
+            if (a < b)
+            {
+                pUVar6 = pUVar7;
+            }
+        }
+
+        func_0203bd34(pUVar6, 2, 1);
+    }
+
+    if ((data_02196f0c->unk_0c & 0x800) != 0)
+    {
+        return;
+    }
+
+    func_0202511c();
+
+    return;
+}
 
 void func_0202272c(u32 param_1)
 {
@@ -594,7 +908,7 @@ void func_0202284c(u32 param_1)
             break;
 
         case 3:
-            func_02022f28(0x23);
+            func_02022f28(35);
             break;
     }
 
@@ -617,8 +931,8 @@ void func_020228ac(u32 param_1)
     return;
 }
 
-// TODO: Figure out inline
-inline BOOL func_02022988(void)
+// TODO: Figure out the inline issues
+inline BOOL _func_02022988(void)
 {
     return data_02196f10->unk_04 == 1 ? TRUE : FALSE;
 }
@@ -634,7 +948,7 @@ void func_020228ec(u32 unused)
     data_02196f0c->unk_0c |= 0x4000;
     data_02196f0c->unk_0c |= 1;
 
-    if (func_02022988())
+    if (_func_02022988())
     {
         func_0202118c();
         return;
@@ -645,8 +959,10 @@ void func_020228ec(u32 unused)
     return;
 }
 
-// TODO: Figure out inline
-// #func_02022988
+/* inline */ BOOL func_02022988(void)
+{
+    return _func_02022988();
+}
 
 void func_020229a8(void)
 {
@@ -671,25 +987,98 @@ void func_020229a8(void)
     return;
 }
 
-// #func_020229f0
+inline BOOL _func_02022b10(void)
+{
+    return data_02196f10->unk_07 == 2 ? TRUE : FALSE;
+}
 
-// TODO: Inlines
-// #func_02022b10
-
-inline BOOL func_02022b30(void)
+inline BOOL _func_02022b30(void)
 {
     return data_02196f10->unk_04 == 3 ? TRUE : FALSE;
 }
 
-// #func_02022b50
+inline BOOL _func_02022b50(void)
+{
+    return data_02196f10->unk_07 == 0 ? TRUE : FALSE;
+}
 
-// #func_02022b70
+void func_020229f0(void)
+{
+    int uVar3;
+
+    if (_func_02022b10())
+    {
+        return;
+    }
+
+    if (_func_02022b30())
+    {
+        return;
+    }
+
+    if (_func_02022b50())
+    {
+        uVar3 = func_0202000c(1, data_02197254->pDBFE11Footer->unk_14 - 1);
+        data_02196f10->unk_11 = uVar3;
+        func_0204939c(data_02196f18->unk_00, uVar3);
+
+        if (data_02196f10->unk_0b != 0 && func_02021410(data_02196f10->unk_06)->unk_756 == 0x14)
+        {
+            uVar3 = func_0202000c(1, data_02197254->pDBFE11Footer->unk_14 - 2);
+
+            if (uVar3 >= data_02196f10->unk_11)
+            {
+                uVar3 += 1;
+            }
+
+            data_02196f10->unk_12 = uVar3;
+
+            func_0204939c(data_02196f18->unk_00, uVar3);
+        }
+    }
+
+    func_02025344();
+    func_0202454c(0x18, 0, 0);
+
+    return;
+}
+
+// TODO: Figure out inlines
+
+/* inline */ BOOL func_02022b10(void)
+{
+    return _func_02022b10();
+}
+
+/* inline */ BOOL func_02022b30(void)
+{
+    return _func_02022b30();
+}
+
+/* inline */ BOOL func_02022b50(void)
+{
+    return _func_02022b50();
+}
+
+void func_02022b70(struct Proc * proc)
+{
+    if (_func_02022b50())
+    {
+        func_0201d950(proc, 0x10, 1);
+    }
+    else
+    {
+        func_0201d814(proc, 0x10, 1);
+    }
+
+    return;
+}
 
 void func_02022bb0(u32 param_1)
 {
     u32 uVar1;
 
-    if (!func_02022b30())
+    if (!_func_02022b30())
     {
         if (data_02196f10->unk_08 != 0)
         {
@@ -705,7 +1094,7 @@ void func_02022bb0(u32 param_1)
         data_02196f10->unk_04 = uVar1;
 
         func_020228ec(param_1);
-        func_02022f28(0x1e);
+        func_02022f28(30);
 
         data_020efcc8->unk_a4->unk_00->unk_3c(data_020efcc8->unk_a4, 0x10, 0x48, 0);
     }
@@ -747,7 +1136,57 @@ void func_02022cdc(u32 param_1)
     return;
 }
 
-// #func_02022d00
+void func_02022d00(u32 param_1)
+{
+    struct Unit * pUnit;
+    int i;
+
+    if (data_02196f0c->unk_0c & 0x2000)
+    {
+        for (i = 0, pUnit = gUnitList; i < 0x8c; i++, pUnit++)
+        {
+            if (pUnit->unk_4c->unk_08 == 4)
+            {
+                continue;
+            }
+
+            if (pUnit->unk_4c->unk_08 == 5)
+            {
+                continue;
+            }
+
+            if (!(pUnit->state2 & 0x40000))
+            {
+                continue;
+            }
+
+            func_0203c19c(pUnit);
+        }
+
+        data_02196f0c->unk_0c &= 0xffffdfff;
+        func_02022f28(13);
+
+        return;
+    }
+
+    if (data_02196f0c->unk_0c & 0x10000)
+    {
+        data_02196f0c->unk_0c &= 0xfffeffff;
+        func_02022f28(54);
+
+        return;
+    }
+
+    if (!(data_02196f0c->unk_0c & 0x80))
+    {
+        func_ov006_0221bdbc(param_1);
+        return;
+    }
+
+    data_02196f0c->unk_0c &= 0xffffff7f;
+
+    return;
+}
 
 void func_02022db8(void)
 {
@@ -806,8 +1245,6 @@ void func_02022e54(void)
     return;
 }
 
-extern u32 data_020efcb4;
-
 BOOL func_02022eb8(void)
 {
     return data_020efcb4 == 2 ? TRUE : FALSE;
@@ -831,8 +1268,8 @@ void func_02022f10(void)
     return;
 }
 
-void func_02022f28(u32 param_1)
+void func_02022f28(u32 label)
 {
-    Proc_Goto(Proc_Find(data_020cec44), param_1, 0);
+    Proc_Goto(Proc_Find(data_020cec44), label, 0);
     return;
 }

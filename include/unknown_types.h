@@ -85,6 +85,18 @@ struct UnkStruct_021E3324_00
     /* 00 */ u8 unk_00;
     /* 01 */ u8 unk_01;
     /* 02 */ u8 unk_02;
+    /* 03 */ u8 unk_03;
+    /* 03 */ u16 unk_04;
+    /* 03 */ u16 unk_06;
+    /* 03 */ u32 unk_08;
+    /* 03 */ u32 unk_0c;
+    /* 03 */ u32 unk_10;
+    /* 03 */ u8 unk_14;
+    /* 03 */ u8 unk_15;
+    /* 03 */ u8 unk_16;
+    /* 03 */ u8 unk_17;
+    /* 03 */ u8 unk_18[4];
+    u8 unk_1c;
 };
 
 struct UnkStruct_021E3324
@@ -118,6 +130,16 @@ struct TerrainData
     s8 * unk_10;
 };
 
+struct DBFE11Footer
+{
+    u32 pidTableLength;
+    u32 jidTableLength;
+    u32 iidTableLength;
+    u32 unk_0c;
+    u32 unk_10;
+    u32 unk_14;
+};
+
 // FE11 Database, in RAM
 struct Unknown_02197254
 {
@@ -130,6 +152,8 @@ struct Unknown_02197254
     /* 20 */ struct TerrainData * pTerrain;
     STRUCT_PAD(0x24, 0x2C);
     /* 2C */ u8 * pWeaponLevel;
+    STRUCT_PAD(0x30, 0x48);
+    /* 48 */ struct DBFE11Footer * pDBFE11Footer;
 };
 
 #endif // UNKNOWN_TYPES_H
