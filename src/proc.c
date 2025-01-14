@@ -495,7 +495,16 @@ BOOL func_02019230(struct Proc * proc, u32 flags)
     return TRUE;
 }
 
-void func_020192d0(struct Proc * proc)
+struct UnkProc_020ce710
+{
+    /* 00 */ PROC_HEADER
+    /* 36 */ STRUCT_PAD(0x36, 0x38);
+    /* 38 */ void (*unk_38)(void *);
+    /* 3C */ STRUCT_PAD(0x3C, 0x58);
+    /* 58 */ s16 unk_58;
+};
+
+void func_020192d0(struct UnkProc_020ce710 * proc)
 {
     proc->unk_58--;
 
@@ -509,29 +518,29 @@ void func_020192d0(struct Proc * proc)
     return;
 }
 
-void func_020192f4(struct Proc * proc)
+void func_020192f4(struct UnkProc_020ce710 * proc)
 {
     proc->unk_38(proc);
     Proc_End(proc);
     return;
 }
 
-void func_02019310(void * func, struct Proc * parent)
+void func_02019310(void * func, ProcPtr parent)
 {
-    struct Proc * proc = Proc_Start(ProcScr_020ce6f0, parent);
+    struct UnkProc_020ce710 * proc = Proc_Start(ProcScr_020ce6f0, parent);
     proc->unk_38 = func;
     return;
 }
 
-void func_0201932c(struct Proc * proc)
+void func_0201932c(struct UnkProc_020ce710 * proc)
 {
     proc->unk_38(proc);
     return;
 }
 
-void func_0201933c(void * func, struct Proc * parent)
+void func_0201933c(void * func, ProcPtr parent)
 {
-    struct Proc * proc = Proc_Start(ProcScr_020ce710, parent);
+    struct UnkProc_020ce710 * proc = Proc_Start(ProcScr_020ce710, parent);
     proc->unk_38 = func;
     return;
 }

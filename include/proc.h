@@ -110,11 +110,7 @@ struct ProcFuncTable
 struct Proc
 {
     PROC_HEADER
-    STRUCT_PAD(0x36, 0x38);
-    /* 38 */ void (*unk_38)(void *);
-    STRUCT_PAD(0x3C, 0x58);
-    /* 58 */ s16 unk_58;
-    STRUCT_PAD(0x5A, 0x78);
+    STRUCT_PAD(0x36, 0x78);
 };
 
 #define PROC_TREE_9     ((ProcPtr) 9)
@@ -182,11 +178,11 @@ void func_02019164(struct Proc * proc);
 struct Proc * Proc_GetChild(struct Proc * proc);
 BOOL func_02019190(struct Proc * proc, u32 flags);
 BOOL func_02019230(struct Proc * proc, u32 flags);
-void func_020192d0(struct Proc * proc);
-void func_020192f4(struct Proc * proc);
-void func_02019310(void * func, struct Proc * parent);
-void func_0201932c(struct Proc * proc);
-void func_0201933c(void * func, struct Proc * parent);
+// void func_020192d0(ProcPtr proc);
+// void func_020192f4(ProcPtr proc);
+// void func_02019310(void * func, ProcPtr parent);
+// void func_0201932c(ProcPtr proc);
+// void func_0201933c(void * func, ProcPtr parent);
 BOOL ProcCmd_End(ProcPtr proc);
 BOOL func_02019368(ProcPtr proc);
 BOOL func_02019370(ProcPtr proc);
