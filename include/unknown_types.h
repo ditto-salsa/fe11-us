@@ -312,7 +312,7 @@ struct UnkStruct_02196f20
     s32 unk_184;
     u32 unk_188;
     u32 unk_18c;
-    u32 unk_190;
+    s32 unk_190;
     u32 unk_194;
     u8 unk_198;
     u8 unk_199;

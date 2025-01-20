@@ -50,7 +50,7 @@ extern void func_ov000_021c9f8c(struct ArenaProc_unk_5c *, u32);
 extern struct Unit * func_ov000_021ca0b8(struct ArenaProc_unk_5c *);
 extern void * func_ov000_021cf59c(struct ArenaProc *);
 extern void func_ov000_021d3b00(struct Unit *, struct ArenaProc *, s32, s32);
-extern void func_ov000_021ef134(struct ArenaProc *, struct ArenaProc_unk_5c *);
+extern void func_ov002_021ef134(struct ArenaProc *, struct ArenaProc_unk_5c *);
 
 struct ArenaEnemy * func_ov000_021d7c90(u32);
 void func_ov000_021d7d98(struct ArenaProc * proc);
@@ -481,6 +481,7 @@ void func_ov000_021d8014(struct ArenaProc * proc)
     return;
 }
 
+/* https://decomp.me/scratch/SlQqe */
 void func_ov000_021d8064(struct ArenaProc * proc)
 {
     s32 i;
@@ -533,6 +534,7 @@ u8 * func_ov000_021d80a4(struct ArenaProc * proc, struct Unit * unit, s32 arg_2)
     return func_ov000_021d7cd8(uVar1);
 }
 
+/* https://decomp.me/scratch/BcOxD */
 void func_ov000_021d8104(struct ArenaProc * proc)
 {
     s32 r0;
@@ -854,12 +856,13 @@ void func_ov000_021d87a4(struct ArenaProc * proc)
 
 void func_ov000_021d881c(struct ArenaProc * proc)
 {
-    func_ov000_021ef134(proc, proc->unk_5c);
+    func_ov002_021ef134(proc, proc->unk_5c);
     return;
 }
 
 // TODO: FIXME - need to resolve the inline issue with "func_0203c378"
 
+/* https://decomp.me/scratch/eLqmo */
 void func_ov000_021d882c(struct ArenaProc * proc, BOOL arg_1)
 {
     struct Unit * pUnit;
@@ -978,7 +981,7 @@ void * func_ov000_021d8bfc(struct ArenaProc * proc)
 void func_ov000_021d8c2c(struct ArenaProc * proc)
 {
     s32 iVar1 = proc->unk_54;
-    iVar1 += data_02196f20->unk_190;
+    iVar1 = (u32)data_02196f20->unk_190 + iVar1;
 
     if (iVar1 > 999999)
     {
@@ -999,7 +1002,7 @@ void func_ov000_021d8c2c(struct ArenaProc * proc)
 void func_ov000_021d8c90(struct ArenaProc * proc)
 {
     s32 iVar1 = -proc->unk_54;
-    iVar1 += data_02196f20->unk_190;
+    iVar1 = (u32)data_02196f20->unk_190 + iVar1;
 
     if (iVar1 > 999999)
     {
@@ -1124,6 +1127,7 @@ void func_ov000_021d8e28(struct ArenaProc * proc)
     return;
 }
 
+/* https://decomp.me/scratch/KlfJk */
 void func_ov000_021d8ed4(struct ArenaProc * proc)
 {
     u8 bVar1;
@@ -1170,6 +1174,7 @@ void func_ov000_021d9024(struct ArenaProc * proc)
     return;
 }
 
+/* https://decomp.me/scratch/LWUIx */
 void func_ov000_021d9078(struct ArenaProc * proc)
 {
     u32 uVar4;
