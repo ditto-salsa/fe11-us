@@ -5,5 +5,5 @@
     .bss        start:0x021e3320 end:0x021e3560 kind:bss align:32
 
 src/ov000/arena.c:
-    .text       start:0x021d7c90 end:0x021d95ec
+    .text       start:0x021d7c90 end:0x021d9924
     .data       start:0x021e2f38 end:0x021e32c4

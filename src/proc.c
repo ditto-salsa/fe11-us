@@ -49,7 +49,7 @@ void Proc_Init(void)
     return;
 }
 
-struct Proc * Proc_Find(struct ProcCmd * script)
+ProcPtr Proc_Find(struct ProcCmd * script)
 {
     struct Proc ** it;
 

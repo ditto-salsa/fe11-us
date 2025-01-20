@@ -1055,7 +1055,7 @@ void func_ov000_021d8ccc(struct ArenaProc * proc)
 
 void func_ov000_021d8d4c(s32 arg_0)
 {
-    struct ArenaProc * proc = (void *)Proc_Find(data_ov000_021e2f38);
+    struct ArenaProc * proc = Proc_Find(data_ov000_021e2f38);
     proc->unk_58 = arg_0;
     return;
 }
@@ -1504,4 +1504,108 @@ void func_ov000_021d95d8(struct ArenaProc * unused)
 {
     Proc_EndEach(data_ov000_021e2cb8);
     return;
+}
+
+extern struct ProcFuncTable data_ov000_021e2d68;
+
+extern struct Unit * gUnitList;
+
+struct Unknown_021e3344
+{
+    STRUCT_PAD(0x00, 0x32);
+    u8 unk_32;
+};
+
+extern struct Unknown_021e3344 * data_ov000_021e3344;
+
+struct Unknown_021e3320
+{
+    STRUCT_PAD(0x00, 0x08);
+    u32 unk_08[1];
+};
+
+extern u8 data_ov000_021e3320[];
+
+void func_ov000_021d95ec(ProcPtr parent)
+{
+    struct ArenaProc * proc;
+    struct Unit * iVar4;
+    struct Unit * uVar5;
+
+    if (data_ov000_021e3344->unk_32 == 0)
+    {
+        iVar4 = NULL;
+    }
+    else
+    {
+        iVar4 = gUnitList + data_ov000_021e3344->unk_32 - 1;
+    }
+
+    if (data_ov000_021e3320[iVar4->unk_4c->unk_08] == 1)
+    {
+        data_021974fc->unk_00 = iVar4;
+        func_0204b194(iVar4->xPos, iVar4->yPos);
+    }
+
+    proc = Proc_StartBlocking(data_ov000_021e2f38, parent);
+
+    if (proc == NULL)
+    {
+        return;
+    }
+
+    uVar5 = data_ov000_021e3328->unk_04->unk_00;
+
+    proc->proc_funcTable = &data_ov000_021e2d68;
+
+    func_02039eac("shop");
+
+    proc->unk_38 = uVar5;
+    proc->unk_60 = NULL;
+    proc->unk_5c = 0;
+    proc->unk_5b = 0;
+
+    func_ov000_021d8ed4(proc);
+
+    data_027e1268->unk_00->unk_12_67 = 1;
+
+    data_027e1268->unk_00->unk_51 = 0xe;
+    data_027e1268->unk_00->unk_52 = 2;
+
+    data_027e1268->unk_00->unk_12_0 = 0;
+    data_027e1268->unk_00->unk_12_1 = 0;
+    data_027e1268->unk_00->unk_12_2 = 1;
+    data_027e1268->unk_00->unk_12_3 = 0;
+    data_027e1268->unk_00->unk_12_4 = 0;
+    data_027e1268->unk_00->unk_12_5 = 0;
+
+    data_027e1268->unk_00->unk_12_8 = 1;
+    data_027e1268->unk_00->unk_12_9 = 0;
+    data_027e1268->unk_00->unk_12_A = 0;
+    data_027e1268->unk_00->unk_12_B = 0;
+    data_027e1268->unk_00->unk_12_C = 0;
+    data_027e1268->unk_00->unk_12_D = 1;
+
+    func_ov000_021a5810(data_ov000_021e3328->unk_0c, 1);
+    func_ov000_021d9078(proc);
+
+    return;
+}
+
+void func_ov000_021d98ec(void)
+{
+    func_ov000_021d8bbc(Proc_Find(data_ov000_021e2f38));
+    return;
+}
+
+u32 func_ov000_021d9904(void)
+{
+    struct ArenaProc * proc = Proc_Find(data_ov000_021e2f38);
+
+    if (proc != NULL)
+    {
+        return proc->unk_5b;
+    }
+
+    return 0;
 }
