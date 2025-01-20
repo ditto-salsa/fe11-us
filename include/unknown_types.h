@@ -4,6 +4,38 @@
 #include "global.h"
 #include "types.h"
 
+struct Unknown_027e1268_unk_00 {
+    STRUCT_PAD(0x00, 0x12);
+    u16 unk_12_0 : 1;
+    u16 unk_12_1 : 1;
+    u16 unk_12_2 : 1;
+    u16 unk_12_3 : 1;
+    u16 unk_12_4 : 1;
+    u16 unk_12_5 : 1;
+    u16 unk_12_67 : 2;
+
+    u16 unk_12_8 : 1;
+    u16 unk_12_9 : 1;
+    u16 unk_12_A : 1;
+    u16 unk_12_B : 1;
+    u16 unk_12_C : 1;
+    u16 unk_12_D : 1;
+    STRUCT_PAD(0x14, 0x51);
+    u8 unk_51;
+    u8 unk_52;
+};
+
+struct Unknown_027e1268
+{
+    struct Unknown_027e1268_unk_00 * volatile unk_00;
+    STRUCT_PAD(0x04, 0x0C);
+    u32 unk_0c[1];
+    STRUCT_PAD(0x10, 0x20);
+    u32 unk_20[1];
+    STRUCT_PAD(0x24, 0x3E);
+    u8 unk_3e;
+};
+
 struct UnkStruct_Func_2000C7C {
     STRUCT_PAD(0x0000, 0x0854);
 
@@ -47,8 +79,18 @@ struct UnkStruct_02197254 {
 	/* 00 */ struct UnkStruct_02197254_20 * unk_20;
 };
 
-struct UnkStruct_021E3328_00_04 {
+struct UnkStruct_021E3328_00_04_04
+{
+    STRUCT_PAD(0x00, 0x5f);
+    s8 unk_5f;
+    s8 unk_60;
+    u8 unk_61;
+};
+
+struct UnkStruct_021E3328_00_04
+{
     /* 00 */ struct Unit * unk_00;
+    struct UnkStruct_021E3328_00_04_04 * unk_04;
 };
 
 struct UnkStruct_021E3328_10
@@ -62,8 +104,7 @@ struct UnkStruct_021E3328 {
     /* 00 */ int unk_00;
     /* 04 */ struct UnkStruct_021E3328_00_04 * unk_04;
     /* 08 */ struct UnkStruct_Func_2000C7C * unk_08;
-
-    STRUCT_PAD(0x0C, 0x10);
+    u32 unk_0c;
     struct UnkStruct_021E3328_10 * unk_10;
     STRUCT_PAD(0x14, 0x20);
 
@@ -193,6 +234,8 @@ struct Unknown_020efcc8
     STRUCT_PAD(0x00, 0xA4);
     struct Unknown_020efcc8_unk_a8 * unk_a4;
     struct Unknown_020efcc8_unk_a8 * unk_a8;
+    void * unk_ac;
+    struct Unknown_020efcc8_unk_a8 * unk_b0;
 };
 
 struct UnkStruct_Func_02021410_Ret
@@ -269,7 +312,7 @@ struct UnkStruct_02196f20
     s32 unk_184;
     u32 unk_188;
     u32 unk_18c;
-    u32 unk_190;
+    s32 unk_190;
     u32 unk_194;
     u8 unk_198;
     u8 unk_199;
@@ -280,7 +323,56 @@ struct UnkStruct_02196f20
 
 struct UnkStruct_02196f24
 {
-    STRUCT_PAD(0x00, 0x10);
+    STRUCT_PAD(0x00, 0x07);
+    u8 unk_07;
+    STRUCT_PAD(0x08, 0x10);
+};
+
+struct UnkStruct_020ca61c
+{
+    u16 unk_00;
+};
+
+struct UnkStruct_Func_020302e0_Arg
+{
+    void * unk_00;
+    STRUCT_PAD(0x04, 0x5C);
+};
+
+struct VmMap_Common
+{
+    STRUCT_PAD(0x00, 0x04);
+    u16 unk_04;
+    u8 unk_06;
+    u8 unk_07;
+};
+
+// Overlay 000:
+
+struct UnkStruct_021e3340
+{
+    STRUCT_PAD(0x00, 0x06);
+    u8 unk_06;
+};
+
+struct UnkStruct_021e3508
+{
+    void * unk_00;
+    u32 unk_04;
+    void * unk_08;
+    u32 unk_0c;
+    void * unk_10;
+    void * unk_14;
+    u32 unk_18;
+    u32 unk_1c;
+};
+
+// Overlay 002:
+
+struct UnkStruct_021faf8c
+{
+    STRUCT_PAD(0x00, 0x08);
+    u8 unk_08;
 };
 
 #endif // UNKNOWN_TYPES_H

@@ -53,6 +53,7 @@ struct ProcCmd
 };
 
 #define PROC_END                          { PROC_CMD_END, 0, 0 }
+#define PROC_02                           { PROC_CMD_02, 0, 0 }
 #define PROC_BLOCK                        { PROC_CMD_BLOCK, 0, 0 }
 #define PROC_06(arg, func)                { PROC_CMD_06, (arg), (func) }
 #define PROC_CALL(func)                   { PROC_CMD_CALL, 0, (func) }
@@ -148,7 +149,7 @@ void Proc_Break(ProcPtr proc, s32 arg_1);
 void func_01ffc3f4(ProcPtr proc);
 
 void Proc_Init(void);
-struct Proc * Proc_Find(struct ProcCmd * script);
+ProcPtr Proc_Find(struct ProcCmd * script);
 struct Proc * func_02018d40(struct ProcCmd * script);
 struct Proc * func_02018d9c(struct ProcCmd * script, struct Proc * proc);
 struct Proc * func_02018df4(struct ProcCmd * script, struct Proc * proc);
