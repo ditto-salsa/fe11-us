@@ -5,7 +5,7 @@
 
 #include "proc.h"
 
-extern void * data_027e1268;
+extern struct Unknown_027e1268 * data_027e1268;
 extern u8 data_027e1b9c[];
 
 
@@ -26,5 +26,30 @@ extern struct Unknown_02197254 * data_02197254; // FE11 database
 extern struct UnkStruct_021E3324 data_ov000_021e3324;
 extern struct UnkStruct_021E3328 * data_ov000_021e3328;
 extern int data_027e00e0;
+
+extern struct UnkStruct_020ca61c * data_020ca61c;
+extern struct Unknown_020efcc8 * data_020efcc8;
+
+extern struct UnkStruct_02196f20 * data_02196f20;
+extern struct UnkStruct_02196f24 * data_02196f24;
+extern u16 data_021970c4[];
+extern struct UnkStruct_021974fc * data_021974fc;
+
+// Overlay 000:
+
+extern u32 data_ov000_021e2ca0[];
+extern u32 data_ov000_021e2cac[];
+
+extern void * data_ov000_021dcebc[];
+extern void * data_ov000_021e2d80[];
+extern void * data_ov000_021e2e60[];
+
+extern struct UnkStruct_021e3340 * data_ov000_021e3340;
+
+extern struct UnkStruct_021e3508 data_ov000_021e3508[];
+
+// Overlay 002:
+
+extern struct UnkStruct_021faf8c data_ov002_021faf8c;
 
 #endif // UNKNOWN_DATA_H

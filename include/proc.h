@@ -53,6 +53,7 @@ struct ProcCmd
 };
 
 #define PROC_END                          { PROC_CMD_END, 0, 0 }
+#define PROC_02                           { PROC_CMD_02, 0, 0 }
 #define PROC_BLOCK                        { PROC_CMD_BLOCK, 0, 0 }
 #define PROC_06(arg, func)                { PROC_CMD_06, (arg), (func) }
 #define PROC_CALL(func)                   { PROC_CMD_CALL, 0, (func) }

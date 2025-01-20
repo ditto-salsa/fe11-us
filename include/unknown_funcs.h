@@ -41,6 +41,7 @@ extern void func_02012bbc(void);
 extern void func_02012680(void *);
 extern void func_020146a0(void);
 extern void func_02015f64(void);
+extern BOOL func_02016250(s32);
 extern void func_02018f54(struct Proc *, void *);
 
 extern void func_0201d728(struct Proc * proc, u16 data, u32 flag);
@@ -59,7 +60,7 @@ extern void func_0201da98(struct Proc * proc, u16 data, u32 flag);
 extern BOOL func_0201f690(void);
 extern BOOL func_0201f760(s32);
 extern s32 func_0201ffc0(void);
-extern void func_0201ffd0(void);
+extern u32 func_0201ffd0(void);
 
 extern s32 RollRN(s32, s32);
 
@@ -87,25 +88,41 @@ extern void func_0202511c(void);
 extern void func_02025344(void);
 extern void func_02028c68(void);
 
+extern s32 func_020295ec(u16 *, char *, u32, u32, u32, u32, u32, u32, u32, u32);
+extern void func_02029850(u16 *, s32, u32, u32, u32, u32, u32, u32, u32);
+
+extern void func_020302e0(void *);
+extern void func_020303bc(void *, char *, u32 *, ProcPtr, s32, s32);
+
 extern void func_020355e4(void);
 
 extern void func_02037a04(struct Unknown_02197254 *);
 extern void func_020377c8(void);
 extern BOOL func_020377e8(char *);
+extern void * func_02037800(char *);
 extern struct JobData * func_02037c5c(const char *);
+extern s32 func_02037fd8(struct JobData *);
 
 extern s32 func_02038108(struct UnkStruct_02196f0c_00 *);
+extern s32 func_02038348(struct ItemData *);
 
 extern s32 func_02039088(struct Unit * unit, int b, int c, int d, int e, int f, int g);
-extern const char * func_02039e10(const char *);
+extern char * func_02039e10(char *);
 extern BOOL func_02039e7c(char *);
-extern void func_02039eac(const char *);
+extern void func_02039eac(char *);
 extern void func_02039f00(char *, s32);
+extern void func_02039f40(char *, s32);
+
+extern void func_0203a728(struct Unit *, struct PersonData *, struct JobData *, s32);
+extern void func_0203a94c(struct Unit *);
 
 extern void func_0203bd34(struct Unit *, s32, s32);
 extern void func_0203c19c(struct Unit *);
 extern s32 GetUnitMaxHp(struct Unit * unit);
 extern s32 GetUnitMag(struct Unit * unit, struct ItemData * item, BOOL unused);
+extern s32 func_0203c480(struct Unit * unit, struct ItemData * item, BOOL unused);
+extern s32 func_0203c610(struct Unit * unit, struct ItemData * item, BOOL unused);
+extern s32 func_0203c660(struct Unit * unit, struct ItemData * item, BOOL unused);
 extern s32 func_0203c6c0(struct Unit * unit, u32 arg_1, struct ItemData * item, s32 arg_3);
 extern s32 func_0203c77c(struct Unit * unit);
 extern s32 func_0203c7ac(struct Unit * unit, u32 arg_1);
@@ -114,7 +131,12 @@ extern s32 CheckUnitAttribute(struct Unit * unit, int attribute);
 extern BOOL func_0203c834(struct Unit * unit, struct ItemData * item, s32 arg_2);
 extern s32 GetUnitEquippedWeaponSlot(struct Unit * unit);
 extern struct ItemData * GetItemData(struct Item *);
+extern s32 func_0203dbd4(struct Unit *, s32, s32);
+extern void func_0203dd48(struct Unit *);
+extern void func_0203de10(struct Unit *);
 extern void func_0203e02c(struct Item *);
+extern void func_0203e008(struct Item *, u8);
+extern void func_0203e040(struct Item *, struct Item *);
 extern void func_0203fafc(void);
 extern void func_0203fb68(void);
 extern void func_0203fc88(void);
@@ -146,7 +168,14 @@ extern void func_02049a2c(struct UnkStruct_02196f0c_04 *, const char *, s32);
 extern void func_0204a9e0(s32);
 extern void func_0204abe4(void);
 extern void func_0204ac00(void);
+extern void func_0204ac18(ProcPtr);
+extern void func_0204aca8(ProcPtr);
 extern void func_0204ad38(s32, s32, s32);
+extern void func_0204b1e0(ProcPtr);
+extern void func_0204b39c(ProcPtr);
+extern void func_0204b3b8(ProcPtr);
+extern void func_0204b3d4(ProcPtr);
+extern void func_0204b40c(ProcPtr);
 extern void func_0204b790(void);
 extern void func_0204bbb4(s32);
 extern void func_0204e1a4(struct Unit *, s32, s32);
@@ -165,12 +194,19 @@ extern void func_020a374c(void *, void (*)(void *));
 
 extern void func_020a5824(void * buf, int a, int b);
 
+extern void func_020a8f40(char *);
+
 extern void func_020ad244(int a);
 
 // Overlay 000:
 
+extern void func_ov000_021a43e8(void);
+extern void func_ov000_021a4694(void);
 extern BOOL func_ov000_021a47e4(void);
 extern BOOL func_ov000_021a4e84(s32, s32, s32, s32);
+extern BOOL func_ov000_021a5650(u32, u32);
+extern void func_ov000_021a57e4(u32, u32);
+extern void func_ov000_021a5810(u32, u32);
 
 // Overlay 002:
 
