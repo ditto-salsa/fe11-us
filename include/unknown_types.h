@@ -100,13 +100,19 @@ struct UnkStruct_021E3328_10
     u8 unk_09;
 };
 
+struct UnkStruct_021E3328_14
+{
+    void * unk_00;
+};
+
 struct UnkStruct_021E3328 {
     /* 00 */ int unk_00;
     /* 04 */ struct UnkStruct_021E3328_00_04 * unk_04;
     /* 08 */ struct UnkStruct_Func_2000C7C * unk_08;
     u32 unk_0c;
     struct UnkStruct_021E3328_10 * unk_10;
-    STRUCT_PAD(0x14, 0x20);
+    struct UnkStruct_021E3328_14 * unk_14;
+    STRUCT_PAD(0x18, 0x20);
 
     /* 20 */ u16 unk_20;
     /* 22 */ u16 unk_22;
@@ -127,17 +133,17 @@ struct UnkStruct_021E3324_00
     /* 01 */ u8 unk_01;
     /* 02 */ u8 unk_02;
     /* 03 */ u8 unk_03;
-    /* 03 */ u16 unk_04;
-    /* 03 */ u16 unk_06;
-    /* 03 */ u32 unk_08;
-    /* 03 */ u32 unk_0c;
-    /* 03 */ u32 unk_10;
-    /* 03 */ u8 unk_14;
-    /* 03 */ u8 unk_15;
-    /* 03 */ u8 unk_16;
-    /* 03 */ u8 unk_17;
-    /* 03 */ u8 unk_18[4];
-    u8 unk_1c;
+    /* 04 */ u16 unk_04;
+    /* 06 */ u16 unk_06;
+    /* 08 */ u32 unk_08;
+    /* 0C */ u32 unk_0c;
+    /* 10 */ u32 unk_10;
+    /* 14 */ u8 unk_14;
+    /* 15 */ u8 unk_15;
+    /* 16 */ u8 unk_16;
+    /* 17 */ u8 unk_17;
+    /* 18 */ u8 unk_18[4];
+    /* 1C */ u8 unk_1c;
 };
 
 struct UnkStruct_021E3324
