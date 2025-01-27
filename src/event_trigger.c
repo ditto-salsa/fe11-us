@@ -967,6 +967,107 @@ BOOL func_02048278(u32 arg_0, u32 arg_1)
     return CheckEventTrigger(4, CheckAreaEventTrigger, &input);
 }
 
+BOOL CheckTalkEventTrigger(struct EventProc_unk_38 * arg_0, struct EventFuncInput * arg_1)
+{
+    void * uVar2;
+    void * uVar3;
+
+    if (!CheckEventFlagMaybe(GetEventStr(arg_0, arg_0->args[3])))
+    {
+        return FALSE;
+    }
+
+    uVar2 = GetEventStr(arg_0, arg_0->args[0]);
+    uVar3 = GetEventStr(arg_0, arg_0->args[1]);
+
+    if ((func_02047aec(uVar2, (char *)arg_1->unk_00) != 0) && (func_02047aec(uVar3, (char *)arg_1->unk_04) != 0))
+    {
+        return TRUE;
+    }
+
+    if (arg_0->args[2] != 0)
+    {
+        if (((func_02047aec(uVar3, (char *)arg_1->unk_00) != 0)) && (func_02047aec(uVar2, (char *)arg_1->unk_04) != 0))
+        {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+BOOL TryStartTalkEvent(ProcPtr parent, u32 arg_1, u32 arg_2, u32 arg_3)
+{
+    struct EventProc * proc;
+    struct EventFuncInput input;
+
+    input.unk_00 = arg_1;
+    input.unk_04 = arg_2;
+
+    if (CheckEventTrigger(8, CheckTalkEventTrigger, &input) == 0)
+    {
+        return FALSE;
+    }
+
+    proc = Proc_StartBlocking(ProcScr_EventCaller, parent);
+
+    if (proc != NULL)
+    {
+        proc->proc_funcTable = &ProcFuncTable_EventCaller;
+        proc->unk_38 = NULL;
+        proc->unk_3c = 8;
+        proc->unk_40 = CheckTalkEventTrigger;
+        func_020a5780(&input, &proc->unk_44, 0x20);
+        if (arg_3 != 0)
+        {
+            proc->unk_64 = data_021974f0;
+            data_021974f0 = arg_3;
+            proc->unk_68 = 1;
+        }
+        else
+        {
+            proc->unk_64 = 0;
+            proc->unk_68 = 0;
+        }
+        proc->unk_38 = func_02035b98(proc->unk_38);
+
+        for (; proc->unk_38 != NULL; proc->unk_38 = func_02035b98(proc->unk_38))
+        {
+            if (proc->unk_38->type != proc->unk_3c)
+            {
+                continue;
+            }
+
+            if (!proc->unk_40(proc->unk_38, (struct EventFuncInput *)&proc->unk_44))
+            {
+                continue;
+            }
+
+            if (!func_020475cc(proc->unk_38, proc))
+            {
+                continue;
+            }
+
+            goto _exit;
+        }
+
+        Proc_End(proc);
+    }
+
+_exit:
+    return TRUE;
+}
+
+BOOL func_02048480(u32 arg_0, u32 arg_1)
+{
+    struct EventFuncInput input;
+
+    input.unk_00 = arg_0;
+    input.unk_04 = arg_1;
+
+    return CheckEventTrigger(8, CheckTalkEventTrigger, &input) & 0xFF;
+}
+
 void func_020484b0(void)
 {
     char * pcVar2;
@@ -1143,107 +1244,6 @@ BOOL func_020486f4(struct EventProc_unk_38 * arg_0, struct EventFuncInput * arg_
     }
 
     return FALSE;
-}
-
-BOOL CheckTalkEventTrigger(struct EventProc_unk_38 * arg_0, struct EventFuncInput * arg_1)
-{
-    void * uVar2;
-    void * uVar3;
-
-    if (!CheckEventFlagMaybe(GetEventStr(arg_0, arg_0->args[3])))
-    {
-        return FALSE;
-    }
-
-    uVar2 = GetEventStr(arg_0, arg_0->args[0]);
-    uVar3 = GetEventStr(arg_0, arg_0->args[1]);
-
-    if ((func_02047aec(uVar2, (char *)arg_1->unk_00) != 0) && (func_02047aec(uVar3, (char *)arg_1->unk_04) != 0))
-    {
-        return TRUE;
-    }
-
-    if (arg_0->args[2] != 0)
-    {
-        if (((func_02047aec(uVar3, (char *)arg_1->unk_00) != 0)) && (func_02047aec(uVar2, (char *)arg_1->unk_04) != 0))
-        {
-            return TRUE;
-        }
-    }
-
-    return FALSE;
-}
-
-BOOL TryStartTalkEvent(ProcPtr parent, u32 arg_1, u32 arg_2, u32 arg_3)
-{
-    struct EventProc * proc;
-    struct EventFuncInput input;
-
-    input.unk_00 = arg_1;
-    input.unk_04 = arg_2;
-
-    if (CheckEventTrigger(8, CheckTalkEventTrigger, &input) == 0)
-    {
-        return FALSE;
-    }
-
-    proc = Proc_StartBlocking(ProcScr_EventCaller, parent);
-
-    if (proc != NULL)
-    {
-        proc->proc_funcTable = &ProcFuncTable_EventCaller;
-        proc->unk_38 = NULL;
-        proc->unk_3c = 8;
-        proc->unk_40 = CheckTalkEventTrigger;
-        func_020a5780(&input, &proc->unk_44, 0x20);
-        if (arg_3 != 0)
-        {
-            proc->unk_64 = data_021974f0;
-            data_021974f0 = arg_3;
-            proc->unk_68 = 1;
-        }
-        else
-        {
-            proc->unk_64 = 0;
-            proc->unk_68 = 0;
-        }
-        proc->unk_38 = func_02035b98(proc->unk_38);
-
-        for (; proc->unk_38 != NULL; proc->unk_38 = func_02035b98(proc->unk_38))
-        {
-            if (proc->unk_38->type != proc->unk_3c)
-            {
-                continue;
-            }
-
-            if (!proc->unk_40(proc->unk_38, (struct EventFuncInput *)&proc->unk_44))
-            {
-                continue;
-            }
-
-            if (!func_020475cc(proc->unk_38, proc))
-            {
-                continue;
-            }
-
-            goto _exit;
-        }
-
-        Proc_End(proc);
-    }
-
-_exit:
-    return TRUE;
-}
-
-BOOL func_02048480(u32 arg_0, u32 arg_1)
-{
-    struct EventFuncInput input;
-
-    input.unk_00 = arg_0;
-    input.unk_04 = arg_1;
-
-    return CheckEventTrigger(8, CheckTalkEventTrigger, &input) & 0xFF;
 }
 
 BOOL func_020487a4(ProcPtr parent, u32 arg_1, u32 arg_2, u32 arg_3)
