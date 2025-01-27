@@ -755,9 +755,9 @@ void func_02021f5c(void)
         {
             int j;
 
-            puVar2->unk_00 = 0;
+            puVar2->phase = 0;
             puVar2->unk_01 = 0;
-            puVar2->unk_04 = 1;
+            puVar2->turn = 1;
             puVar2->unk_06 = 0;
             puVar2->unk_08 = 0;
             puVar2->unk_0c = 0;

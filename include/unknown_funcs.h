@@ -36,6 +36,7 @@ extern void func_0200f28c(u32 arg_0);
 extern BOOL IsOverlayLoaded(u32 overlayId);
 
 extern void * func_02011574(s32);
+extern void func_020115bc(void *);
 extern void func_020115a4(void *);
 extern void func_02012bbc(void);
 extern void func_02012680(void *);
@@ -43,6 +44,9 @@ extern void func_020146a0(void);
 extern void func_02015f64(void);
 extern BOOL func_02016250(s32);
 extern void func_02018f54(struct Proc *, void *);
+
+extern s32 func_0201bce4(void);
+extern s32 func_0201bcf4(void);
 
 extern void func_0201d728(struct Proc * proc, u16 data, u32 flag);
 extern void func_0201d778(struct Proc * proc, u16 data, u32 flag);
@@ -95,12 +99,20 @@ extern void func_020302e0(void *);
 extern void func_020303bc(void *, char *, u32 *, ProcPtr, s32, s32);
 
 extern void func_020355e4(void);
+extern s32 func_020357e8(void);
+extern void * func_02035b98(void *);
+extern char * GetEventStr(void *, u16);
+extern void func_02035c7c(void *, s32);
+extern void func_02035dc4(void *, void *);
+extern void func_02035e5c(void *, void *);
+extern void func_02035f20(void *);
 
-extern void func_02037a04(struct Unknown_02197254 *);
 extern void func_020377c8(void);
 extern BOOL func_020377e8(char *);
 extern void * func_02037800(char *);
-extern struct JobData * func_02037c5c(const char *);
+extern void func_02037a04(struct Unknown_02197254 *);
+extern struct PersonData * GetPersonByPidStr(char *);
+extern struct JobData * GetJobByJidStr(char *);
 extern s32 func_02037fd8(struct JobData *);
 
 extern s32 func_02038108(struct UnkStruct_02196f0c_00 *);
@@ -156,11 +168,15 @@ extern void func_020423fc(void);
 extern void func_02042420(const char *);
 extern void func_02042460(char *);
 extern void func_020424ac(void);
-extern void func_020424b8(const char *);
-extern void func_02047708(char *, void *);
+extern BOOL func_020424b8(char *);
+extern void RegisterEventFunctions(void);
+extern BOOL func_02047708(char *, void *);
 extern void func_020476a0(void);
 extern void func_020484b0(void);
 extern void func_020485d0(void);
+extern void func_02049024(void *, ProcPtr);
+extern s32 func_020492f4(void *, void *);
+extern BOOL func_02049350(void *, s32);
 extern void func_0204939c(s32, s32);
 extern void func_020494a0(struct UnkStruct_02196f0c_04 *, const char *, s32);
 extern void func_02049528(struct UnkStruct_02196f0c_04 *);
@@ -192,9 +208,12 @@ extern void func_020a341c(void *);
 extern void func_020a36ac(void (*)(void *, void *));
 extern void func_020a374c(void *, void (*)(void *));
 
+extern void func_020a5780(void *, void *, s32);
 extern void func_020a5824(void * buf, int a, int b);
 
 extern void func_020a8f40(char *);
+
+extern void * func_020c3bfc(s32, s32, s32, s32, s32);
 
 extern void func_020ad244(int a);
 
@@ -204,9 +223,16 @@ extern void func_ov000_021a43e8(void);
 extern void func_ov000_021a4694(void);
 extern BOOL func_ov000_021a47e4(void);
 extern BOOL func_ov000_021a4e84(s32, s32, s32, s32);
+extern void func_ov000_021a516c(s32);
 extern BOOL func_ov000_021a5650(u32, u32);
 extern void func_ov000_021a57e4(u32, u32);
 extern void func_ov000_021a5810(u32, u32);
+extern void func_ov000_021a81d4(void);
+extern BOOL func_ov000_021a8248(void);
+
+extern void func_ov000_021bb318(void *);
+
+extern void func_ov000_021db624(void);
 
 // Overlay 002:
 

@@ -114,6 +114,11 @@ struct Proc
     STRUCT_PAD(0x36, 0x78);
 };
 
+enum
+{
+    PROC_MARK_A = 0xA,
+};
+
 #define PROC_TREE_9     ((ProcPtr) 9)
 
 struct Unknown02190ce0
