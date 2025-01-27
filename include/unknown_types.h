@@ -129,11 +129,11 @@ struct UnkStruct_021E3328 {
 
 struct UnkStruct_021E3324_00
 {
-    /* 00 */ u8 unk_00;
+    /* 00 */ u8 phase;
     /* 01 */ u8 unk_01;
     /* 02 */ u8 unk_02;
     /* 03 */ u8 unk_03;
-    /* 04 */ u16 unk_04;
+    /* 04 */ u16 turn;
     /* 06 */ u16 unk_06;
     /* 08 */ u32 unk_08;
     /* 0C */ u32 unk_0c;

@@ -250,7 +250,7 @@ BOOL func_02038384(struct ItemData * item, struct Unit * unit)
 
             if (item->attributes & 0x400000000)
             {
-                if (job != func_02037c5c("JID_PEGASUSKNIGHT_F"))
+                if (job != GetJobByJidStr("JID_PEGASUSKNIGHT_F"))
                 {
                     return FALSE;
                 }
@@ -866,16 +866,16 @@ struct JobData * GetJInfoFromItem(struct ItemData * item, struct Unit * unit)
     switch (item->unk_11)
     {
         case 11:
-            return func_02037c5c("JID_FIREDRAGON\0");
+            return GetJobByJidStr("JID_FIREDRAGON\0");
 
         case 12:
-            return func_02037c5c("JID_EARTHDRAGON");
+            return GetJobByJidStr("JID_EARTHDRAGON");
 
         case 13:
-            return func_02037c5c("JID_MAGICDRAGON");
+            return GetJobByJidStr("JID_MAGICDRAGON");
 
         case 14:
-            return func_02037c5c("JID_GODDESSDRAGON_F");
+            return GetJobByJidStr("JID_GODDESSDRAGON_F");
 
         default:
             return unit->pJobData;
