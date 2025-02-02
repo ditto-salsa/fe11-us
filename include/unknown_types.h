@@ -79,9 +79,24 @@ struct UnkStruct_02197254 {
 	/* 00 */ struct UnkStruct_02197254_20 * unk_20;
 };
 
+struct UnkStruct_021E3328_00_14
+{
+    STRUCT_PAD(0x00, 0x27);
+    u8 unk_27;
+};
+
+struct UnkStruct_021E3328_00
+{
+    STRUCT_PAD(0x00, 0x14);
+    struct UnkStruct_021E3328_00_14 * unk_14;
+    u8 unk_18;
+};
+
 struct UnkStruct_021E3328_00_04_04
 {
-    STRUCT_PAD(0x00, 0x5f);
+    STRUCT_PAD(0x00, 0x54);
+    u16 unk_54;
+    STRUCT_PAD(0x56, 0x5f);
     s8 unk_5f;
     s8 unk_60;
     u8 unk_61;
@@ -91,25 +106,63 @@ struct UnkStruct_021E3328_00_04
 {
     /* 00 */ struct Unit * unk_00;
     struct UnkStruct_021E3328_00_04_04 * unk_04;
+    u32 unk_08;
+};
+
+struct UnkStruct_021E3328_0c
+{
+// +0x10 contains last touch coords
+// +0x14 contains current touch coords
+// +0x18 contains key handlers
+    STRUCT_PAD(0x00, 0x1C);
+    u16 unk_1c;
+    STRUCT_PAD(0x1E, 0x20);
+    u8 unk_20;
+    u8 unk_21_0 : 2;
+    u8 unk_21_2 : 1;
+    u8 unk_21_3 : 1;
+    u8 unk_21_4 : 2;
+    u8 unk_21_6 : 1;
+    u8 unk_21_7 : 1;
+    u8 unk_21_8 : 1;
 };
 
 struct UnkStruct_021E3328_10
 {
-    STRUCT_PAD(0x00, 0x08);
-    u8 unk_08;
-    u8 unk_09;
+    u8 unk_00[2];
+    u8 unk_02[2];
+    STRUCT_PAD(0x04, 0x08); // shorts, cursor real pos?
+    u8 unk_08; // map x?
+    u8 unk_09; // map y?
+    u8 unk_0a;
+    u8 unk_0b;
+};
+
+struct UnkStruct_021E3328_14_04
+{
+    STRUCT_PAD(0x00, 0x10);
+    u8 unk_10;
+    STRUCT_PAD(0x11, 0x14);
+    u8 unk_14;
+    u8 unk_15;
+    u8 unk_16;
+    STRUCT_PAD(0x17, 0x19);
+    u8 unk_19;
 };
 
 struct UnkStruct_021E3328_14
 {
     void * unk_00;
+    struct UnkStruct_021E3328_14_04 * unk_04;
+    STRUCT_PAD(0x08, 0x27);
+    u8 unk_27;
 };
 
 struct UnkStruct_021E3328 {
-    /* 00 */ int unk_00;
+    /* 00 */ struct UnkStruct_021E3328_00 * unk_00;
     /* 04 */ struct UnkStruct_021E3328_00_04 * unk_04;
     /* 08 */ struct UnkStruct_Func_2000C7C * unk_08;
-    u32 unk_0c;
+    struct UnkStruct_021E3328_0c * unk_0c;
     struct UnkStruct_021E3328_10 * unk_10;
     struct UnkStruct_021E3328_14 * unk_14;
     STRUCT_PAD(0x18, 0x20);
@@ -124,7 +177,11 @@ struct UnkStruct_021E3328 {
 
 	STRUCT_PAD(0xA8, 0x828);
 
-	/* 0828 */ u8 * unk_0828; // idk
+	/* 0828 */ u8 * unk_828; // idk
+    u8 * unk_82c;
+    STRUCT_PAD(0x830, 0xD30);
+    u8 unk_d30[0x80];
+    u8 unk_db0[0x80];
 };
 
 struct UnkStruct_021E3324_00
@@ -212,7 +269,7 @@ struct UnkStruct_021e3528
 
 struct UnkStruct_021974fc
 {
-    u32 unk_00;
+    struct Unit * unk_00;
     u32 unk_04;
     u32 unk_08;
     u32 unk_0c;
@@ -293,20 +350,31 @@ struct UnkStruct_02196f0c_00
 
 struct UnkStruct_02196f0c_04_00
 {
-    u32 unk_00;
+    void (*unk_00)(void *, s32);
     void (*unk_04)(void *, char *);
 };
 
 struct UnkStruct_02196f0c_04
 {
     struct UnkStruct_02196f0c_04_00 * unk_00;
+    char ** unk_04;
+    u8 * unk_08;
+    u32 unk_0c;
+};
+
+struct UnkStruct_02196f0c_08
+{
+    struct UnkStruct_02196f0c_04_00 * unk_00;
+    char ** unk_04;
+    s32 * unk_08;
+    u32 unk_0c;
 };
 
 struct UnkStruct_02196f0c
 {
     struct UnkStruct_02196f0c_00 * unk_00;
     struct UnkStruct_02196f0c_04 * unk_04;
-    struct UnkStruct_02196f0c_04 * unk_08;
+    struct UnkStruct_02196f0c_08 * unk_08;
     u32 unk_0c;
     u32 unk_10;
     u32 unk_14;
@@ -329,7 +397,9 @@ struct UnkStruct_02196f20
 
 struct UnkStruct_02196f24
 {
-    STRUCT_PAD(0x00, 0x07);
+    STRUCT_PAD(0x00, 0x03);
+    u8 unk_03;
+    STRUCT_PAD(0x04, 0x07);
     u8 unk_07;
     STRUCT_PAD(0x08, 0x10);
 };
@@ -337,6 +407,8 @@ struct UnkStruct_02196f24
 struct UnkStruct_020ca61c
 {
     u16 unk_00;
+    STRUCT_PAD(0x02, 0x04);
+    u16 unk_04;
 };
 
 struct UnkStruct_Func_020302e0_Arg

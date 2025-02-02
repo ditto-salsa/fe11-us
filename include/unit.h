@@ -35,9 +35,9 @@ struct JobData
 
 struct ItemData
 {
-    /* 00 */ const char * id;
-    /* 04 */ const char * pName;
-    /* 08 */ const char * pDescription;
+    /* 00 */ char * id;
+    /* 04 */ char * pName;
+    /* 08 */ char * pDescription;
     /* 0C */ u16 weaponIcon;
     /* 0E */ u16 price;
     /* 10 */ u8 type;

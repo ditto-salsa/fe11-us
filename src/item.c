@@ -452,7 +452,7 @@ BOOL func_02038914(struct ItemData * item, u32 x, u32 y)
                     return FALSE;
                 }
 
-                ppUVar2 = func_02040c98(data_ov000_021e3324.unk_00->unk_00);
+                ppUVar2 = func_02040c98(data_ov000_021e3324.unk_00->phase);
 
                 for (pUnit = *ppUVar2; pUnit != 0; pUnit = pUnit->unk_3c)
                 {
@@ -493,7 +493,7 @@ BOOL func_02038914(struct ItemData * item, u32 x, u32 y)
                 return FALSE;
             }
 
-            if (!((pUnit->unk_4c->unk_08 == data_ov000_021e3324.unk_00->unk_00 ? TRUE : FALSE) & 0xff))
+            if (!((pUnit->unk_4c->unk_08 == data_ov000_021e3324.unk_00->phase ? TRUE : FALSE) & 0xff))
             {
                 return FALSE;
             }
@@ -535,7 +535,7 @@ BOOL func_02038914(struct ItemData * item, u32 x, u32 y)
                 return FALSE;
             }
 
-            if (!((pUnit->unk_4c->unk_08 == data_ov000_021e3324.unk_00->unk_00 ? TRUE : FALSE) & 0xff))
+            if (!((pUnit->unk_4c->unk_08 == data_ov000_021e3324.unk_00->phase ? TRUE : FALSE) & 0xff))
             {
                 return FALSE;
             }
@@ -592,7 +592,7 @@ BOOL func_02038914(struct ItemData * item, u32 x, u32 y)
                 return FALSE;
             }
 
-            if (!((pUnit->unk_4c->unk_08 == data_ov000_021e3324.unk_00->unk_00 ? TRUE : FALSE) & 0xff))
+            if (!((pUnit->unk_4c->unk_08 == data_ov000_021e3324.unk_00->phase ? TRUE : FALSE) & 0xff))
             {
                 return FALSE;
             }
@@ -621,7 +621,7 @@ BOOL func_02038914(struct ItemData * item, u32 x, u32 y)
                 return FALSE;
             }
 
-            if (!((pUnit->unk_4c->unk_08 == data_ov000_021e3324.unk_00->unk_00 ? TRUE : FALSE) & 0xff))
+            if (!((pUnit->unk_4c->unk_08 == data_ov000_021e3324.unk_00->phase ? TRUE : FALSE) & 0xff))
             {
                 return FALSE;
             }
@@ -682,7 +682,7 @@ void func_02038ce4(struct ItemData * item, struct Unit * unitA, struct Unit * un
         case 0:
             if (item->attributes & 0x10)
             {
-                ppUVar3 = func_02040c98(data_ov000_021e3324.unk_00->unk_00);
+                ppUVar3 = func_02040c98(data_ov000_021e3324.unk_00->phase);
                 pUnit = *ppUVar3;
 
                 for (; pUnit != NULL; pUnit = pUnit->unk_3c)

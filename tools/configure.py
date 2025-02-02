@@ -37,6 +37,7 @@ CC_FLAGS = " ".join([
     "-msgstyle gcc",        # Use GCC-like messages (some IDEs will make file names clickable)
     "-str pool",
     "-enc sjis",
+    "-ipa file",
 ])
 LD_FLAGS = " ".join([
     "-proc arm946e",        # Target processor

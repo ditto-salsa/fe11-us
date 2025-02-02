@@ -28,7 +28,7 @@ void func_02000c7c(struct UnkStruct_Func_2000C7C * buf)
     buf->unk_0871 = data_ov000_021e3328->unk_25;
     buf->unk_0872 = data_ov000_021e3328->unk_26;
     buf->unk_0873 = data_ov000_021e3328->unk_27;
-    buf->unk_0874 = data_ov000_021e3324.unk_00->unk_00;
+    buf->unk_0874 = data_ov000_021e3324.unk_00->phase;
 
     buf->unk_0854 = buf->unk_0878;
     buf->unk_0858 = buf->unk_1078;
@@ -173,11 +173,11 @@ s32 func_02000fec(struct UnkStruct_Func_2000D2C * buf, s32 a, s32 b)
     }
 
     // The temp variable seems to be required
-    terrainId = data_ov000_021e3328->unk_0828[GetPos(a, b)];
+    terrainId = data_ov000_021e3328->unk_828[GetPos(a, b)];
 
     tmp_r4 += (data_02197254->pTerrain[terrainId].unk_08[0] << 8);
-    tmp_r4 += (data_02197254->pTerrain[data_ov000_021e3328->unk_0828[GetPos(a, b)]].unk_08[1] << 4);
-    tmp_r4 += (data_02197254->pTerrain[data_ov000_021e3328->unk_0828[GetPos(a, b)]].unk_08[2]);
+    tmp_r4 += (data_02197254->pTerrain[data_ov000_021e3328->unk_828[GetPos(a, b)]].unk_08[1] << 4);
+    tmp_r4 += (data_02197254->pTerrain[data_ov000_021e3328->unk_828[GetPos(a, b)]].unk_08[2]);
 
     return tmp_r4;
 }

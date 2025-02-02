@@ -4,10 +4,10 @@
 
 // .bss
 
-struct Proc gProcArray[0x80];
-struct Proc * gProcAllocList[0x80 + 1];
-struct Proc * gProcTreeRootArray[14];
-struct Unknown02190ce0 data_02190ce0;
+extern struct Proc gProcArray[0x80];
+extern struct Proc * gProcAllocList[0x80 + 1];
+extern struct Proc * gProcTreeRootArray[14];
+extern struct Unknown02190ce0 data_02190ce0;
 
 #pragma force_active on
 
