@@ -14,7 +14,6 @@ src/main_loop.c:
 src/proc.c:
     complete
     .text       start:0x02018c58 end:0x02019bd4
-    .bss        start:0x02190ce0 end:0x02194b28
 
 src/gamectrl.c:
     .text       start:0x020217b4 end:0x02022f4c

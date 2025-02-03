@@ -88,7 +88,7 @@ void func_0204745c(void)
 
     if (data_ov000_021e3328 != NULL)
     {
-        func_ov000_021a516c(data_ov000_021e3328->unk_00);
+        func_ov000_021a516c((s32)data_ov000_021e3328->unk_00);
     }
 
     func_ov000_021db624();

@@ -333,8 +333,6 @@ s32 func_ov000_021d7db8(struct ArenaProc * proc, struct Unit * unit, s32 arg_2)
 
 void func_ov000_021d7e1c(struct ArenaProc * proc)
 {
-    s32 pid;
-    s32 jid;
     s32 set;
     s32 rng;
     s32 iVar7;
@@ -497,7 +495,6 @@ void func_ov000_021d8064(struct ArenaProc * proc)
 u8 * func_ov000_021d80a4(struct ArenaProc * proc, struct Unit * unit, s32 arg_2)
 {
     u32 uVar1;
-    u32 uVar2;
 
     switch (func_ov000_021d7db8(proc, unit, arg_2))
     {

@@ -464,7 +464,6 @@ extern void func_02022f28(u32 label);
 void func_020217b4(void)
 {
     int random;
-    u32 uVar2;
 
     LoadOverlay(0);
     LoadOverlay(2);
@@ -610,18 +609,18 @@ void func_02021b14(void)
 
 void InitOnlineShopItemFlags(void)
 {
-    func_020494a0(data_02196f0c->unk_08, "os_BraveSword\0\0", 0);
-    func_020494a0(data_02196f0c->unk_08, "os_BraveLance\0\0", 0);
-    func_020494a0(data_02196f0c->unk_08, "os_BraveAxe", 0);
-    func_020494a0(data_02196f0c->unk_08, "os_BraveBow", 0);
-    func_020494a0(data_02196f0c->unk_08, "os_Wato", 0);
-    func_020494a0(data_02196f0c->unk_08, "os_MasterProof\0", 0);
-    func_020494a0(data_02196f0c->unk_08, "os_LongBow\0", 0);
-    func_020494a0(data_02196f0c->unk_08, "os_EmpyreadWhip", 0);
-    func_020494a0(data_02196f0c->unk_08, "os_reserved1\0\0\0", 0);
-    func_020494a0(data_02196f0c->unk_08, "os_reserved2\0\0\0", 0);
-    func_020494a0(data_02196f0c->unk_08, "os_reserved3\0\0\0", 0);
-    func_020494a0(data_02196f0c->unk_08, "os_reserved4\0\0\0", 0);
+    func_020494a0((void *)data_02196f0c->unk_08, "os_BraveSword\0\0", 0);
+    func_020494a0((void *)data_02196f0c->unk_08, "os_BraveLance\0\0", 0);
+    func_020494a0((void *)data_02196f0c->unk_08, "os_BraveAxe", 0);
+    func_020494a0((void *)data_02196f0c->unk_08, "os_BraveBow", 0);
+    func_020494a0((void *)data_02196f0c->unk_08, "os_Wato", 0);
+    func_020494a0((void *)data_02196f0c->unk_08, "os_MasterProof\0", 0);
+    func_020494a0((void *)data_02196f0c->unk_08, "os_LongBow\0", 0);
+    func_020494a0((void *)data_02196f0c->unk_08, "os_EmpyreadWhip", 0);
+    func_020494a0((void *)data_02196f0c->unk_08, "os_reserved1\0\0\0", 0);
+    func_020494a0((void *)data_02196f0c->unk_08, "os_reserved2\0\0\0", 0);
+    func_020494a0((void *)data_02196f0c->unk_08, "os_reserved3\0\0\0", 0);
+    func_020494a0((void *)data_02196f0c->unk_08, "os_reserved4\0\0\0", 0);
 
     return;
 }
@@ -706,7 +705,7 @@ void func_02021e6c(void)
     data_02196f0c->unk_04->unk_00->unk_04(data_02196f0c->unk_04, "gf_complete");
     data_02196f0c->unk_04->unk_00->unk_04(data_02196f0c->unk_04, "gf_gameover");
 
-    func_02049528(data_02196f0c->unk_08);
+    func_02049528((void *)data_02196f0c->unk_08);
 
     if (data_02196f14 == NULL)
     {
@@ -842,7 +841,7 @@ void func_0202214c(ProcPtr proc)
         return;
     }
 
-    func_ov000_021a4e84(data_ov000_021e3328->unk_00, unit->xPos, unit->yPos, 1);
+    func_ov000_021a4e84((s32)data_ov000_021e3328->unk_00, unit->xPos, unit->yPos, 1);
 
     return;
 }
@@ -1312,7 +1311,7 @@ void func_020229f0(void)
     {
         random = RollRN(1, data_02197254->pDBFE11Footer->unk_14 - 1);
         data_02196f10->unk_11 = random;
-        func_0204939c(data_02196f18->unk_00, random);
+        func_0204939c((void *)data_02196f18->unk_00, random);
 
         if (data_02196f10->unk_0b != 0 && func_02021410(data_02196f10->unk_06)->unk_756 == 0x14)
         {
@@ -1325,7 +1324,7 @@ void func_020229f0(void)
 
             data_02196f10->unk_12 = random;
 
-            func_0204939c(data_02196f18->unk_00, random);
+            func_0204939c((void *)data_02196f18->unk_00, random);
         }
     }
 
