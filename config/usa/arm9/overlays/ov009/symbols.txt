@@ -61,7 +61,7 @@ __typestr__3Fin kind:data(any) addr:0x2207e60
 data_ov009_02207e68 kind:data(any) addr:0x2207e68
 data_ov009_02207e74 kind:data(any) addr:0x2207e74
 __typeinfo__3Fin kind:data(any) addr:0x2207ea4
-data_ov009_02207eb8 kind:data(any) addr:0x2207eb8
+__vt__3Fin kind:data(any) addr:0x2207eb8
 data_ov009_02207ec8 kind:data(any) addr:0x2207ec8
 data_ov009_02207ed0 kind:data(any) addr:0x2207ed0
 data_ov009_02207edc kind:data(any) addr:0x2207edc
@@ -71,7 +71,7 @@ data_ov009_02207efc kind:data(any) addr:0x2207efc
 data_ov009_02207f08 kind:data(any) addr:0x2207f08
 __typestr__6Record kind:data(any) addr:0x2207f38
 __typeinfo__6Record kind:data(any) addr:0x2207f40
-data_ov009_02207f54 kind:data(any) addr:0x2207f54
+__vt__6Record kind:data(any) addr:0x2207f54
 data_ov009_02207f64 kind:data(any) addr:0x2207f64
 data_ov009_02207f6c kind:data(any) addr:0x2207f6c
 data_ov009_02207f7c kind:data(any) addr:0x2207f7c
@@ -88,7 +88,7 @@ __typestr__9StaffRoll kind:data(any) addr:0x220801c
 data_ov009_02208028 kind:data(any) addr:0x2208028
 data_ov009_02208034 kind:data(any) addr:0x2208034
 __typeinfo__9StaffRoll kind:data(any) addr:0x2208064
-data_ov009_02208078 kind:data(any) addr:0x2208078
+__vt__9StaffRoll kind:data(any) addr:0x2208078
 data_ov009_02208088 kind:data(any) addr:0x2208088
 data_ov009_02208090 kind:data(any) addr:0x2208090
 data_ov009_0220809c kind:data(any) addr:0x220809c
@@ -99,7 +99,7 @@ data_ov009_022080cc kind:data(any) addr:0x22080cc
 data_ov009_022080d8 kind:data(any) addr:0x22080d8
 data_ov009_022080e8 kind:data(any) addr:0x22080e8
 __typeinfo__16AfterwardsWindow kind:data(any) addr:0x22080f8
-data_ov009_02208108 kind:data(any) addr:0x2208108
+__vt__16AfterwardsWindow kind:data(any) addr:0x2208108
 __typestr__16AfterwardsWindow kind:data(any) addr:0x2208110
 data_ov009_02208124 kind:data(any) addr:0x2208124
 data_ov009_0220812c kind:data(any) addr:0x220812c
@@ -113,9 +113,9 @@ data_ov009_02208198 kind:data(any) addr:0x2208198
 data_ov009_022081a8 kind:data(any) addr:0x22081a8
 __typeinfo__9StaffFont kind:data(any) addr:0x22081ac
 __typestr__9StaffFont kind:data(any) addr:0x22081b4
-data_ov009_022081c8 kind:data(any) addr:0x22081c8
+__vt__9StaffFont kind:data(any) addr:0x22081c8
 __typeinfo__13StaffFontCtrl kind:data(any) addr:0x22081d0
-data_ov009_022081e0 kind:data(any) addr:0x22081e0
+__vt__13StaffFontCtrl kind:data(any) addr:0x22081e0
 __typestr__13StaffFontCtrl kind:data(any) addr:0x22081e8
 data_ov009_022081f8 kind:data(any) addr:0x22081f8
 data_ov009_02208200 kind:data(any) addr:0x2208200

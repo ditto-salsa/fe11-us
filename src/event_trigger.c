@@ -67,7 +67,7 @@ struct EventProc
 extern u32 data_021974f0;
 
 extern void * data_020d5e18[]; // func table?
-extern void * data_020d5e2c[]; // func table?
+extern void * __vt__9EventSkip[]; // func table?
 
 extern struct ProcFuncTable ProcFuncTable_EventCaller;
 extern struct ProcFuncTable ProcFuncTable_020d5e58;
@@ -243,7 +243,7 @@ void func_020476a0(void)
     {
         var_0->unk_00 = data_020d5e18;
         var_0->unk_0a = 0;
-        var_0->unk_00 = data_020d5e2c;
+        var_0->unk_00 = __vt__9EventSkip;
     }
 
     data_021974e8.unk_00 = var_0;
