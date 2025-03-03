@@ -240,13 +240,13 @@ data_ov010_02209d18 kind:data(any) addr:0x2209d18
 data_ov010_02209d48 kind:data(any) addr:0x2209d48 ambiguous
 data_ov010_02209d50 kind:data(any) addr:0x2209d50
 data_ov010_02209d88 kind:data(any) addr:0x2209d88
-data_ov010_02209df8 kind:data(any) addr:0x2209df8
-data_ov010_02209e04 kind:data(any) addr:0x2209e04
-data_ov010_02209e10 kind:data(any) addr:0x2209e10
-data_ov010_02209e1c kind:data(any) addr:0x2209e1c
-data_ov010_02209e28 kind:data(any) addr:0x2209e28
-data_ov010_02209e34 kind:data(any) addr:0x2209e34
-data_ov010_02209e40 kind:data(any) addr:0x2209e40
+__typeinfo__25WLMExchangeFriendDataProc kind:data(any) addr:0x2209df8
+__typeinfo__18WLMProcessRecvProc kind:data(any) addr:0x2209e04
+__typeinfo__18WLMProcessSendProc kind:data(any) addr:0x2209e10
+__typeinfo__19WLMSyncGameInfoProc kind:data(any) addr:0x2209e1c
+__typeinfo__24WLMSyncAIDBitmapInfoProc kind:data(any) addr:0x2209e28
+__typeinfo__11WLMSyncProc kind:data(any) addr:0x2209e34
+__typeinfo__16WLMProcessMPProc kind:data(any) addr:0x2209e40
 __typestr__11WLMSyncProc kind:data(any) addr:0x2209e4c
 data_ov010_02209e54 kind:data(any) addr:0x2209e54 ambiguous
 __typestr__16WLMProcessMPProc kind:data(any) addr:0x2209e5c
@@ -264,11 +264,11 @@ __typestr__24WLMSyncAIDBitmapInfoProc kind:data(any) addr:0x2209f60
 __typestr__25WLMExchangeFriendDataProc kind:data(any) addr:0x2209f7c
 data_ov010_02209f98 kind:data(any) addr:0x2209f98
 data_ov010_02209fd8 kind:data(any) addr:0x2209fd8
-data_ov010_0220a020 kind:data(any) addr:0x220a020
+__typeinfo__28WLMStartAutoErrorProcessProc kind:data(any) addr:0x220a020
 data_ov010_0220a02c kind:data(any) addr:0x220a02c
-data_ov010_0220a038 kind:data(any) addr:0x220a038
-data_ov010_0220a044 kind:data(any) addr:0x220a044
-data_ov010_0220a050 kind:data(any) addr:0x220a050
+__typeinfo__23WLMAutoSyncGameInfoProc kind:data(any) addr:0x220a038
+__typeinfo__26WLMAutoErrorMonitoringProc kind:data(any) addr:0x220a044
+__typeinfo__26WLMOpenAutoErrorDialogProc kind:data(any) addr:0x220a050
 data_ov010_0220a05c kind:data(any) addr:0x220a05c
 data_ov010_0220a068 kind:data(any) addr:0x220a068
 data_ov010_0220a080 kind:data(any) addr:0x220a080
