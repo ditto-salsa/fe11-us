@@ -247,12 +247,12 @@ data_ov010_02209e1c kind:data(any) addr:0x2209e1c
 data_ov010_02209e28 kind:data(any) addr:0x2209e28
 data_ov010_02209e34 kind:data(any) addr:0x2209e34
 data_ov010_02209e40 kind:data(any) addr:0x2209e40
-data_ov010_02209e4c kind:data(any) addr:0x2209e4c
+__typestr__11WLMSyncProc kind:data(any) addr:0x2209e4c
 data_ov010_02209e54 kind:data(any) addr:0x2209e54 ambiguous
-data_ov010_02209e5c kind:data(any) addr:0x2209e5c
-data_ov010_02209e70 kind:data(any) addr:0x2209e70
-data_ov010_02209e88 kind:data(any) addr:0x2209e88
-data_ov010_02209ea0 kind:data(any) addr:0x2209ea0
+__typestr__16WLMProcessMPProc kind:data(any) addr:0x2209e5c
+__typestr__18WLMProcessRecvProc kind:data(any) addr:0x2209e70
+__typestr__18WLMProcessSendProc kind:data(any) addr:0x2209e88
+__typestr__19WLMSyncGameInfoProc kind:data(any) addr:0x2209ea0
 data_ov010_02209ec0 kind:data(any) addr:0x2209ec0
 data_ov010_02209ed8 kind:data(any) addr:0x2209ed8
 data_ov010_02209ef0 kind:data(any) addr:0x2209ef0
@@ -260,8 +260,8 @@ data_ov010_02209f08 kind:data(any) addr:0x2209f08
 data_ov010_02209f20 kind:data(any) addr:0x2209f20
 data_ov010_02209f38 kind:data(any) addr:0x2209f38
 data_ov010_02209f50 kind:data(any) addr:0x2209f50
-data_ov010_02209f60 kind:data(any) addr:0x2209f60
-data_ov010_02209f7c kind:data(any) addr:0x2209f7c
+__typestr__24WLMSyncAIDBitmapInfoProc kind:data(any) addr:0x2209f60
+__typestr__25WLMExchangeFriendDataProc kind:data(any) addr:0x2209f7c
 data_ov010_02209f98 kind:data(any) addr:0x2209f98
 data_ov010_02209fd8 kind:data(any) addr:0x2209fd8
 data_ov010_0220a020 kind:data(any) addr:0x220a020
@@ -275,10 +275,10 @@ data_ov010_0220a080 kind:data(any) addr:0x220a080
 data_ov010_0220a098 kind:data(any) addr:0x220a098
 data_ov010_0220a0b0 kind:data(any) addr:0x220a0b0
 data_ov010_0220a0c8 kind:data(any) addr:0x220a0c8
-data_ov010_0220a0d8 kind:data(any) addr:0x220a0d8
-data_ov010_0220a0f4 kind:data(any) addr:0x220a0f4
-data_ov010_0220a114 kind:data(any) addr:0x220a114
-data_ov010_0220a134 kind:data(any) addr:0x220a134
+__typestr__23WLMAutoSyncGameInfoProc kind:data(any) addr:0x220a0d8
+__typestr__26WLMOpenAutoErrorDialogProc kind:data(any) addr:0x220a0f4
+__typestr__26WLMAutoErrorMonitoringProc kind:data(any) addr:0x220a114
+__typestr__28WLMStartAutoErrorProcessProc kind:data(any) addr:0x220a134
 data_ov010_0220a154 kind:data(any) addr:0x220a154
 data_ov010_0220a17c kind:data(any) addr:0x220a17c
 data_ov010_0220a1ac kind:data(any) addr:0x220a1ac
