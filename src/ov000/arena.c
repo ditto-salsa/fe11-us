@@ -1065,13 +1065,13 @@ void func_ov000_021d8d68(struct ArenaProc * proc)
 
     if ((data_ov000_021e3508->unk_0c & 1) == 0)
     {
-        data_ov000_021e3508->unk_00 = data_ov000_021e2e60;
+        data_ov000_021e3508->unk_00 = __vt__11DI_ArenaYes;
         data_ov000_021e3508->unk_0c |= 1;
     }
 
     if ((data_ov000_021e3508->unk_18 & 1) == 0)
     {
-        data_ov000_021e3508->unk_10 = data_ov000_021e2d80;
+        data_ov000_021e3508->unk_10 = __vt__10DI_ArenaNo;
         data_ov000_021e3508->unk_18 |= 1;
     }
 
@@ -1100,13 +1100,13 @@ void func_ov000_021d8e28(struct ArenaProc * proc)
 
     if ((data_ov000_021e3508->unk_1c & 1) == 0)
     {
-        data_ov000_021e3508->unk_14 = data_ov000_021e2e60;
+        data_ov000_021e3508->unk_14 = __vt__11DI_ArenaYes;
         data_ov000_021e3508->unk_1c |= 1;
     }
 
     if ((data_ov000_021e3508->unk_04 & 1) == 0)
     {
-        data_ov000_021e3508->unk_08 = data_ov000_021e2d80;
+        data_ov000_021e3508->unk_08 = __vt__10DI_ArenaNo;
         data_ov000_021e3508->unk_04 |= 1;
     }
 
@@ -1483,7 +1483,7 @@ void func_ov000_021d9564(struct ArenaProc * proc)
 }
 
 extern struct ProcCmd data_ov000_021e2cb8[];
-extern struct ProcFuncTable data_ov000_021e2d50;
+extern struct ProcFuncTable __vt__12ArenaBGMCont;
 
 void func_ov000_021d95b0(struct ArenaProc * parent)
 {
@@ -1491,7 +1491,7 @@ void func_ov000_021d95b0(struct ArenaProc * parent)
 
     if (proc != NULL)
     {
-        proc->proc_funcTable = &data_ov000_021e2d50;
+        proc->proc_funcTable = &__vt__12ArenaBGMCont;
     }
 
     return;
@@ -1503,7 +1503,7 @@ void func_ov000_021d95d8(struct ArenaProc * unused)
     return;
 }
 
-extern struct ProcFuncTable data_ov000_021e2d68;
+extern struct ProcFuncTable __vt__N5arena5ArenaE;
 
 extern struct Unit * gUnitList;
 
@@ -1553,7 +1553,7 @@ void func_ov000_021d95ec(ProcPtr parent)
 
     uVar5 = data_ov000_021e3328->unk_04->unk_00;
 
-    proc->proc_funcTable = &data_ov000_021e2d68;
+    proc->proc_funcTable = &__vt__N5arena5ArenaE;
 
     func_02039eac("shop");
 

@@ -41,8 +41,8 @@ extern u32 data_ov000_021e2ca0[];
 extern u32 data_ov000_021e2cac[];
 
 extern void * data_ov000_021dcebc[];
-extern void * data_ov000_021e2d80[];
-extern void * data_ov000_021e2e60[];
+extern void * __vt__10DI_ArenaNo[];
+extern void * __vt__11DI_ArenaYes[];
 
 extern struct UnkStruct_021e3340 * data_ov000_021e3340;
 
