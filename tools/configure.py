@@ -182,6 +182,12 @@ def main():
         )
         n.newline()
 
+        n.rule(
+            name="sha1",
+            command=f"{PYTHON} tools/sha1.py $in -c $sha1_file"
+        )
+        n.newline()
+
         game_build = build_path / game_version
         game_extract = extract_path / game_version
 
@@ -252,6 +258,15 @@ def add_mwld_and_rom_builds(n: ninja_syntax.Writer, game_build: Path, game_confi
     )
     n.newline()
 
+    n.build(
+        inputs=rom_file,
+        rule="sha1",
+        variables={
+            "sha1_file": str(Path(rom_file).with_suffix(".sha1"))
+        },
+        outputs="sha1",
+    )
+    n.newline()
 
 def add_mwcc_builds(n: ninja_syntax.Writer, game_version: str, game_build: Path, mwcc_implicit: list[Path]):
     for source_file in get_c_cpp_files([src_path, libs_path]):
