@@ -10,7 +10,7 @@ import ninja_syntax
 
 
 parser = argparse.ArgumentParser(description="Generates build.ninja")
-parser.add_argument('-w', type=str, default="wine", dest="wine", required=False, help="Path to Wine (linux only)")
+parser.add_argument('-w', type=str, default="./wibo", dest="wine", required=False, help="Path to Wine/Wibo (linux only)")
 parser.add_argument('version', help='Game version')
 args = parser.parse_args()
 

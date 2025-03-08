@@ -19,7 +19,10 @@ report.json
 /dsd.exe
 
 build.ninja
-.ninja_log
+.ninja_log*
+.ninja_lock
+
+/wibo
 
 __pycache__/
 tools/mwccarm/

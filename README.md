@@ -17,7 +17,6 @@ It builds the following ROM:
     - Python 3.11+ and pip
     - GCC 9+
     - Ninja
-    - **On Linux**: Wine/Wibo
 1. Install the Python dependencies:
     ```shell
     python -m pip install -r tools/requirements.txt
@@ -31,11 +30,11 @@ It builds the following ROM:
     python tools/configure.py usa
     ```
 
-    > [!IMPORTANT]
-    > Rerun `configure.py` often to ensure that all C code gets compiled.
+> [!IMPORTANT]
+> Rerun `configure.py` often to ensure that all C code gets compiled.
 
-    > [!NOTE]
-    > For Linux users: If you plan to use Wibo instead of Wine, run `configure.py` with `-w <path/to/wibo>`.`
+> [!NOTE]
+> Wibo is used by default. If you want to use Wine instead, run `configure.py` with `-w <path/to/wine>`.
 
 1. Put one or more base ROMs in the [`/extract/`](/extract/) directory of this repository.
 
