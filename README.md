@@ -13,19 +13,19 @@ It builds the following ROM:
 1. Use one of these platforms:
     - Windows (recommended)
     - Linux
-1. Install the following:
+2. Install the following:
     - Python 3.11+ and pip
     - GCC 9+
     - Ninja
-1. Install the Python dependencies:
+3. Install the Python dependencies:
     ```shell
     python -m pip install -r tools/requirements.txt
     ```
-1. Run the setup script:
+4. Run the setup script:
     ```shell
     python tools/setup.py
     ```
-1. Run the Ninja configure script:
+5. Run the Ninja configure script:
     ```shell
     python tools/configure.py usa
     ```
@@ -36,7 +36,7 @@ It builds the following ROM:
 > [!NOTE]
 > Wibo is used by default. If you want to use Wine instead, run `configure.py` with `-w <path/to/wine>`.
 
-1. Put one or more base ROMs in the [`/extract/`](/extract/) directory of this repository.
+6. Put one or more base ROMs in the [`/extract/`](/extract/) directory of this repository.
 
 Now you can run `ninja` to build a ROM for the chosen version. Currently, only the US version is supported.
 
@@ -63,10 +63,6 @@ This project uses the object diffing tool [`objdiff`](https://github.com/encount
 1. In `objdiff`, set the project directory to the repository root.
 1. Select your source file in the left sidebar.
 1. See the list of functions and data to decompile.
-
-> [!NOTE]
-> If a source file is missing in `objdiff`, or `objdiff` fails to build a file, first rerun `objdiff.py` to update
-> `objdiff.json`. If the problem persists, feel free to ask for help.
 
 ## See also
 
