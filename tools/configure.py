@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 import os
 from pathlib import Path
@@ -10,7 +10,7 @@ import ninja_syntax
 
 
 parser = argparse.ArgumentParser(description="Generates build.ninja")
-parser.add_argument('-w', type=str, default="wine", dest="wine", required=False, help="Path to Wine (linux only)")
+parser.add_argument('-w', type=str, default="./wibo", dest="wine", required=False, help="Path to Wine/Wibo (linux only)")
 parser.add_argument('version', help='Game version')
 args = parser.parse_args()
 
@@ -25,7 +25,7 @@ CC_FLAGS = " ".join([
     "-proc arm946e",        # Target processor
     "-gccext,on",           # Enable GCC extensions
     "-fp soft",             # Compute float operations in software
-    "-lang c99",
+    "-lang c++",
     "-char signed",         # Char type is signed
     "-inline on,noauto",    # Inline only functions marked with 'inline'
     "-Cpp_exceptions off",  # Disable C++ exceptions
@@ -131,9 +131,18 @@ def main():
         )
         n.newline()
 
+        # -MMD excludes all includes instead of just system includes for some reason, so use -MD instead.
+        mwcc_cmd = f'{WINE} "{mwcc_path}/mwccarm.exe" {CC_FLAGS} {CC_INCLUDES} $cc_flags -d $game_version -MD -c $in -o $basedir'
+        mwcc_implicit = []
+        if os.name != "nt":
+            transform_dep = "tools/transform_dep.py"
+            mwcc_cmd += f" && $python {transform_dep} $basefile.d $basefile.d"
+            mwcc_implicit.append(transform_dep)
+
         n.rule(
             name="mwcc",
-            command=f'{WINE} "{mwcc_path}/mwccarm.exe" {CC_FLAGS} {CC_INCLUDES} $cc_flags -d $game_version $in -o $out'
+            command=mwcc_cmd,
+            depfile="$basefile.d",
         )
         n.newline()
 
@@ -173,12 +182,18 @@ def main():
         )
         n.newline()
 
+        n.rule(
+            name="sha1",
+            command=f"{PYTHON} tools/sha1.py $in -c $sha1_file"
+        )
+        n.newline()
+
         game_build = build_path / game_version
         game_extract = extract_path / game_version
 
         add_extract_build(n, game_extract, game_version)
         add_delink_and_lcf_builds(n, game_config, game_build, game_extract)
-        add_mwcc_builds(n, game_version, game_build)
+        add_mwcc_builds(n, game_version, game_build, mwcc_implicit)
         add_mwld_and_rom_builds(n, game_build, game_config, game_version)
 
 
@@ -243,21 +258,33 @@ def add_mwld_and_rom_builds(n: ninja_syntax.Writer, game_build: Path, game_confi
     )
     n.newline()
 
+    n.build(
+        inputs=rom_file,
+        rule="sha1",
+        variables={
+            "sha1_file": str(Path(rom_file).with_suffix(".sha1"))
+        },
+        outputs="sha1",
+    )
+    n.newline()
 
-def add_mwcc_builds(n: ninja_syntax.Writer, game_version: str, game_build: Path):
+def add_mwcc_builds(n: ninja_syntax.Writer, game_version: str, game_build: Path, mwcc_implicit: list[Path]):
     for source_file in get_c_cpp_files([src_path, libs_path]):
-        output_file = str(game_build / source_file.with_suffix(".o"))
+        src_obj_path = game_build / source_file
         cc_flags = []
         if is_cpp(source_file): cc_flags.append("-lang=c++")
         elif is_c(source_file): cc_flags.append("-lang=c")
         n.build(
             inputs=str(source_file),
             rule="mwcc",
-            outputs=output_file,
+            outputs=str(src_obj_path.with_suffix(".o")),
             variables={
                 "game_version": game_version,
-                "cc_flags": " ".join(cc_flags)
-            }
+                "cc_flags": " ".join(cc_flags),
+                "basedir": os.path.dirname(src_obj_path),
+                "basefile": str(src_obj_path.with_suffix("")),
+            },
+            implicit=mwcc_implicit,
         )
         n.newline()
         

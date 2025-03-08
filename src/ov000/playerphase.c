@@ -291,12 +291,14 @@ BOOL func_ov000_021ac0c0(void)
 
 static inline BOOL TEMP(struct Unit * unit)
 {
+    u32 pos;
+
     if (func_ov000_021a3da0(unit) != 0)
     {
         return TRUE;
     }
 
-    u32 pos = (unit->xPos | unit->yPos << 5) >> 3;
+    pos = (unit->xPos | unit->yPos << 5) >> 3;
     return (data_ov000_021e3328->unk_d30[pos] & (1 << (unit->xPos & 7))) & 0xFF;
 }
 

@@ -700,6 +700,8 @@ void func_ov000_021d8104(struct ArenaProc * proc)
 
         if ((opponentMight * 6) < GetUnitMaxHp(proc->unk_38))
         {
+            s32 idk;
+
             if (r7 != 0)
             {
                 proc->unk_3c->unk_50[2]++;
@@ -736,7 +738,7 @@ void func_ov000_021d8104(struct ArenaProc * proc)
                 continue;
             }
 
-            s32 idk = item->wpnLevel;
+            idk = item->wpnLevel;
             idk -= func_0203c7ac(proc->unk_3c, wpnType);
 
             if (idk + proc->unk_3c->unk_84[wpnType] <= 0xFF)
