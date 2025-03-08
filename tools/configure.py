@@ -25,7 +25,7 @@ CC_FLAGS = " ".join([
     "-proc arm946e",        # Target processor
     "-gccext,on",           # Enable GCC extensions
     "-fp soft",             # Compute float operations in software
-    "-lang c99",
+    "-lang c++",
     "-char signed",         # Char type is signed
     "-inline on,noauto",    # Inline only functions marked with 'inline'
     "-Cpp_exceptions off",  # Disable C++ exceptions
