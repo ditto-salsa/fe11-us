@@ -14,6 +14,7 @@ parser = argparse.ArgumentParser(description="Generates build.ninja")
 parser.add_argument('-w', type=str, default=DEFAULT_WIBO_PATH, dest="wine", required=False, help="Path to Wine/Wibo (linux only)")
 parser.add_argument("--compiler", type=Path, required=False, help="Path to compiler root directory")
 parser.add_argument("--no-extract", action="store_true", help="Skip extract step")
+parser.add_argument("--dsd", type=Path, required=False, help="Path to pre-installed dsd CLI")
 parser.add_argument('version', help='Game version')
 args = parser.parse_args()
 
@@ -94,7 +95,7 @@ if platform is None:
 
 EXE = platform.exe
 WINE = args.wine if platform.system != "windows" else ""
-DSD = os.path.join('.', str(root_path / f"dsd{EXE}"))
+DSD = str(args.dsd or os.path.join('.', str(root_path / f"dsd{EXE}")))
 OBJDIFF = os.path.join('.', str(root_path / f"objdiff-cli{EXE}"))
 CC = os.path.join('.', str(mwcc_path / "mwccarm.exe"))
 LD = os.path.join('.', str(mwcc_path / "mwldarm.exe"))
@@ -281,16 +282,17 @@ def main():
         add_objdiff_builds(n, project)
 
 def add_download_tool_builds(n: ninja_syntax.Writer):
-    n.build(
-        rule="download_tool",
-        outputs=DSD,
-        variables={
-            "tool": "dsd",
-            "tag": DSD_VERSION,
-            "path": DSD,
-        },
-    )
-    n.newline()
+    if args.dsd is None:
+        n.build(
+            rule="download_tool",
+            outputs=DSD,
+            variables={
+                "tool": "dsd",
+                "tag": DSD_VERSION,
+                "path": DSD,
+            },
+        )
+        n.newline()
 
     n.build(
         rule="download_tool",
