@@ -13,6 +13,7 @@ DEFAULT_WIBO_PATH = "./wibo"
 parser = argparse.ArgumentParser(description="Generates build.ninja")
 parser.add_argument('-w', type=str, default=DEFAULT_WIBO_PATH, dest="wine", required=False, help="Path to Wine/Wibo (linux only)")
 parser.add_argument("--compiler", type=Path, required=False, help="Path to compiler root directory")
+parser.add_argument("--no-extract", action="store_true", help="Skip extract step")
 parser.add_argument('version', help='Game version')
 args = parser.parse_args()
 
@@ -93,10 +94,10 @@ if platform is None:
 
 EXE = platform.exe
 WINE = args.wine if platform.system != "windows" else ""
-DSD = str(root_path / f"dsd{EXE}")
-OBJDIFF = str(root_path / f"objdiff-cli{EXE}")
-CC = str(mwcc_path / "mwccarm.exe")
-LD = str(mwcc_path / "mwldarm.exe")
+DSD = os.path.join('.', str(root_path / f"dsd{EXE}"))
+OBJDIFF = os.path.join('.', str(root_path / f"objdiff-cli{EXE}"))
+CC = os.path.join('.', str(mwcc_path / "mwccarm.exe"))
+LD = os.path.join('.', str(mwcc_path / "mwldarm.exe"))
 PYTHON = sys.executable
 
 
@@ -327,16 +328,17 @@ def add_download_tool_builds(n: ninja_syntax.Writer):
         n.newline()
 
 def add_extract_build(n: ninja_syntax.Writer, project: Project):
-    n.build(
-        inputs=str(project.baserom()),
-        implicit=DSD,
-        rule="extract",
-        outputs=str(project.baserom_config()),
-        variables={
-            "output_path": str(project.game_extract)
-        }
-    )
-    n.newline()
+    if not args.no_extract:
+        n.build(
+            inputs=str(project.baserom()),
+            implicit=DSD,
+            rule="extract",
+            outputs=str(project.baserom_config()),
+            variables={
+                "output_path": str(project.game_extract)
+            }
+        )
+        n.newline()
 
 
 def add_mwld_and_rom_builds(n: ninja_syntax.Writer, project: Project):
