@@ -257,13 +257,13 @@ def main():
 
         n.rule(
             name="check_modules",
-            command=f"{DSD} check modules --config-path $config_path"
+            command=f"{DSD} check modules --config-path $config_path --fail"
         )
         n.newline()
 
         n.rule(
             name="check_symbols",
-            command=f"{DSD} check symbols --config-path $config_path --elf-path $elf_path"
+            command=f"{DSD} check symbols --config-path $config_path --elf-path $elf_path --fail"
         )
         n.newline()
 
