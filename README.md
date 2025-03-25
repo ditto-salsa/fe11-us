@@ -21,24 +21,19 @@ It builds the following ROM:
     ```shell
     python -m pip install -r tools/requirements.txt
     ```
-4. Run the setup script:
-    ```shell
-    python tools/setup.py
-    ```
-5. Run the Ninja configure script:
+4. Run the Ninja configure script:
     ```shell
     python tools/configure.py usa
     ```
+5. Put one or more base ROMs in the [`/extract/`](/extract/) directory of this repository.
+
+Now you can run `ninja` to build a ROM for the chosen version. Currently, only the US version is supported.
 
 > [!IMPORTANT]
 > Rerun `configure.py` often to ensure that all C code gets compiled.
 
 > [!NOTE]
 > Wibo is used by default. If you want to use Wine instead, run `configure.py` with `-w <path/to/wine>`.
-
-6. Put one or more base ROMs in the [`/extract/`](/extract/) directory of this repository.
-
-Now you can run `ninja` to build a ROM for the chosen version. Currently, only the US version is supported.
 
 #### Matching the base ROM
 
