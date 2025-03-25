@@ -254,6 +254,18 @@ def main():
         n.newline()
 
         n.rule(
+            name="check_modules",
+            command=f"{DSD} check modules --config-path $config_path"
+        )
+        n.newline()
+
+        n.rule(
+            name="check_symbols",
+            command=f"{DSD} check symbols --config-path $config_path --elf-path $elf_path"
+        )
+        n.newline()
+
+        n.rule(
             name="sha1",
             command=f"{PYTHON} tools/sha1.py $in -c $sha1_file"
         )
@@ -264,6 +276,7 @@ def main():
         add_delink_and_lcf_builds(n, project)
         add_mwcc_builds(n, project, mwcc_implicit)
         add_mwld_and_rom_builds(n, project)
+        add_check_builds(n, project)
         add_objdiff_builds(n, project)
 
 def add_download_tool_builds(n: ninja_syntax.Writer):
@@ -341,6 +354,13 @@ def add_mwld_and_rom_builds(n: ninja_syntax.Writer, project: Project):
             "objects_file": objects_file,
             "lcf_file": lcf_file,
         }
+    )
+    n.newline()
+
+    n.build(
+        inputs=elf_file,
+        rule="phony",
+        outputs="arm9",
     )
     n.newline()
 
@@ -466,6 +486,35 @@ def add_delink_and_lcf_builds(n: ninja_syntax.Writer, project: Project):
     )
     n.newline()
 
+def add_check_builds(n: ninja_syntax.Writer, project: Project):
+    n.build(
+        inputs=str(project.arm9_o()),
+        rule="check_modules",
+        outputs="check_modules",
+        variables={
+            "config_path": project.arm9_config_yaml(),
+        },
+    )
+    n.newline()
+
+    n.build(
+        inputs=str(project.arm9_o()),
+        rule="check_symbols",
+        outputs="check_symbols",
+        variables={
+            "config_path": project.arm9_config_yaml(),
+            "elf_path": project.arm9_o(),
+        },
+    )
+    n.newline()
+
+    n.build(
+        inputs=["check_modules", "check_symbols"],
+        rule="phony",
+        outputs="check",
+    )
+    n.newline()
+
 def add_objdiff_builds(n: ninja_syntax.Writer, project: Project):
     n.build(
         inputs=project.dsd_configs(),
@@ -493,6 +542,12 @@ def add_objdiff_builds(n: ninja_syntax.Writer, project: Project):
     )
     n.newline()
 
+    n.build(
+        inputs=str(project.objdiff_report()),
+        rule="phony",
+        outputs="report",
+    )
+    n.newline()
 
 def get_config_files(game_config: Path, name: str) -> list[str]:
     return [
