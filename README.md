@@ -29,8 +29,7 @@ It builds the following ROM:
 
 Now you can run `ninja` to build a ROM for the chosen version. Currently, only the US version is supported.
 
-> [!IMPORTANT]
-> Rerun `configure.py` often to ensure that all C code gets compiled.
+Running `ninja` again after making any changes to the project (e.g. source files, delinks.txt, etc) should automatically re-run `configure.py` to ensure that all code gets compiled.
 
 > [!NOTE]
 > Wibo is used by default. If you want to use Wine instead, run `configure.py` with `-w <path/to/wine>`.
