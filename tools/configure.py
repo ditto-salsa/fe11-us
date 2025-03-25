@@ -409,7 +409,7 @@ def add_mwld_and_rom_builds(n: ninja_syntax.Writer, project: Project):
         inputs=rom_file,
         rule="sha1",
         variables={
-            "sha1_file": str(Path(rom_file).with_suffix(".sha1"))
+            "sha1_file": project.game_config / f"{GAME}_{project.game_version}.sha1"
         },
         outputs="sha1",
     )

@@ -4,7 +4,7 @@ This is a decompilation of *Fire Emblem: Shadow Dragon* (NDS), powered by [`ds-d
 
 It builds the following ROM:
 
-* [**fe11_usa.nds**](https://datomatic.no-intro.org/index.php?page=show_record&s=28&n=3398): `sha1: 7b7b307ef819ac31a7b71aed2e8e47ff23c1765e`
+* [**fe11_YFEE01.nds**](https://datomatic.no-intro.org/index.php?page=show_record&s=28&n=3398): `sha1: 7b7b307ef819ac31a7b71aed2e8e47ff23c1765e`
 
 ## Setup
 
@@ -23,7 +23,7 @@ It builds the following ROM:
     ```
 4. Run the Ninja configure script:
     ```shell
-    python tools/configure.py usa
+    python tools/configure.py YFEE01
     ```
 5. Put one or more base ROMs in the [`/extract/`](/extract/) directory of this repository.
 
@@ -53,7 +53,7 @@ Now, rerun `configure.py` so it can update `build.ninja` to build a matching ROM
 This project uses the object diffing tool [`objdiff`](https://github.com/encounter/objdiff) to track differences between our decompiled C code and the base ROM's code.
 
 1. [Download the latest release.](https://github.com/encounter/objdiff/releases/latest)
-1. Run `configure.py usa` and `ninja` to generate `objdiff.json` in the repository root.
+1. Run `configure.py YFEE01` and `ninja` to generate `objdiff.json` in the repository root.
 1. In `objdiff`, set the project directory to the repository root.
 1. Select your source file in the left sidebar.
 1. See the list of functions and data to decompile.
