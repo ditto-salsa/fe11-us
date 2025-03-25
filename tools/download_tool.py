@@ -29,10 +29,14 @@ def mwccarm_url(tag: str) -> str:
 def wibo_url(tag: str) -> str:
     return f'https://github.com/decompals/wibo/releases/download/{tag}/wibo'
 
+def objdiff_url(tag: str) -> str:
+    return f'https://github.com/encounter/objdiff/releases/download/{tag}/objdiff-cli-{platform.system}-{platform.machine}{platform.exe}'
+
 TOOLS = {
     "dsd": dsd_url,
     "mwccarm": mwccarm_url,
     "wibo": wibo_url,
+    "objdiff": objdiff_url,
 }
 
 

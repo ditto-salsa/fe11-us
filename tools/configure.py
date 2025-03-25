@@ -21,6 +21,7 @@ args = parser.parse_args()
 GAME = "fe11"
 DSD_VERSION = 'v0.6.0'
 WIBO_VERSION = '0.6.16'
+OBJDIFF_VERSION = 'v2.7.1'
 MWCC_VERSION = "2.0/sp2p2"
 DECOMP_ME_COMPILER = "mwcc_30_131"
 CC_FLAGS = " ".join([
@@ -93,17 +94,80 @@ if platform is None:
 EXE = platform.exe
 WINE = args.wine if platform.system != "windows" else ""
 DSD = str(root_path / f"dsd{EXE}")
+OBJDIFF = str(root_path / f"objdiff-cli{EXE}")
 CC = str(mwcc_path / "mwccarm.exe")
 LD = str(mwcc_path / "mwldarm.exe")
 PYTHON = sys.executable
 
 
+class Project:
+    def __init__(self, game_version: str):
+        self.game_version = game_version
+        '''Version of the game'''
+        self.game_config = config_path / game_version
+        '''Root directory for dsd configs'''
+
+        if not self.game_config.is_dir():
+            print(f"Version '{game_version}' not recognized")
+            exit(1)
+
+        self.game_build = build_path / game_version
+        '''Path to build directory'''
+        self.game_extract = extract_path / game_version
+        '''Path to extract directory'''
+
+        self.delinks_files = get_config_files(self.game_config, "delinks.txt")
+        '''Paths to every delinks.txt file'''
+        self.relocs_files = get_config_files(self.game_config, "relocs.txt")
+        '''Paths to every relocs.txt file'''
+        self.symbols_files = get_config_files(self.game_config, "symbols.txt")
+        '''Paths to every symbols.txt file'''
+
+    def dsd_configs(self) -> list[str]:
+        return self.delinks_files + self.relocs_files + self.symbols_files
+
+    def arm9_config_yaml(self) -> Path:
+        return self.game_config / "arm9" / "config.yaml"
+
+    def baserom(self) -> Path:
+        return extract_path / f'baserom_{GAME}_{self.game_version}.nds'
+
+    def build_rom(self) -> str:
+        return f"{GAME}_{self.game_version}.nds"
+
+    def baserom_config(self) -> Path:
+        return self.game_extract / 'config.yaml'
+
+    def build_rom_config(self) -> Path:
+        return self.game_build / "build" / "rom_config.yaml"
+
+    def source_object_files(self) -> list[str]:
+        return [
+            str(self.game_build / source_file.with_suffix(".o"))
+            for source_file in get_c_cpp_files([src_path, libs_path])
+        ]
+
+    def arm9_lcf(self) -> Path:
+        return self.game_build / "linker_script.lcf"
+
+    def arm9_objects_txt(self) -> Path:
+        return self.game_build / "objects.txt"
+
+    def arm9_delink_yaml(self) -> Path:
+        return self.game_build / "delinks" / "delink.yaml"
+
+    def arm9_o(self) -> Path:
+        return self.game_build / "arm9.o"
+
+    def arm9_delinks(self) -> Path:
+        return self.game_build / "delinks"
+
+    def objdiff_report(self) -> Path:
+        return self.game_build / "report.json"
+
+
 def main():
-    game_version: str = args.version
-    game_config = config_path / game_version
-    if not game_config.is_dir():
-        print(f"Version '{game_version}' not recognized")
-        return
+    project = Project(args.version)
 
     with build_ninja_path.open("w") as file:
         n = ninja_syntax.Writer(file)
@@ -178,6 +242,12 @@ def main():
         n.newline()
 
         n.rule(
+            name="objdiff_report",
+            command=f"{OBJDIFF} report generate -o $out"
+        )
+        n.newline()
+
+        n.rule(
             name="m2ctx",
             command=f"{PYTHON} tools/m2ctx.py -f $out $in"
         )
@@ -189,14 +259,12 @@ def main():
         )
         n.newline()
 
-        game_build = build_path / game_version
-        game_extract = extract_path / game_version
-
         add_download_tool_builds(n)
-        add_extract_build(n, game_extract, game_version)
-        add_delink_and_lcf_builds(n, game_config, game_build, game_extract)
-        add_mwcc_builds(n, game_version, game_build, mwcc_implicit)
-        add_mwld_and_rom_builds(n, game_build, game_config, game_version)
+        add_extract_build(n, project)
+        add_delink_and_lcf_builds(n, project)
+        add_mwcc_builds(n, project, mwcc_implicit)
+        add_mwld_and_rom_builds(n, project)
+        add_objdiff_builds(n, project)
 
 def add_download_tool_builds(n: ninja_syntax.Writer):
     n.build(
@@ -207,6 +275,17 @@ def add_download_tool_builds(n: ninja_syntax.Writer):
             "tag": DSD_VERSION,
             "path": DSD,
         },
+    )
+    n.newline()
+
+    n.build(
+        rule="download_tool",
+        outputs=OBJDIFF,
+        variables={
+            "tool": "objdiff",
+            "tag": OBJDIFF_VERSION,
+            "path": OBJDIFF,
+        }
     )
     n.newline()
 
@@ -234,56 +313,50 @@ def add_download_tool_builds(n: ninja_syntax.Writer):
         )
         n.newline()
 
-def add_extract_build(n: ninja_syntax.Writer, game_extract: Path, game_version: str):
-    rom_path = extract_path / f'baserom_{GAME}_{game_version}.nds'
-    rom_config = game_extract / 'config.yaml'
+def add_extract_build(n: ninja_syntax.Writer, project: Project):
     n.build(
-        inputs=str(rom_path),
+        inputs=str(project.baserom()),
         implicit=DSD,
         rule="extract",
-        outputs=str(rom_config),
+        outputs=str(project.baserom_config()),
         variables={
-            "output_path": str(game_extract)
+            "output_path": str(project.game_extract)
         }
     )
     n.newline()
 
 
-def add_mwld_and_rom_builds(n: ninja_syntax.Writer, game_build: Path, game_config: Path, game_version: str):
-    source_object_files = [
-        str(game_build / source_file.with_suffix(".o"))
-        for source_file in get_c_cpp_files([src_path, libs_path])
-    ]
-    lcf_file = str(game_build / "linker_script.lcf")
-    objects_file = str(game_build / "objects.txt")
-    delink_file = str(game_build / "delinks" / "delink.yaml")
-    elf_file = str(game_build / "arm9.o")
+def add_mwld_and_rom_builds(n: ninja_syntax.Writer, project: Project):
+    lcf_file = str(project.arm9_lcf())
+    objects_file = str(project.arm9_objects_txt())
+    delink_file = str(project.arm9_delink_yaml())
+    elf_file = str(project.arm9_o())
     n.build(
-        inputs=source_object_files + [lcf_file, objects_file, delink_file],
+        inputs=project.source_object_files() + [lcf_file, objects_file, delink_file],
         implicit=LD,
         rule="mwld",
         outputs=elf_file,
         variables={
-            "target_dir": game_build,
+            "target_dir": project.game_build,
             "objects_file": objects_file,
             "lcf_file": lcf_file,
         }
     )
     n.newline()
 
-    rom_config_file = str(game_build / "build" / "rom_config.yaml")
+    rom_config_file = str(project.build_rom_config())
     n.build(
         inputs=elf_file,
         implicit=DSD,
         rule="rom_config",
         outputs=rom_config_file,
         variables={
-            "config_path": game_config / "arm9" / "config.yaml",
+            "config_path": project.arm9_config_yaml(),
         }
     )
     n.newline()
 
-    rom_file = f"{GAME}_{game_version}.nds"
+    rom_file = project.build_rom()
     n.build(
         inputs=rom_config_file,
         implicit=DSD,
@@ -309,9 +382,9 @@ def add_mwld_and_rom_builds(n: ninja_syntax.Writer, game_build: Path, game_confi
     )
     n.newline()
 
-def add_mwcc_builds(n: ninja_syntax.Writer, game_version: str, game_build: Path, mwcc_implicit: list[Path]):
+def add_mwcc_builds(n: ninja_syntax.Writer, project: Project, mwcc_implicit: list[Path]):
     for source_file in get_c_cpp_files([src_path, libs_path]):
-        src_obj_path = game_build / source_file
+        src_obj_path = project.game_build / source_file
         cc_flags = []
         if is_cpp(source_file): cc_flags.append("-lang=c++")
         elif is_c(source_file): cc_flags.append("-lang=c")
@@ -321,7 +394,7 @@ def add_mwcc_builds(n: ninja_syntax.Writer, game_version: str, game_build: Path,
             rule="mwcc",
             outputs=str(src_obj_path.with_suffix(".o")),
             variables={
-                "game_version": game_version,
+                "game_version": project.game_version,
                 "cc_flags": " ".join(cc_flags),
                 "basedir": os.path.dirname(src_obj_path),
                 "basefile": str(src_obj_path.with_suffix("")),
@@ -330,7 +403,7 @@ def add_mwcc_builds(n: ninja_syntax.Writer, game_version: str, game_build: Path,
         n.newline()
         
         extension = source_file.suffix
-        ctx_file = str(game_build / source_file.with_suffix(f".ctx{extension}"))
+        ctx_file = str(project.game_build / source_file.with_suffix(f".ctx{extension}"))
         n.build(
             inputs=str(source_file),
             rule="m2ctx",
@@ -356,20 +429,17 @@ def is_c(name: str):
     return Path(name).suffix in [".c"]
 
 
-def add_delink_and_lcf_builds(n: ninja_syntax.Writer, game_config: Path, game_build: Path, game_extract: Path):
+def add_delink_and_lcf_builds(n: ninja_syntax.Writer, project: Project):
     n.comment("Delink ELF binaries when any delinks.txt file is modified")
-    delinks_files = get_config_files(game_config, "delinks.txt")
-    relocs_files = get_config_files(game_config, "relocs.txt")
-    symbols_files = get_config_files(game_config, "symbols.txt")
-    rom_config = str(game_extract / 'config.yaml')
-    delinks_path = game_build / "delinks"
+    rom_config = str(project.baserom_config())
+    delinks_path = project.arm9_delinks()
     n.build(
-        inputs=delinks_files + relocs_files + symbols_files + [rom_config],
+        inputs=project.dsd_configs() + [rom_config],
         implicit=DSD,
         rule="delink",
         outputs=str(delinks_path / "delink.yaml"),
         variables={
-            "config_path": game_config / "arm9" / "config.yaml",
+            "config_path": project.arm9_config_yaml(),
         }
     )
     n.newline()
@@ -381,28 +451,29 @@ def add_delink_and_lcf_builds(n: ninja_syntax.Writer, game_config: Path, game_bu
     )
     n.newline()
 
-    lcf_file = game_build / "linker_script.lcf"
-    objects_file = game_build / "objects.txt"
+    lcf_file = project.arm9_lcf()
+    objects_file = project.arm9_objects_txt()
     n.build(
-        inputs=delinks_files + [str(rom_config)],
+        inputs=project.delinks_files + [str(rom_config)],
         implicit=DSD,
         rule="lcf",
         outputs=[str(lcf_file), str(objects_file)],
         variables={
-            "config_path": game_config / "arm9" / "config.yaml",
+            "config_path": project.arm9_config_yaml(),
             "lcf_file": lcf_file,
             "objects_file": objects_file,
         }
     )
     n.newline()
 
+def add_objdiff_builds(n: ninja_syntax.Writer, project: Project):
     n.build(
-        inputs=delinks_files + relocs_files + symbols_files,
+        inputs=project.dsd_configs(),
         implicit=DSD,
         rule="objdiff",
         outputs="objdiff.json",
         variables={
-            "config_path": game_config / "arm9" / "config.yaml",
+            "config_path": project.arm9_config_yaml(),
         }
     )
     n.newline()
@@ -414,8 +485,16 @@ def add_delink_and_lcf_builds(n: ninja_syntax.Writer, game_config: Path, game_bu
     )
     n.newline()
 
+    n.build(
+        inputs=["objdiff.json"],
+        implicit=[OBJDIFF] + project.source_object_files(),
+        rule="objdiff_report",
+        outputs=str(project.objdiff_report()),
+    )
+    n.newline()
 
-def get_config_files(game_config: Path, name: str):
+
+def get_config_files(game_config: Path, name: str) -> list[str]:
     return [
         f"{root}/{file}"
         for root, _, files in os.walk(game_config)

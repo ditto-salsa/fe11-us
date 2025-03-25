@@ -2,5 +2,4 @@
     .bss        start:0x01ffcce0 end:0x01ffcce0 kind:bss align:32
 
 src/itcm/proc-itcm.c:
-    complete
     .text       start:0x01ffbbf8 end:0x01ffc404
