@@ -66,3 +66,4 @@ This project uses the object diffing tool [`objdiff`](https://github.com/encount
 * [**MokhaLeee/FireEmblem7J**](https://github.com/MokhaLeee/FireEmblem7J), a decompilation of Fire Emblem: Rekka no Ken (GBA, JP)
 * [**FireEmblemUniverse/fireemblem8u**](https://github.com/FireEmblemUniverse/fireemblem8u), a decompilation of Fire Emblem: The Sacred Stones (GBA, US)
 * [**AetiasHax/ph**](https://github.com/AetiasHax/ph/), a decompilation of The Legend of Zelda: Phantom Hourglass (NDS)
+* [**LagoLunatic/ooe**](https://github.com/LagoLunatic/ooe), a decompilation of Castlevania: Order of Ecclesia (NDS)
