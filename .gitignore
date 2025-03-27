@@ -14,6 +14,8 @@ fe11_*/
 # Objdiff
 objdiff.json
 report.json
+/objdiff-cli
+/objdiff-cli.exe
 
 /dsd
 /dsd.exe

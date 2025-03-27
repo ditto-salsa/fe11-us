@@ -11,7 +11,9 @@ extern void func_020a4a4c(void *);
 extern u8 data_027e1258;
 extern u8 data_027e125c;
 
-#pragma section force_text begin
+// FIXME: gProcessCmdTable appears to be in the ITCM .text section.
+//        However, when forcing it there, objdiff cannot run on this file.
+// #pragma section force_text begin
 
 BOOL (* gProcessCmdTable[])(ProcPtr) =
 {
@@ -55,7 +57,7 @@ BOOL (* gProcessCmdTable[])(ProcPtr) =
     [PROC_CMD_25] = func_02019b84,
 };
 
-#pragma section force_text end
+// #pragma section force_text end
 
 struct Proc * func_01ffbc90(u32 treeNum)
 {

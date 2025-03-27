@@ -4,7 +4,7 @@ This is a decompilation of *Fire Emblem: Shadow Dragon* (NDS), powered by [`ds-d
 
 It builds the following ROM:
 
-* [**fe11_usa.nds**](https://datomatic.no-intro.org/index.php?page=show_record&s=28&n=3398): `sha1: 7b7b307ef819ac31a7b71aed2e8e47ff23c1765e`
+* [**fe11_YFEE01.nds**](https://datomatic.no-intro.org/index.php?page=show_record&s=28&n=3398): `sha1: 7b7b307ef819ac31a7b71aed2e8e47ff23c1765e`
 
 ## Setup
 
@@ -21,24 +21,18 @@ It builds the following ROM:
     ```shell
     python -m pip install -r tools/requirements.txt
     ```
-4. Run the setup script:
+4. Run the Ninja configure script:
     ```shell
-    python tools/setup.py
+    python tools/configure.py YFEE01
     ```
-5. Run the Ninja configure script:
-    ```shell
-    python tools/configure.py usa
-    ```
+5. Put one or more base ROMs in the [`/extract/`](/extract/) directory of this repository.
 
-> [!IMPORTANT]
-> Rerun `configure.py` often to ensure that all C code gets compiled.
+Now you can run `ninja` to build a ROM for the chosen version. Currently, only the US version is supported.
+
+Running `ninja` again after making any changes to the project (e.g. source files, delinks.txt, etc) should automatically re-run `configure.py` to ensure that all code gets compiled.
 
 > [!NOTE]
 > Wibo is used by default. If you want to use Wine instead, run `configure.py` with `-w <path/to/wine>`.
-
-6. Put one or more base ROMs in the [`/extract/`](/extract/) directory of this repository.
-
-Now you can run `ninja` to build a ROM for the chosen version. Currently, only the US version is supported.
 
 #### Matching the base ROM
 
@@ -59,7 +53,7 @@ Now, rerun `configure.py` so it can update `build.ninja` to build a matching ROM
 This project uses the object diffing tool [`objdiff`](https://github.com/encounter/objdiff) to track differences between our decompiled C code and the base ROM's code.
 
 1. [Download the latest release.](https://github.com/encounter/objdiff/releases/latest)
-1. Run `configure.py usa` and `ninja` to generate `objdiff.json` in the repository root.
+1. Run `configure.py YFEE01` and `ninja` to generate `objdiff.json` in the repository root.
 1. In `objdiff`, set the project directory to the repository root.
 1. Select your source file in the left sidebar.
 1. See the list of functions and data to decompile.
@@ -72,3 +66,4 @@ This project uses the object diffing tool [`objdiff`](https://github.com/encount
 * [**MokhaLeee/FireEmblem7J**](https://github.com/MokhaLeee/FireEmblem7J), a decompilation of Fire Emblem: Rekka no Ken (GBA, JP)
 * [**FireEmblemUniverse/fireemblem8u**](https://github.com/FireEmblemUniverse/fireemblem8u), a decompilation of Fire Emblem: The Sacred Stones (GBA, US)
 * [**AetiasHax/ph**](https://github.com/AetiasHax/ph/), a decompilation of The Legend of Zelda: Phantom Hourglass (NDS)
+* [**LagoLunatic/ooe**](https://github.com/LagoLunatic/ooe), a decompilation of Castlevania: Order of Ecclesia (NDS)

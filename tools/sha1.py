@@ -22,6 +22,8 @@ with checksum_path.open('r') as file:
 with file_path.open('rb') as file:
     file_sha1 = hashlib.sha1(file.read()).hexdigest()
 
+print(f"Target: {target_sha1}; File {file_sha1}")
+
 if target_sha1 != file_sha1:
     eprint(f"{file_path}: FAILED")
     exit(1)
